@@ -1,0 +1,20 @@
+Kalkulačka - tím G.I.I.T.
+- základné funkcie: +, -, *, /, !, pow, sqrt
+- pridaná funkcia : inkrementácia, prípadne dekrementácia
+- programovací jazyk: python v3
+- vývojová platforma: Linux (Ubuntu 20.04)
+- správa verzií : git, hosting github.com
+- nástroj na vytvorenie programovej dokumentácie : Doxygen
+- uživateľská dokumentácia : latex
+- debugger : gdb
+- plánované voliteľné rozšírenia : 
+
+Jednotlivý členovia
+- Adam Bezák
+- Jozef Michal Bukas
+- Samuel Stolárik
+- Martin Valach - vytvorenie GUI, zostavenie uživateľskej aj programovej dokumentácie, Makefile
+
+// základné operácie, pokročilé operácie, profilling, inštalátor, 
+
+
