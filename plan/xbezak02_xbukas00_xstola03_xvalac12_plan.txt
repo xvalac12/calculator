@@ -10,7 +10,7 @@ Kalkulačka - tím G.I.I.T.
 - plánované voliteľné rozšírenia : 
 
 Jednotlivý členovia
-- Adam Bezák
+- Adam Bezák - Tests
 - Jozef Michal Bukas
 - Samuel Stolárik
 - Martin Valach - vytvorenie GUI, zostavenie uživateľskej aj programovej dokumentácie, Makefile
