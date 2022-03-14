@@ -12,7 +12,7 @@ Kalkulačka - tím G.I.I.T.
 Jednotlivý členovia
 - Adam Bezák
 - Jozef Michal Bukas
-- Samuel Stolárik
+- Samuel Stolárik inštalátor, profilling, základné operácie 
 - Martin Valach - vytvorenie GUI, zostavenie uživateľskej aj programovej dokumentácie, Makefile
 
 // základné operácie, pokročilé operácie, profilling, inštalátor, 
