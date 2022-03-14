@@ -11,4 +11,4 @@ Ubuntu 20.04
 	 * _xvalac12_ Martin Valach
 
 ### Licenses
-> [GNU GENERAL PUBLIC LICENSE](https://www.gnu.org/licenses/gpl-3.0.html)
+> [GNU GENERAL PUBLIC LICENSE v3.0](https://www.gnu.org/licenses/gpl-3.0.html) 
