@@ -11,7 +11,7 @@ Kalkulačka - tím G.I.I.T.
 
 Jednotlivý členovia
 - Adam Bezák - Tests, Bonus function
-- Jozef Michal Bukas
+- Jozef Michal Bukas - pokročilé operácie
 - Samuel Stolárik inštalátor, profilling, základné operácie 
 - Martin Valach - vytvorenie GUI, zostavenie uživateľskej aj programovej dokumentácie, Makefile
 
