@@ -10,9 +10,15 @@ Kalkulačka - tím G.I.I.T.
 - plánované voliteľné rozšírenia : využitie Profile-guided optimization (PGO) 
 
 Jednotlivý členovia
+<<<<<<< HEAD
 - Adam Bezák - Tests, Bonus function, Random number generation (possibly cryptographically secure),Project managment, Project clown
 - Jozef Michal Bukas
 - Samuel Stolárik
+=======
+- Adam Bezák - Tests, Bonus function
+- Jozef Michal Bukas - pokročilé operácie
+- Samuel Stolárik inštalátor, profilling, základné operácie 
+>>>>>>> 3331cd8cb3ecc744362b4ababf5c96f311f7b469
 - Martin Valach - vytvorenie GUI, zostavenie uživateľskej aj programovej dokumentácie, Makefile
 
 // základné operácie, pokročilé operácie, profilling, inštalátor
