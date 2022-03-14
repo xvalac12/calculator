@@ -7,14 +7,12 @@ Kalkulačka - tím G.I.I.T.
 - nástroj na vytvorenie programovej dokumentácie : Doxygen
 - uživateľská dokumentácia : latex
 - debugger : gdb
-- plánované voliteľné rozšírenia : 
+- plánované voliteľné rozšírenia : využitie Profile-guided optimization (PGO) 
 
 Jednotlivý členovia
-- Adam Bezák - Tests
+- Adam Bezák - Tests, Bonus function
 - Jozef Michal Bukas
 - Samuel Stolárik inštalátor, profilling, základné operácie 
 - Martin Valach - vytvorenie GUI, zostavenie uživateľskej aj programovej dokumentácie, Makefile
 
-// základné operácie, pokročilé operácie, profilling, inštalátor, 
-
-
+// základné operácie, pokročilé operácie, profilling, inštalátor
