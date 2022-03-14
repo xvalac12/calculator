@@ -7,7 +7,7 @@ Kalkulačka - tím G.I.I.T.
 - nástroj na vytvorenie programovej dokumentácie : Doxygen
 - uživateľská dokumentácia : latex
 - debugger : gdb
-- plánované voliteľné rozšírenia : využitie Profile-guided optimization (PGO) 
+- plánované voliteľné rozšírenia : využitie Profile-guided optimization (PGO), RNG 
 
 Jednotlivý členovia
 - Adam Bezák - Tests, Bonus function, Random number generation (possibly cryptographically secure), Project management, Project clown
