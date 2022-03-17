@@ -1,18 +1,35 @@
-Kalkulačka - tím G.I.I.T.
-- základné funkcie: +, -, *, /, !, pow, sqrt
-- pridaná funkcia : inkrementácia, prípadne dekrementácia
-- programovací jazyk: python v3
-- vývojová platforma: Linux (Ubuntu 20.04)
-- správa verzií : git, hosting github.com
-- nástroj na vytvorenie programovej dokumentácie : Doxygen
-- uživateľská dokumentácia : latex
-- debugger : gdb
-- plánované voliteľné rozšírenia : využitie Profile-guided optimization (PGO), RNG 
+Calculator - team G.I.I.T.
 
-Jednotlivý členovia
-- Adam Bezák - Tests, Bonus function, Random number generation (possibly cryptographically secure), Project management, Project clown
-- Jozef Michal Bukas - pokročilé operácie
-- Samuel Stolárik inštalátor, profilling, základné operácie 
-- Martin Valach - vytvorenie GUI, zostavenie uživateľskej aj programovej dokumentácie, Makefile
+Project attributes
+- basic functions: +, -, *, /, !, pow, sqrt
+- added functions: Incrementation, Decrementation, Conversion eur => ruble
+- optional extensions: PGO, RNG
+- programming language: Python v3
+- debugger: GDB
+- development platform: Linux (Ubuntu 20.04)
+- program documentation tool: Doxygen
+- user manual tool: Overleaf (LaTeX)
 
-// základné operácie, pokročilé operácie, profilling, inštalátor
+Comunications
+- communication channel: Discord
+- most communication will be in person, so no need for any additional software
+
+Schedule
+- min. 2 meetings per week
+- 18.3. to 27.3.2022: self-education about project, a lot of communication among us about project and issues with it
+- 28.3.to 6.4.: basics of project (basic functions, simple GUI, first tests) 
+- 7.4. to 20.4.2022: main project programming, group programming sessions as often as possible
+- 21.4.2022 to 27.4.2022: final tweeks to project, adding optional functions, making of documentation, manual and instalator
+- 28.4.2022: testing everything, submitting project till midnight, maybe a little bit later in case of some problems
+
+Team members
+- Adam Bezák (xbezak02) - Tests, Bonus functions, Random number generation (possibly cryptographically secure), Programming management and clown
+- Jozef Michal Bukas (xbukas00) - Advanced functions
+- Samuel Stolárik (xstola03)- Basic functions, Profilling, Installator
+- Martin Valach (xvalac12)- GUI, User manual, Program documentation, Makefile, Team management
+
+Version control system:
+- git
+- hosting: github.com
+- access for check: ivskontrola was added as collaborator to repository
+
