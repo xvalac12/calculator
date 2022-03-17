@@ -16,11 +16,11 @@ Comunications
 
 Schedule
 - min. 2 meetings per week
-- 18.3. to 27.3.2022: self-education about project, a lot of communication among us about project and issues with it
-- 28.3.to 6.4.: basics of project (basic functions, simple GUI, first tests) 
-- 7.4. to 20.4.2022: main project programming, group programming sessions as often as possible
-- 21.4.2022 to 27.4.2022: final tweeks to project, adding optional functions, making of documentation, manual and instalator
-- 28.4.2022: testing everything, submitting project till midnight, maybe a little bit later in case of some problems
+- 18.3.2022 to 27.3.2022: Project analysis. We figure out what needs to be done and who does what. Project structure and first tests are figured out here.
+- 28.3.2022 to 6.4.2022: Project basics (basic functions, simple GUI).
+- 7.4.2022 to 20.4.2022: Most of the work on the project happens here. Group programming sessions happen as often as possible.
+- 21.4.2022 to 27.4.2022: Tweaking the project, adding optional functions, creating documentation, manual and instalator
+- 28.4.2022: Testing everything, submitting project at midnight.
 
 Team members
 - Adam Bezák (xbezak02) - Tests, Bonus functions, Random number generation (possibly cryptographically secure), Programming management and clown
