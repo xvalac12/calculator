@@ -152,5 +152,25 @@ class TestPower(unittest.TestCase):
         self.assertEqual(calculate_expression("-4^ 0.5"), 2)
 
 
+class TestRoot(unittest.TestCase):
+    def integers(self):
+        self.assertEqual(calculate_expression("2 √ 4"), 2)
+        self.assertEqual(calculate_expression("3√16"), 2)
+        self.assertEqual(calculate_expression("4√ 256"), 4)
+        self.assertEqual(calculate_expression("1 √3"), 3)
+        self.assertEqual(calculate_expression("2 √ 0"), 0)
+
+
+    def negative_numbers(self):
+        self.assertEqual(calculate_expression("-2 √ 4"), 0.5)
+        self.assertEqual(calculate_expression("3√-8"), -2)
+        self.assertEqual(calculate_expression("-3 √ -8"), 0.25)
+    
+
+    def exceptions(self):
+        self.assertRaises(ArithmeticError, calculate_expression("2000√-4"))
+        self.assertRaises(ArithmeticError, calculate_expression("0√4"))
+
+
 if __name__ == '__main__':
     unittest.main()
