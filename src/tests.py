@@ -131,5 +131,26 @@ class TestDivision(unittest.TestCase):
         self.assertRaises(ArithmeticError, calculate_expression("3 / 0"))
 
 
+class TestPower(unittest.TestCase):
+    def integers(self):
+        self.assertEqual(calculate_expression("2 ^ 1"), 2)
+        self.assertEqual(calculate_expression("3^3"), 27)
+        self.assertEqual(calculate_expression("1 ^28964"), 1)
+        self.assertEqual(calculate_expression("2 ^3"), )
+
+        self.assertEqual(calculate_expression("0 ^ 7"), 0)
+        self.assertEqual(calculate_expression("1 ^ 0"), 1)
+        self.assertEqual(calculate_expression("0 ^ 0"), 1)
+
+        self.assertEqual(calculate_expression("4^0.5"), 2)
+
+
+    def negative_numbers(self):
+        self.assertEqual(calculate_expression("2 ^ -1"), -0.5)
+        self.assertEqual(calculate_expression("-4^3"), -64)
+        self.assertEqual(calculate_expression("-5 ^-1"), -0.2)
+        self.assertEqual(calculate_expression("-4^ 0.5"), 2)
+
+
 if __name__ == '__main__':
     unittest.main()
