@@ -91,5 +91,23 @@ class IncrementDecrement(unittest.TestCase):
         self.assertRaises(SyntaxError, calculate_expression("dec('This is a message')"))
 
 
+class TestMultiplication(unittest.TestCase):
+    
+    def integers(self):
+        self.assertEqual(calculate_expression("2 * 2"), 4)
+        self.assertEqual(calculate_expression("3*7"), 21)
+        self.assertEqual(calculate_expression("5 *5"), 25)
+        self.assertEqual(calculate_expression("3* 7"), 21)
+        
+        self.assertEqual(calculate_expression("0 * 7"), 0)
+        self.assertEqual(calculate_expression("3 * 0"), 0)
+
+
+    def negative_numbers(self):
+        self.assertEqual(calculate_expression("2 * -2"), -4)
+        self.assertEqual(calculate_expression("-3*7"), -21)
+        self.assertEqual(calculate_expression("-5 *-5"), 25)
+        self.assertEqual(calculate_expression("3* -7"), -21)
+
 if __name__ == '__main__':
     unittest.main()
