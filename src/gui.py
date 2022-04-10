@@ -3,6 +3,8 @@
 # author: Martin Valach <xvalac12>
 
 # import everything from tkinter module
+
+import functions
 import tkinter as tk
 from tkinter import *
 
@@ -35,9 +37,11 @@ def delete():
 
 def equals():
     global expr
-    # evaluation_string = evaluation_function(expr)
+#    eval_string = functions.evaluation_function(expr)
     clear()
-    # expr_input.set(evaluation_string)
+#    expr = str(eval_string)
+#    expr_input.set(expr)
+#    shift_cursor(len(expr))
 
 
 def button_press(button, shift):
