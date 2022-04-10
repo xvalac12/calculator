@@ -183,5 +183,30 @@ class TestFactorial(unittest.TestCase):
         self.assertRaises(SyntaxError, calculate_expression("2!5"))
 
 
+class Excpeptions(unittest.TestCase):
+    def syntax(self):
+        
+        # Lone symbols
+        self.assertRaises(SyntaxError, calculate_expression("+"))
+        self.assertRaises(SyntaxError, calculate_expression("-"))
+        
+        # Hanging symbols
+        self.assertRaises(SyntaxError, calculate_expression("+ 2 + 5"))
+        self.assertRaises(SyntaxError, calculate_expression("5 * 6 /"))
+
+        # Repating symbols
+        self.assertRaises(SyntaxError, calculate_expression("2 + + 5"))
+        self.assertRaises(SyntaxError, calculate_expression("5!!"))
+
+        # Text
+        self.assertRaises(SyntaxError, calculate_expression("Heyo"))
+        self.assertRaises(SyntaxError, calculate_expression("increment"))
+        self.assertRaises(SyntaxError, calculate_expression("Minca"))
+        self.assertRaises(SyntaxError, calculate_expression("codec"))
+
+
+
 if __name__ == '__main__':
     unittest.main()
+# "In this you rejoice, though now for a little while, if necessary, you have been grieved by various trials"
+# - 1 Peter 1:6
