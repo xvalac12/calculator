@@ -108,6 +108,28 @@ class TestMultiplication(unittest.TestCase):
         self.assertEqual(calculate_expression("-3*7"), -21)
         self.assertEqual(calculate_expression("-5 *-5"), 25)
         self.assertEqual(calculate_expression("3* -7"), -21)
+    
+
+class TestDivision(unittest.TestCase):
+    def integers(self):
+        self.assertEqual(calculate_expression("2 / 2"), 1)
+        self.assertEqual(calculate_expression("21/7"), 3)
+        self.assertEqual(calculate_expression("5 /5"), 1)
+        self.assertEqual(calculate_expression("14/ 7"), 2)
+
+        self.assertEqual(calculate_expression("0 / 7"), 0)
+
+
+    def negative_numbers(self):
+        self.assertEqual(calculate_expression("2 / -2"), -1)
+        self.assertEqual(calculate_expression("-21/7"), -3)
+        self.assertEqual(calculate_expression("-5 /-5"), 1)
+        self.assertEqual(calculate_expression("14/ -7"), -2)
+
+
+    def exceptions(self):
+        self.assertRaises(ArithmeticError, calculate_expression("3 / 0"))
+
 
 if __name__ == '__main__':
     unittest.main()
