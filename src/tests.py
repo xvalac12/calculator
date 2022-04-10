@@ -72,23 +72,23 @@ class TestSubstratcion(unittest.TestCase):
 class IncrementDecrement(unittest.TestCase):
     
     def integers(self):
-        self.assertEqual(calculate_expression("inc(2)"), 3)
-        self.assertEqual(calculate_expression("inc(5)"), 6)
+        self.assertEqual(calculate_expression("inc2"), 3)
+        self.assertEqual(calculate_expression("inc5"), 6)
 
-        self.assertEqual(calculate_expression("dec(2)"), 1)
-        self.assertEqual(calculate_expression("dec(5)"), 4)
+        self.assertEqual(calculate_expression("dec2"), 1)
+        self.assertEqual(calculate_expression("dec5"), 4)
 
 
     def negative_numbers(self):
-        self.assertEqual(calculate_expression("inc(-5)"), 4)
+        self.assertEqual(calculate_expression("inc-5"), 4)
 
-        self.assertEqual(calculate_expression("dec(-5)"), - 6)
+        self.assertEqual(calculate_expression("dec-5"), - 6)
 
 
     def exceptions(self):
-        self.assertRaises(SyntaxError, calculate_expression("inc('This is a message')"))
+        self.assertRaises(SyntaxError, calculate_expression("inc"))
 
-        self.assertRaises(SyntaxError, calculate_expression("dec('This is a message')"))
+        self.assertRaises(SyntaxError, calculate_expression("dec"))
 
 
 class TestMultiplication(unittest.TestCase):
@@ -170,6 +170,17 @@ class TestRoot(unittest.TestCase):
     def exceptions(self):
         self.assertRaises(ArithmeticError, calculate_expression("2000√-4"))
         self.assertRaises(ArithmeticError, calculate_expression("0√4"))
+
+
+class TestFactorial(unittest.TestCase):
+    def integers(self):
+        self.assertEqual(calculate_expression("2!"), 2)
+        self.assertEqual(calculate_expression("5!"), 120)
+    
+
+    def exceptions(self):
+        self.assertRaises(SyntaxError, calculate_expression("-5!"))
+        self.assertRaises(SyntaxError, calculate_expression("2!5"))
 
 
 if __name__ == '__main__':
