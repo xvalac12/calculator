@@ -188,7 +188,7 @@ def __string_control(string_for_control: str) -> str:
 
 # def calculate_expression(expression: str) -> Union[int, float]:
 
-def evaluation_function(str_for_calc: str) -> float :
+def calculate_expression(str_for_calc: str) -> float :
 
     print(str_for_calc)    
     if str_for_calc == "":
