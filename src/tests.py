@@ -55,7 +55,7 @@ class TestSubstratcion(unittest.TestCase):
 
     def test_negative_numbers(self):
         self.assertEqual(calculate_expression("-3 - -6"), 3)
-        self.assertEqual(calculate_expression("5 - -7"), 11)
+        self.assertEqual(calculate_expression("5 - -7"), 12)
         self.assertEqual(calculate_expression("-6 - 10"), -16)
         self.assertEqual(calculate_expression("-3.5 - 3"), -6.5)
 
@@ -80,7 +80,7 @@ class IncrementDecrement(unittest.TestCase):
 
 
     def test_negative_numbers(self):
-        self.assertEqual(calculate_expression("inc-5"), 4)
+        self.assertEqual(calculate_expression("inc-5"), -4)
 
         self.assertEqual(calculate_expression("dec-5"), - 6)
 
@@ -136,7 +136,7 @@ class TestPower(unittest.TestCase):
         self.assertEqual(calculate_expression("2 ^ 1"), 2)
         self.assertEqual(calculate_expression("3^3"), 27)
         self.assertEqual(calculate_expression("1 ^28964"), 1)
-        self.assertEqual(calculate_expression("2 ^3"), )
+        self.assertEqual(calculate_expression("2 ^3"), 8)
 
         self.assertEqual(calculate_expression("0 ^ 7"), 0)
         self.assertEqual(calculate_expression("1 ^ 0"), 1)
@@ -146,7 +146,7 @@ class TestPower(unittest.TestCase):
 
 
     def test_negative_numbers(self):
-        self.assertEqual(calculate_expression("2 ^ -1"), -0.5)
+        self.assertEqual(calculate_expression("2 ^ -1"), 0.5)
         self.assertEqual(calculate_expression("-4^3"), -64)
         self.assertEqual(calculate_expression("-5 ^-1"), -0.2)
         self.assertEqual(calculate_expression("-4^ 0.5"), 2)
@@ -155,7 +155,7 @@ class TestPower(unittest.TestCase):
 class TestRoot(unittest.TestCase):
     def test_integers(self):
         self.assertEqual(calculate_expression("2 √ 4"), 2)
-        self.assertEqual(calculate_expression("3√16"), 2)
+        self.assertEqual(calculate_expression("3√8"), 2)
         self.assertEqual(calculate_expression("4√ 256"), 4)
         self.assertEqual(calculate_expression("1 √3"), 3)
         self.assertEqual(calculate_expression("2 √ 0"), 0)
