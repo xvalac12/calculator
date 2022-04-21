@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+from logging import raiseExceptions
 import re
 from typing import Union
 
@@ -6,27 +7,38 @@ from typing import Union
 # function which calculates basic operations
 def __funct(string_for_eval):
 
+  
     value = eval(string_for_eval)
-
+   
+    
     return value
 
 
 def __find_all_expressions_power_d(string_for_change: str) -> str:
 
-    string_list = re.findall(r" *[\^√] *",string_for_change)
+    string_list = re.findall(r" *[\^√] *",string_for_change)  # check if there are any desired symbols in string
 
     if bool(string_list) == False:
 
         return string_for_change
 
-    string_for_change = "".join(reversed(string_for_change))
+    string_for_change = "".join(reversed(string_for_change))  # string is reversed because I want to look for last occurence of symbol
 
     try:
-        substr = re.search(r"(?:\d+\.\d*|\d+) *[-\+]? *[\^√] *(?:\d+\.\d*|\d+) *[-\+]{1} *\D", string_for_change).group()
+        # this regex must be read backwards. It is backwards because I need to look for the most inner symbol so it will be mathematicly correct
+        # this regex looks for symbols ^ and √ . Then it cuts it from string with all operands.
+        # It must be in try because there are two tipes of tring which I look for. If this regex finds nothing it throws exception
+        # which would ruin whole calculation
+
+        substr = re.search(r"(?:\d+\.\d*|\d+) *[-\+]? *[\^√] *(?:\d+\.\d*|\d+) *[-\+]{1} *(?:\D|$)", string_for_change).group()
 
         substr = "".join(reversed(substr))
 
-        substr = re.sub(r"\D","",substr,1)
+        found = re.findall(r" *[-\+\*\\]{1} *[\+-]{1}",substr) # if first operand is negative number I need to strip substr from previous sign
+
+        if bool(found):
+
+            substr = re.sub(r"(?:\D|^)","",substr,1)  
 
     except AttributeError:
         substr = ""
@@ -42,28 +54,45 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
 
     if "^" in substr:
 
-        nums = re.split(" *\^ *",substr)    
+        nums = re.split(" *\^ *",substr)    # taking oprands for calculation
+        
         num = float(nums[0])**float(nums[1])
+        
         substr = "".join(reversed(substr))
         num = "".join(reversed(str(num)))
-        string_for_change = string_for_change.replace(substr, str(num),1)    #nums[0] + "**" + nums[1])
+        
+        string_for_change = string_for_change.replace(substr, str(num),1)    # replacing substring with value
 
     else:
 
         nums = re.split(" *√ *",substr)     # spliting expression into two parts
-
+        flag = False
+        negative = False
+        is_not_even = float(nums[0]) % 2
+       
         exponent = (1 / float(nums[0]))
         number = float(nums[1])
-        print("amana hy")
-        print(exponent)
+
+        if is_not_even:         # this must be simplified
+
+            flag = True
+
+        if number < 0:
+
+            negative = True
+            number *= -1
+      
         root = number ** exponent
-        print(root)
+        
+        if negative & flag:
+
+            root *= -1
 
         substr = "".join(reversed(substr))
         root = "".join(reversed(str(root)))
         
         string_for_change = string_for_change.replace(substr, str(root),1)
-        print(string_for_change)
+        #print(string_for_change)
    
 
     string_for_change = "".join(reversed(string_for_change))
@@ -94,13 +123,6 @@ def __convert_to_evaluate_power(string_for_change: str) -> str:
     
         string_for_change = __find_all_expressions_power_d(string_for_change)    
 
-    #print(string)   
-   # while string_for_change != find_all_expressions_u(string_for_change):
-
-    #    string_for_change = find_all_expressions_u(string_for_change)
-
-   
-    print(string_for_change)
     return string_for_change   # 1024
 
 
@@ -139,7 +161,9 @@ def __convert_to_evaluable_factorial(string_for_change: str) -> str:
 # function which finds all inc symbols and replaces them with number
 def __find_all_expressions_inc(string_for_change: str) -> str:
 
-    string_for_change = "".join(reversed(string_for_change))
+    string_for_change = "".join(reversed(string_for_change)) # string is reversed to look for most inner occurence
+                                                             # also it had tendency to change incorrect substrings 
+                                                             # this is the safest way
 
     string_list = re.findall(r"\d+[-]?cni|\d+[-]?ced",string_for_change)  
 
@@ -157,6 +181,7 @@ def __find_all_expressions_inc(string_for_change: str) -> str:
             num_replaced = num.replace("dec","")
             num_replaced = int(num_replaced) - 1
 
+        # replaces dec or inc with value, search depends on which operand was calculated
         string_for_change = re.sub(rf"%s\b((?:[^0-9]|\Z))" % num , r"%s\1" % str(num_replaced), string_for_change,re.IGNORECASE)
 
 
@@ -167,8 +192,8 @@ def __find_all_expressions_inc(string_for_change: str) -> str:
 def __convert_to_evalauble_inc(string_for_change: str) -> str:
 
     while string_for_change != __find_all_expressions_inc(string_for_change):
+        
         string_for_change = __find_all_expressions_inc(string_for_change)
-        # string_for_change = find_all_expressions_dec(string_for_change)
 
     return string_for_change
 
