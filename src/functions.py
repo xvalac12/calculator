@@ -201,12 +201,19 @@ def __convert_to_evalauble_inc(string_for_change: str) -> str:
 # basic test how to use throws in python
 def __string_control(string_for_control: str) -> str:
 
-    string_list = re.findall(r" \. ",string_for_control)
+    string_list1 = re.findall(r" \. ",string_for_control)
 
-    if bool(string_list) == True:
+    if bool(string_list1) == True:
 
         raise SyntaxError("Space is not allowed between number dot number\n")
+
+    string_list2 = re.findall(r"(?:\D|^) *- *[\d]!",string_for_control)
     
+    if bool(string_list2) == True:
+
+        return "a"
+        
+
     return string_for_control
 
     
@@ -215,17 +222,26 @@ def __string_control(string_for_control: str) -> str:
 
 def calculate_expression(str_for_calc: str) -> float :
 
-    print(str_for_calc)    
+    #print(str_for_calc)    
     if str_for_calc == "":
         return ""
 
-    __string_control(str_for_calc)
+    
+    str_for_calc = __string_control(str_for_calc)
+
+    error = re.findall(r"a",str_for_calc)
+    if bool(error):
+ 
+        raise SyntaxError("Unable to calculate factorial from negative number\n")
+        
     str_for_calc = __convert_to_evalauble_inc(str_for_calc)
     str_for_calc = __convert_to_evaluable_factorial(str_for_calc)
     str_for_calc = __convert_to_evaluate_power(str_for_calc)
     
-      
+    
     asdf = __funct(str_for_calc)
+
+    #print(asdf)
     return float(asdf)
 
 
