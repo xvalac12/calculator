@@ -66,16 +66,11 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
     else:
 
         nums = re.split(" *√ *",substr)     # spliting expression into two parts
-        flag = False
         negative = False
         is_not_even = float(nums[0]) % 2
        
         exponent = (1 / float(nums[0]))
         number = float(nums[1])
-
-        if is_not_even:         # this must be simplified
-
-            flag = True
 
         if number < 0:
 
@@ -84,7 +79,7 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
       
         root = number ** exponent
         
-        if negative & flag:
+        if negative & bool(is_not_even):
 
             root *= -1
 
@@ -218,7 +213,7 @@ def __string_control(string_for_control: str) -> str:
 
     
 
-# def calculate_expression(expression: str) -> Union[int, float]:
+# def calculate_expression(str_for_calc: str) -> Union[int, float]:
 
 def calculate_expression(str_for_calc: str) -> float :
 
