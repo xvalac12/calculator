@@ -72,7 +72,7 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
         exponent = (1 / float(nums[0]))
         number = float(nums[1])
 
-        if number < 0:
+        if number < 0 and bool(is_not_even):
 
             negative = True
             number *= -1
@@ -196,18 +196,26 @@ def __convert_to_evalauble_inc(string_for_change: str) -> str:
 # basic test how to use throws in python
 def __string_control(string_for_control: str) -> str:
 
-    string_list1 = re.findall(r" \. ",string_for_control)
+    string_list = re.findall(r" \. ",string_for_control)  
 
-    if bool(string_list1) == True:
+    string_list += re.findall(r"(?: +\.\d|\d\. )",string_for_control)
 
-        raise SyntaxError("Space is not allowed between number dot number\n")
+    string_list += re.findall(r"(?:(?:\D|^) *\.|\. *\D)",string_for_control)
 
-    string_list2 = re.findall(r"(?:\D|^) *- *[\d]!",string_for_control)
-    
-    if bool(string_list2) == True:
+    string_list += re.findall(r"(?:\D|^) *- *[\d]!",string_for_control)
 
-        return "a"
-        
+    string_list += re.findall(r"(?:inc|dec) ",string_for_control)
+
+    string_list += re.findall(r"! *\d",string_for_control)  # r" !",string_for_control
+
+    string_list += re.findall(r" !",string_for_control)
+
+    string_list += re.findall(r"\d+.\d+!",string_for_control)
+
+
+    if bool(string_list) == True:
+
+        raise SyntaxError("Invalid syntax: " + string_list[0])
 
     return string_for_control
 
@@ -221,20 +229,34 @@ def calculate_expression(str_for_calc: str) -> float :
     if str_for_calc == "":
         return ""
 
-    
-    str_for_calc = __string_control(str_for_calc)
+    try:
+        str_for_calc = __string_control(str_for_calc)
 
-    error = re.findall(r"a",str_for_calc)
-    if bool(error):
+    except SyntaxError:
+
+        raise SyntaxError
+
+    #error = re.findall(r"a",str_for_calc)
+    #if bool(error):
  
-        raise SyntaxError("Unable to calculate factorial from negative number\n")
+    #    raise SyntaxError("Unable to calculate factorial from negative number\n")
         
     str_for_calc = __convert_to_evalauble_inc(str_for_calc)
     str_for_calc = __convert_to_evaluable_factorial(str_for_calc)
     str_for_calc = __convert_to_evaluate_power(str_for_calc)
     
-    
-    asdf = __funct(str_for_calc)
+    try :
+        asdf = __funct(str_for_calc)
+
+    except NameError:
+
+        raise SyntaxError
+
+    list_comp = re.findall(r"j",str(asdf)); 
+
+    if bool(list_comp):
+
+        raise ArithmeticError
 
     #print(asdf)
     return float(asdf)
@@ -277,4 +299,4 @@ def __testing_function(string_for_change: str) -> int:
     return string_for_change
 
 
-# find_all_expressions_power_d("3√-27")
+# calculate_expression("-2!")
