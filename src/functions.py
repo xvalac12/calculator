@@ -206,6 +206,8 @@ def __string_control(string_for_control: str) -> str:
 
     string_list += re.findall(r"(?:inc|dec) ",string_for_control)
 
+    string_list += re.findall(r"\d *(?:inc|dec)",string_for_control)
+
     string_list += re.findall(r"! *\d",string_for_control)  # r" !",string_for_control
 
     string_list += re.findall(r" !",string_for_control)
@@ -250,7 +252,11 @@ def calculate_expression(str_for_calc: str) -> float :
 
     except NameError:
 
-        raise SyntaxError
+        raise SyntaxError("Invalid combintaion of operands")
+
+    except SyntaxError:
+
+        raise SyntaxError("Invalid combination of operands")
 
     list_comp = re.findall(r"j",str(asdf)); 
 
