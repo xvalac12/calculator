@@ -217,7 +217,7 @@ def __string_control(string_for_control: str) -> str:
 
     if bool(string_list) == True:
 
-        raise SyntaxError("Invalid syntax: " + string_list[0])
+        return "Invalid syntax: " + string_list[0]
 
     return string_for_control
 
@@ -231,12 +231,14 @@ def calculate_expression(str_for_calc: str) -> float :
     if str_for_calc == "":
         return ""
 
-    try:
-        str_for_calc = __string_control(str_for_calc)
+    
+    str_for_calc = __string_control(str_for_calc)
 
-    except SyntaxError:
+    error = re.findall(r"Invalid syntax:",str_for_calc)
 
-        raise SyntaxError
+    if bool(error):
+
+        raise SyntaxError(str_for_calc)
 
     #error = re.findall(r"a",str_for_calc)
     #if bool(error):
