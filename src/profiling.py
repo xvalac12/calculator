@@ -43,16 +43,21 @@ def inside_function(numbers:list, count:int):
 def expresion(numbers:list, count:int):
     try:
         partial = inside_function(numbers, count) / (len(numbers) - 1)
+
     except IndexError:
         print("ERROR: Not enough numbers for profiling. Required: ", count,". Got: ", len(numbers), ".")
         return nan
-    
+
+    except ZeroDivisionError:
+        print("ERROR: Zero division occured.")
+        return nan
+
     result = 0
     try:
         return sqrt(partial)
 
     except ValueError:
-        print("ERROR: Sqrt of negative number")
+        print("ERROR: Sqrt of negative number. Number: ", partial,".")
         return nan
     
 
