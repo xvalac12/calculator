@@ -7,6 +7,7 @@
 # @brief mathematical function to be profiled
 ##
 
+from cmath import nan
 from functions import power, root
 from math import sqrt
 
@@ -19,6 +20,7 @@ def get_input() -> list:
     except:
         return input_numbers
 
+
 def avg(numbers: list) -> int:
     if len(numbers) == 0:
         return int(0)
@@ -26,13 +28,35 @@ def avg(numbers: list) -> int:
 
 
 def inside_function(numbers:list, count:int):
+    if len(numbers) < count:
+        raise(IndexError)
+
     sum = 0
-    for i in numbers:
+    for i in numbers[0:count]:
         sum += power(i,2)
-    sum-=count * power(avg(numbers), 2)
+        
+    sum-=len(numbers) * power(avg(numbers), 2)
     
     return sum
 
 
+def expresion(numbers:list, count:int):
+    try:
+        partial = inside_function(numbers, len(numbers)) / (len(numbers) - 1)
+    except IndexError:
+        print("ERROR: Not enough numbers for profiling. Required: ", count,". Got: ", len(numbers), ".")
+        return nan
+    
+    result = 0
+    print(partial)
+    try:
+        return sqrt(partial)
+
+    except ValueError:
+        print("ERROR: Sqrt of negative number")
+        return nan
+    
+
+
 my_numbers = get_input()
-print(inside_function(my_numbers, len(my_numbers)))
+print(expresion(my_numbers, 10))
