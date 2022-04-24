@@ -9,7 +9,9 @@ from tkinter import ttk
 
 # elementary settings of window
 calc_gui = Tk()
-calc_gui.geometry('400x366')
+screen_width = int(calc_gui.winfo_screenwidth()/10)
+screen_height = int(calc_gui.winfo_screenheight()/2.95)
+calc_gui.geometry(f'{screen_width}x{screen_height}')
 calc_gui.resizable(False, False)
 calc_gui.title('Calculator G.I.I.T.')
 img = Image("photo", file="icon/icon.png")
@@ -128,7 +130,7 @@ def key_press(key):
     global expr
     if key.keycode == 22:
         delete()
-    elif key.keycode == 36 or key.keycode == 25:
+    elif key.keycode == 36 or key.keycode == 20:
         equals()
     else:
         expr = expr + str(key.char)
