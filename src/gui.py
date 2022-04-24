@@ -15,6 +15,47 @@ calc_gui.title('Calculator G.I.I.T.')
 img = Image("photo", file="icon/icon.png")
 calc_gui.tk.call('wm', 'iconphoto', calc_gui._w, img)
 
+# menu settings
+menubar = Menu(calc_gui)
+calc_gui.config(menu=menubar)
+
+file_menu = Menu(
+    menubar,
+    tearoff=0
+)
+
+# add menu items to the File menu
+file_menu.add_command(label='New')
+file_menu.add_command(label='Open...')
+file_menu.add_command(label='Close')
+file_menu.add_separator()
+
+# add Exit menu item
+file_menu.add_command(
+    label='Exit',
+    command=calc_gui.destroy
+)
+
+# add the File menu to the menubar
+menubar.add_cascade(
+    label="File",
+    menu=file_menu
+)
+# create the Help menu
+help_menu = Menu(
+    menubar,
+    tearoff=0
+)
+
+help_menu.add_command(label='Welcome')
+help_menu.add_command(label='About...')
+
+# add the Help menu to the menubar
+menubar.add_cascade(
+    label="Help",
+    menu=help_menu
+)
+
 # settings of grid
 calc_gui.columnconfigure(0, weight=1)
 calc_gui.columnconfigure(1, weight=1)
@@ -69,11 +110,11 @@ def delete():
 
 def equals():
     global expr
-#    eval_string = functions.evaluation_function(expr)
+    eval_string = functions.calculate_expression(expr)
     clear()
-#    expr = str(eval_string)
-#    expr_input.set(expr)
-#    shift_cursor(len(expr))
+    expr = str(eval_string)
+    expr_input.set(expr)
+    shift_cursor(len(expr))
 
 
 def button_press(button, shift):
@@ -87,7 +128,7 @@ def key_press(key):
     global expr
     if key.keycode == 22:
         delete()
-    elif key.keycode == 36:
+    elif key.keycode == 36 or key.keycode == 25:
         equals()
     else:
         expr = expr + str(key.char)
