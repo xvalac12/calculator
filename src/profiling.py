@@ -48,7 +48,6 @@ def expresion(numbers:list, count:int):
         return nan
     
     result = 0
-    print(partial)
     try:
         return sqrt(partial)
 
@@ -57,6 +56,8 @@ def expresion(numbers:list, count:int):
         return nan
     
 
-
-my_numbers = get_input()
-print(expresion(my_numbers, 10))
+if __name__ == "__main__":
+    input_numbers = get_input()
+    print(expresion(input_numbers, 10))
+    print(expresion(input_numbers, 100))
+    print(expresion(input_numbers, 1000))
