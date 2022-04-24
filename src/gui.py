@@ -189,19 +189,19 @@ calc_gui.bind('<Key>', key_press)
 # First ROW
 button_nsqrt = ttk.Button(calc_gui, text="n√", command=lambda: button_press("√", 0))
 button_nsqrt.grid(row=2, column=0)
-button_nsqrt.bind(pop_mes(" Nth root of x - n√x ", button_nsqrt))
+button_nsqrt.bind(pop_mes(" Nth root of x \n n√x ", button_nsqrt))
 
 button_sqrt = ttk.Button(calc_gui, text="2√", command=lambda: button_press("2√", 2))
 button_sqrt.grid(row=2, column=1)
-button_sqrt.bind(pop_mes(" Square root of x - 2√x ", button_sqrt))
+button_sqrt.bind(pop_mes(" Square root of x \n 2√x ", button_sqrt))
 
 button_pow = ttk.Button(calc_gui, text="x^2", command=lambda: button_press("^2", 2))
 button_pow.grid(row=2, column=2)
-button_pow.bind(pop_mes(" Exponentiation - x^2 ", button_pow))
+button_pow.bind(pop_mes(" Exponentiation \n x^2 ", button_pow))
 
 button_pown = ttk.Button(calc_gui, text="x^n", command=lambda: button_press("^", 1))
 button_pown.grid(row=2, column=3)
-button_pown.bind(pop_mes(" Exponentiation - x^n ", button_pown))
+button_pown.bind(pop_mes(" Exponentiation \n x^n ", button_pown))
 
 button_smile = ttk.Button(calc_gui, text="SFT", command=lambda: shift_cursor(1))
 button_smile.grid(row=2, column=4)
@@ -210,15 +210,15 @@ button_smile.bind(pop_mes(" No idea RN ", button_smile))
 # Second ROW
 button_factorial = ttk.Button(calc_gui, text="!", command=lambda: button_press("!", 1))
 button_factorial.grid(row=3, column=0)
-button_factorial.bind(pop_mes(" Factorial of x - x! ", button_factorial))
+button_factorial.bind(pop_mes(" Factorial of x \n x! ", button_factorial))
 
 button_increment = ttk.Button(calc_gui, text="INC", command=lambda: button_press("inc", 3))
 button_increment.grid(row=3, column=1)
-button_increment.bind(pop_mes(" Incrementation by 1 - inc1 ", button_increment))
+button_increment.bind(pop_mes(" Incrementation by 1 \n incx ", button_increment))
 
 button_decrement = ttk.Button(calc_gui, text="DEC", command=lambda: button_press("dec", 3))
 button_decrement.grid(row=3, column=2)
-button_decrement.bind(pop_mes(" Decrementation by 1 - dec1 ", button_decrement))
+button_decrement.bind(pop_mes(" Decrementation by 1 \n decx ", button_decrement))
 
 button_clear = ttk.Button(calc_gui, text="C", command=lambda: clear())
 button_clear.grid(row=3, column=3)
@@ -231,7 +231,7 @@ button_delete.bind(pop_mes(" Clear last character ", button_delete))
 # Third ROW
 button_plus = ttk.Button(calc_gui, text="+", command=lambda: button_press("+", 1))
 button_plus.grid(row=4, column=0)
-button_plus.bind(pop_mes(" Addition - x+x ", button_plus))
+button_plus.bind(pop_mes(" Addition \n x+x ", button_plus))
 
 button_7 = ttk.Button(calc_gui, text="7", command=lambda: button_press("7", 1))
 button_7.grid(row=4, column=1)
@@ -252,7 +252,7 @@ button_convert.bind(pop_mes(" Conversion from eur(€) to ruble(₽) ", button_c
 # Fourth ROW
 button_minus = ttk.Button(calc_gui, text="-", command=lambda: button_press("-", 1))
 button_minus.grid(row=5, column=0)
-button_minus.bind(pop_mes(" Subtraction - x-x ", button_minus))
+button_minus.bind(pop_mes(" Subtraction \n x-x ", button_minus))
 
 button_4 = ttk.Button(calc_gui, text="4", command=lambda: button_press("4", 1))
 button_4.grid(row=5, column=1)
@@ -273,7 +273,7 @@ button_rng.bind(pop_mes(" Generate random number ", button_rng))
 # Fifth ROW
 button_mul = ttk.Button(calc_gui, text="*", command=lambda: button_press("*", 1))
 button_mul.grid(row=6, column=0)
-button_mul.bind(pop_mes(" Multiplication - x*x ", button_mul))
+button_mul.bind(pop_mes(" Multiplication \n x*x ", button_mul))
 
 button_1 = ttk.Button(calc_gui, text="1", command=lambda: button_press("1", 1))
 button_1.grid(row=6, column=1)
@@ -294,7 +294,7 @@ button_equals.bind(pop_mes(" Calculate expression ", button_equals))
 # Sixth ROW
 button_div = ttk.Button(calc_gui, text="/", command=lambda: button_press("/", 1))
 button_div.grid(row=7, column=0)
-button_div.bind(pop_mes(" Division - x/x ", button_div))
+button_div.bind(pop_mes(" Division \n x/x ", button_div))
 
 button_0 = ttk.Button(calc_gui, text="0", style='Zero.TButton', command=lambda: button_press("0", 1))
 button_0.grid(row=7, column=1, columnspan=2)
