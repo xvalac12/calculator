@@ -42,7 +42,7 @@ def inside_function(numbers:list, count:int):
 
 def expresion(numbers:list, count:int):
     try:
-        partial = inside_function(numbers, len(numbers)) / (len(numbers) - 1)
+        partial = inside_function(numbers, count) / (len(numbers) - 1)
     except IndexError:
         print("ERROR: Not enough numbers for profiling. Required: ", count,". Got: ", len(numbers), ".")
         return nan
