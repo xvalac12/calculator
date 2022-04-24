@@ -46,11 +46,16 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
 
     if substr == "":
     
-        substr = re.search(r"(?:\d+\.\d*|\d+) *[-\+]? *[\^√] *(?:\d+\.\d*|\d+)", string_for_change).group()
+        try:
+            substr = re.search(r"(?:\d+\.\d*|\d+) *[-\+]? *[\^√] *(?:\d+\.\d*|\d+)", string_for_change).group()
                                                                                                         # search is used to find first occurence
                                                                                                         # this may proof uneffecient and it is but
                                                                                                         # while it tried to be fast it has also taken
                                                                                                         # shortcut which wasn't mathemathicly correct
+        except AttributeError:
+
+            return string_for_change
+
         substr = "".join(reversed(substr))
 
     if "^" in substr:
@@ -194,26 +199,34 @@ def __convert_to_evalauble_inc(string_for_change: str) -> str:
     return string_for_change
 
 
-# basic test how to use throws in python
+# function which checks for invalid patterns in string before calculation
 def __string_control(string_for_control: str) -> str:
 
-    string_list = re.findall(r" \. ",string_for_control)  
+    string_list = re.findall(r" \. ",string_for_control)  # space on both sides of '.'
 
-    string_list += re.findall(r"(?: +\.\d|\d\. )",string_for_control)
+    string_list += re.findall(r"(?: +\.\d|\d\. )",string_for_control)   # space on one side of '.'
 
-    string_list += re.findall(r"(?:(?:\D|^) *\.|\. *\D)",string_for_control)
+    string_list += re.findall(r"(?:(?:\D|^) *\.|\. *\D)",string_for_control)   # missing number before or after '.'
 
-    string_list += re.findall(r"(?:\D|^) *- *[\d]!",string_for_control)
+    string_list += re.findall(r"(?:\D|^) *- *[\d]!",string_for_control)  # factorial of negative number
 
-    string_list += re.findall(r"(?:inc|dec) ",string_for_control)
+    string_list += re.findall(r"(?:inc|dec) ",string_for_control)  # space after inc or dec
 
-    string_list += re.findall(r"\d *(?:inc|dec)",string_for_control)
+    string_list += re.findall(r"\d *(?:inc|dec)",string_for_control)  # no operand before inc or dec
+ 
+    string_list += re.findall(r"! *(?:inc|dec)",string_for_control) # inc or dec operand after '!'
 
-    string_list += re.findall(r"! *\d",string_for_control)   
+    string_list += re.findall(r"(?:inc|dec) *(?:\^|√)",string_for_control) #inc or dec operand without number before '^' or '√'
 
-    string_list += re.findall(r" !",string_for_control)
+    string_list += re.findall(r"! *\d",string_for_control)   # no oprand after '!'
 
-    string_list += re.findall(r"\d+.\d+!",string_for_control)
+    string_list += re.findall(r" !",string_for_control)  # space before '!'
+
+    string_list += re.findall(r"\D *! *\D",string_for_control)  # '!' between two operands
+
+    string_list += re.findall(r"(?:\D|^) *!",string_for_control) # '!' at begining without number
+
+    string_list += re.findall(r"\d+.\d+!",string_for_control)  # factorial of fraction
 
 
     if bool(string_list) == True:
@@ -240,11 +253,6 @@ def calculate_expression(str_for_calc: str) -> float :
     if bool(error):
 
         raise SyntaxError(str_for_calc)
-
-    #error = re.findall(r"a",str_for_calc)
-    #if bool(error):
- 
-    #    raise SyntaxError("Unable to calculate factorial from negative number\n")
         
     str_for_calc = __convert_to_evalauble_inc(str_for_calc)
     str_for_calc = __convert_to_evaluable_factorial(str_for_calc)
