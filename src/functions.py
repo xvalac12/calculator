@@ -183,11 +183,26 @@ def __convert_to_evalauble_inc(string_for_change: str) -> str:
 
     return string_for_change
 
+def __replace_irational_numbers(string_for_change: str) -> str:
+
+    #string_list = re.findall(r"(?:e|π)",string_for_cange)
+
+    string_for_change = string_for_change.replace("e","2.7182818")
+
+    string_for_change = string_for_change.replace("π","3.14159265359")
+
+    return string_for_change
+
+
 
 # function which checks for invalid patterns in string before calculation
 def __string_control(string_for_control: str) -> str:
 
     string_list = re.findall(r" \. ",string_for_control)  # space on both sides of '.'
+
+    string_list += re.findall(r"(?:\d *(?:e|π)|(?:e|π) *\d)",string_for_control) # number before or after constants!!!!!!!!!!!!!
+
+    string_for_control = __replace_irational_numbers(string_for_control)  # replacing so that symbols won't interfere with other controls
 
     string_list += re.findall(r"(?: +\.\d|\d\. )",string_for_control)   # space on one side of '.'
 
@@ -213,11 +228,11 @@ def __string_control(string_for_control: str) -> str:
 
     string_list1 += re.findall(r"\d+.\d+!",string_for_control)  # factorial of fraction
 
-    string_list += re.findall(r"(?:\D|^) *(?:√|\^)",string_for_control) # missing first operand for '^' and '√'
+    string_list += re.findall(r"(?:\D|^) *(?:√|\^)",string_for_control) # missing or invalid first operand for '^' and '√'
 
     string_list += re.findall(r"(?:\^|√) *(?:\D *(?:\D|$)|$)",string_for_control) # missing or invalid operand after '^' and '√'
 
-    #string_list += re.findall(r"(?:\^|√) *$",string_for_control)
+    # string_list += re.findall(r"",string_for_control)
 
     if bool(string_list) == True:
 
@@ -247,7 +262,7 @@ def calculate_expression(str_for_calc: str) -> str :
     if bool(error):
 
         return str_for_calc
-        
+    
     str_for_calc = __convert_to_evalauble_inc(str_for_calc)
     str_for_calc = __convert_to_evaluable_factorial(str_for_calc)
     str_for_calc = __convert_to_evaluate_power(str_for_calc)
@@ -342,4 +357,4 @@ def division(number1: Union[float,int], number2: Union[float,int]) -> Union[floa
     return number1/number2
 
 
-# print(decrement(2))
+# calculate_expression("einc10")
