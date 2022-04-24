@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+
+# file: functions.py
+# author: Jozef Michal Bukas <xbukas00>
+
 from logging import raiseExceptions
 import re
 import string
@@ -8,13 +12,11 @@ from typing import Union
 # function which calculates basic operations
 def __funct(string_for_eval):
 
-  
     value = eval(string_for_eval)
    
-    
     return value
 
-
+# function which finds and calculates power and root
 def __find_all_expressions_power_d(string_for_change: str) -> str:
 
     string_list = re.findall(r" *[\^√] *",string_for_change)  # check if there are any desired symbols in string
@@ -239,7 +241,7 @@ def __string_control(string_for_control: str) -> str:
 
 # def calculate_expression(str_for_calc: str) -> Union[int, float]:
 
-def calculate_expression(str_for_calc: str) -> float :
+def calculate_expression(str_for_calc: str) -> Union[int,float] :
 
     #print(str_for_calc)    
     if str_for_calc == "":
@@ -276,12 +278,12 @@ def calculate_expression(str_for_calc: str) -> float :
         raise ArithmeticError
 
     #print(asdf)
-    return float(asdf)
+    return asdf
 
 
 
 
-def power(number: int, exponent: int) -> float:
+def power(number: Union[float,int], exponent: Union[float,int]) -> Union[float,int]:
 
     str_for_calc = str(number) + "^" + str(exponent)
 
@@ -289,37 +291,47 @@ def power(number: int, exponent: int) -> float:
 
     return float(str_for_calc)
 
-def root(number: int, root: int) -> float:
+def root(number: Union[int,float], root: Union[int,float]) -> float:
 
     str_for_calc = str(root) + "√" + str(number)
 
     str_for_calc = __find_all_expressions_power_d(str_for_calc)
 
-    return float(str_for_calc)
+    error = re.findall(r"j",str_for_calc)
+
+    if bool(error):
+
+        raise ArithmeticError("Root of negative number while exponent is even is not defined")
+
+    return str_for_calc
 
 def factorial(number: int) -> int:
     
     str_for_calc = str(number) + "!"
 
+    if number < 0:
+
+        raise ArithmeticError("Factorial of negative number is not defined")
+
     str_for_calc = __find_all_expressions_factorial(str_for_calc)
 
     return int(str_for_calc)
 
-def increment(number: int) -> int:
+def increment(number: Union[float,int]) -> Union[float,int]:
 
     str_for_calc = "inc" + str(number)
 
     str_for_calc = __find_all_expressions_inc(str_for_calc)
 
-    return int(str_for_calc)    
+    return str_for_calc    
 
-def decrement(number: int) -> int:
+def decrement(number: Union[float,int]) -> Union[float,int]:
 
     str_for_calc = "dec" + str(number)
 
     str_for_calc = __find_all_expressions_inc(str_for_calc)
 
-    return int(str_for_calc)
+    return str_for_calc
 
 
-# power(5,2)
+# print(decrement(2))
