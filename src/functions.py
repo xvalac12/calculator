@@ -198,17 +198,17 @@ def __replace_irational_numbers(string_for_change: str) -> str:
 # function which checks for invalid patterns in string before calculation
 def __string_control(string_for_control: str) -> str:
 
-    string_list = re.findall(r" \. ",string_for_control)  # space on both sides of '.'
+    #string_list = re.findall(r" \. ",string_for_control)  # space on both sides of '.'
 
-    string_list += re.findall(r"(?:\d *(?:e|π)|(?:e|π) *\d)",string_for_control) # number before or after constants!!!!!!!!!!!!!
+    string_list = re.findall(r"(?:\d *(?:e|π)|(?:e|π) *\d)",string_for_control) # number before or after constants
 
     string_for_control = __replace_irational_numbers(string_for_control)  # replacing so that symbols won't interfere with other controls
 
     string_list += re.findall(r"(?: +\.\d|\d\. )",string_for_control)   # space on one side of '.'
 
-    string_list += re.findall(r"(?:(?:\D|^) *\.|\. *\D)",string_for_control)   # missing number before or after '.'
+    string_list += re.findall(r"(?:(?:\D|^) *\.|\. *(?:\D|$))",string_for_control)   # missing number before or after '.'
 
-    string_list1 = re.findall(r"(?:\D|^) *- *[\d]!",string_for_control)  # factorial of negative number
+    string_list1 = re.findall(r"(?:\D|^) *- *\d+!",string_for_control)  # factorial of negative number
 
     string_list += re.findall(r"(?:inc|dec) ",string_for_control)  # space after inc or dec
 
@@ -218,15 +218,15 @@ def __string_control(string_for_control: str) -> str:
 
     string_list += re.findall(r"(?:inc|dec) *(?:\^|√)",string_for_control) #inc or dec operand without number before '^' or '√'
 
-    string_list += re.findall(r"! *\d",string_for_control)   # no oprand after '!'
+    string_list += re.findall(r"(?:! *\d| !)",string_for_control)   # no oprand after '!' and space before '!'
 
-    string_list += re.findall(r" !",string_for_control)  # space before '!'
+    #string_list += re.findall(r" !",string_for_control)  # space before '!'
 
     string_list += re.findall(r"\D *! *\D",string_for_control)  # '!' between two operands
 
     string_list += re.findall(r"(?:\D|^) *!",string_for_control) # '!' at begining without number
 
-    string_list1 += re.findall(r"\d+.\d+!",string_for_control)  # factorial of fraction
+    string_list1 += re.findall(r"\d+\.\d+!",string_for_control)  # factorial of fraction
 
     string_list += re.findall(r"(?:\D|^) *(?:√|\^)",string_for_control) # missing or invalid first operand for '^' and '√'
 
