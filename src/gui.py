@@ -20,6 +20,7 @@ img = Image("photo", file="icon/icon.png")
 calc_gui.tk.call('wm', 'iconphoto', calc_gui._w, img)
 
 
+
 # settings of grid
 calc_gui.columnconfigure(0, weight=1)
 calc_gui.columnconfigure(1, weight=1)
@@ -55,6 +56,24 @@ style.map('TButton', foreground=[('pressed', 'red'), ('active', 'red')])
 # style.theme_use('default')
 
 expr = ""
+
+# main menu settings
+main_menu = Menu(calc_gui)
+calc_gui.config(menu=main_menu)
+file_menu = Menu(main_menu, tearoff=0)
+help_menu = Menu(main_menu, tearoff=0)
+
+#  items of main menu File and Help
+main_menu.add_cascade(label="File", menu=file_menu)
+main_menu.add_cascade(label="Help", menu=help_menu)
+
+# submenus of File
+file_menu.add_command(label='Maybe something')
+file_menu.add_command(label='Exit calculator', command=calc_gui.destroy)
+
+# submenus of Help
+help_menu.add_command(label='Manual...')
+help_menu.add_command(label='About...')
 
 
 def shift_cursor(shift):
