@@ -300,6 +300,12 @@ def power(number: Union[float,int], exponent: Union[float,int]) -> Union[float,i
 
     str_for_calc = __find_all_expressions_power_d(str_for_calc)
 
+    error = re.findall(r"j",str_for_calc)
+
+    if bool(error):
+
+        raise ArithmeticError("Root of negative number while exponent is even is not defined")
+
     return float(str_for_calc)
 
 def root(number: Union[int,float], root: Union[int,float]) -> Union[float,int]:
