@@ -257,6 +257,10 @@ def calculate_expression(str_for_calc: str) -> str :
 
         return "Syntax error"
 
+    except ZeroDivisionError:
+
+        return "Arithmetic error: /0"
+
     list_comp = re.findall(r"j",str(asdf)); 
 
     if bool(list_comp):
