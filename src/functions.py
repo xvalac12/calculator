@@ -323,6 +323,17 @@ def decrement(number: Union[float,int]) -> Union[float,int]:
 
     return str_for_calc
 
+def multiply(number1: Union[float,int], number2: Union[float,int]) -> Union[float,int]:
+
+    return number1*number2
+
+def division(number1: Union[float,int], number2: Union[float,int]) -> Union[float,int]:
+
+    if not number2:
+
+        raise ZeroDivisionError
+
+    return number1/number2
 
 
 # print(decrement(2))
