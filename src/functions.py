@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from logging import raiseExceptions
 import re
+import string
 from typing import Union
 
 
@@ -208,7 +209,7 @@ def __string_control(string_for_control: str) -> str:
 
     string_list += re.findall(r"\d *(?:inc|dec)",string_for_control)
 
-    string_list += re.findall(r"! *\d",string_for_control)  # r" !",string_for_control
+    string_list += re.findall(r"! *\d",string_for_control)   
 
     string_list += re.findall(r" !",string_for_control)
 
@@ -272,16 +273,45 @@ def calculate_expression(str_for_calc: str) -> float :
 
 
 
+def power(number: int, exponent: int) -> float:
 
+    str_for_calc = str(number) + "^" + str(exponent)
 
+    str_for_calc = __find_all_expressions_power_d(str_for_calc)
 
+    return float(str_for_calc)
 
+def root(number: int, root: int) -> float:
 
+    str_for_calc = str(root) + "√" + str(number)
 
+    str_for_calc = __find_all_expressions_power_d(str_for_calc)
 
+    return float(str_for_calc)
 
+def factorial(number: int) -> int:
+    
+    str_for_calc = str(number) + "!"
 
+    str_for_calc = __find_all_expressions_factorial(str_for_calc)
 
+    return int(str_for_calc)
+
+def increment(number: int) -> int:
+
+    str_for_calc = "inc" + str(number)
+
+    str_for_calc = __find_all_expressions_inc(str_for_calc)
+
+    return int(str_for_calc)    
+
+def decrement(number: int) -> int:
+
+    str_for_calc = "dec" + str(number)
+
+    str_for_calc = __find_all_expressions_inc(str_for_calc)
+
+    return int(str_for_calc)
 
 
 def __testing_function(string_for_change: str) -> int:
@@ -307,4 +337,4 @@ def __testing_function(string_for_change: str) -> int:
     return string_for_change
 
 
-# calculate_expression("-2!")
+# power(5,2)
