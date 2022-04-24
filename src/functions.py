@@ -1,19 +1,22 @@
 #!/usr/bin/python3
+
+# file: functions.py
+# author: Jozef Michal Bukas <xbukas00>
+
 from logging import raiseExceptions
 import re
+import string
 from typing import Union
 
 
 # function which calculates basic operations
 def __funct(string_for_eval):
 
-  
     value = eval(string_for_eval)
    
-    
     return value
 
-
+# function which finds and calculates power and root
 def __find_all_expressions_power_d(string_for_change: str) -> str:
 
     string_list = re.findall(r" *[\^√] *",string_for_change)  # check if there are any desired symbols in string
@@ -45,11 +48,16 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
 
     if substr == "":
     
-        substr = re.search(r"(?:\d+\.\d*|\d+) *[-\+]? *[\^√] *(?:\d+\.\d*|\d+)", string_for_change).group()
+        try:
+            substr = re.search(r"(?:\d+\.\d*|\d+) *[-\+]? *[\^√] *(?:\d+\.\d*|\d+)", string_for_change).group()
                                                                                                         # search is used to find first occurence
                                                                                                         # this may proof uneffecient and it is but
                                                                                                         # while it tried to be fast it has also taken
                                                                                                         # shortcut which wasn't mathemathicly correct
+        except AttributeError:
+
+            return string_for_change
+
         substr = "".join(reversed(substr))
 
     if "^" in substr:
@@ -72,7 +80,7 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
         exponent = (1 / float(nums[0]))
         number = float(nums[1])
 
-        if number < 0:
+        if number < 0 and bool(is_not_even):
 
             negative = True
             number *= -1
@@ -95,21 +103,6 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
     return string_for_change
 
 
-# function which finds all num^ substrings and changes 
-def __find_all_expressions_u(string_for_change: str) -> str:
-
-    string_list_num = re.findall("[-]?(?:\d*\.\d+ *\^ *|\d+ *\^ *)",string_for_change)
-
-    for num in string_list_num:
-
-        num_replaced = num.replace("^","")
-        string_for_change = string_for_change.replace(num,num_replaced + "**2")
-
-    
-
-    return string_for_change
-
-
 # function to change power symbol into string able to be processed by eval function
 def __convert_to_evaluate_power(string_for_change: str) -> str:
 
@@ -119,9 +112,6 @@ def __convert_to_evaluate_power(string_for_change: str) -> str:
         string_for_change = __find_all_expressions_power_d(string_for_change)    
 
     return string_for_change   # 1024
-
-
-    # 2√2^2+5^2-4√81  
 
 
 # function which calculates factorial 
@@ -193,21 +183,39 @@ def __convert_to_evalauble_inc(string_for_change: str) -> str:
     return string_for_change
 
 
-# basic test how to use throws in python
+# function which checks for invalid patterns in string before calculation
 def __string_control(string_for_control: str) -> str:
 
-    string_list1 = re.findall(r" \. ",string_for_control)
+    string_list = re.findall(r" \. ",string_for_control)  # space on both sides of '.'
 
-    if bool(string_list1) == True:
+    string_list += re.findall(r"(?: +\.\d|\d\. )",string_for_control)   # space on one side of '.'
 
-        raise SyntaxError("Space is not allowed between number dot number\n")
+    string_list += re.findall(r"(?:(?:\D|^) *\.|\. *\D)",string_for_control)   # missing number before or after '.'
 
-    string_list2 = re.findall(r"(?:\D|^) *- *[\d]!",string_for_control)
-    
-    if bool(string_list2) == True:
+    string_list += re.findall(r"(?:\D|^) *- *[\d]!",string_for_control)  # factorial of negative number
 
-        return "a"
-        
+    string_list += re.findall(r"(?:inc|dec) ",string_for_control)  # space after inc or dec
+
+    string_list += re.findall(r"\d *(?:inc|dec)",string_for_control)  # no operand before inc or dec
+ 
+    string_list += re.findall(r"! *(?:inc|dec)",string_for_control) # inc or dec operand after '!'
+
+    string_list += re.findall(r"(?:inc|dec) *(?:\^|√)",string_for_control) #inc or dec operand without number before '^' or '√'
+
+    string_list += re.findall(r"! *\d",string_for_control)   # no oprand after '!'
+
+    string_list += re.findall(r" !",string_for_control)  # space before '!'
+
+    string_list += re.findall(r"\D *! *\D",string_for_control)  # '!' between two operands
+
+    string_list += re.findall(r"(?:\D|^) *!",string_for_control) # '!' at begining without number
+
+    string_list += re.findall(r"\d+.\d+!",string_for_control)  # factorial of fraction
+
+
+    if bool(string_list) == True:
+
+        return "Invalid syntax: " + string_list[0]
 
     return string_for_control
 
@@ -215,7 +223,7 @@ def __string_control(string_for_control: str) -> str:
 
 # def calculate_expression(str_for_calc: str) -> Union[int, float]:
 
-def calculate_expression(str_for_calc: str) -> float :
+def calculate_expression(str_for_calc: str) -> str :
 
     #print(str_for_calc)    
     if str_for_calc == "":
@@ -224,57 +232,89 @@ def calculate_expression(str_for_calc: str) -> float :
     
     str_for_calc = __string_control(str_for_calc)
 
-    error = re.findall(r"a",str_for_calc)
+    error = re.findall(r"Invalid syntax:",str_for_calc)
+
     if bool(error):
- 
-        raise SyntaxError("Unable to calculate factorial from negative number\n")
+
+        return str_for_calc
         
     str_for_calc = __convert_to_evalauble_inc(str_for_calc)
     str_for_calc = __convert_to_evaluable_factorial(str_for_calc)
     str_for_calc = __convert_to_evaluate_power(str_for_calc)
     
-    
-    asdf = __funct(str_for_calc)
+    try :
+        asdf = __funct(str_for_calc)
+
+    except NameError:
+
+        return "Invalid combintaion of operands"
+
+    except SyntaxError:
+
+        return "Invalid combination of operands"
+
+    list_comp = re.findall(r"j",str(asdf)); 
+
+    if bool(list_comp):
+
+        return "Unable to calculate complex number"
 
     #print(asdf)
-    return float(asdf)
+    return asdf
 
 
 
 
+def power(number: Union[float,int], exponent: Union[float,int]) -> Union[float,int]:
+
+    str_for_calc = str(number) + "^" + str(exponent)
+
+    str_for_calc = __find_all_expressions_power_d(str_for_calc)
+
+    return float(str_for_calc)
+
+def root(number: Union[int,float], root: Union[int,float]) -> float:
+
+    str_for_calc = str(root) + "√" + str(number)
+
+    str_for_calc = __find_all_expressions_power_d(str_for_calc)
+
+    error = re.findall(r"j",str_for_calc)
+
+    if bool(error):
+
+        raise ArithmeticError("Root of negative number while exponent is even is not defined")
+
+    return str_for_calc
+
+def factorial(number: int) -> int:
+    
+    str_for_calc = str(number) + "!"
+
+    if number < 0:
+
+        raise ArithmeticError("Factorial of negative number is not defined")
+
+    str_for_calc = __find_all_expressions_factorial(str_for_calc)
+
+    return int(str_for_calc)
+
+def increment(number: Union[float,int]) -> Union[float,int]:
+
+    str_for_calc = "inc" + str(number)
+
+    str_for_calc = __find_all_expressions_inc(str_for_calc)
+
+    return str_for_calc    
+
+def decrement(number: Union[float,int]) -> Union[float,int]:
+
+    str_for_calc = "dec" + str(number)
+
+    str_for_calc = __find_all_expressions_inc(str_for_calc)
+
+    return str_for_calc
 
 
 
-
-
-
-
-
-
-
-
-
-def __testing_function(string_for_change: str) -> int:
-
-    string = re.findall(r"inca7",string_for_change)
-
-    string_for_change = "".join(reversed(string_for_change))
-    print(string_for_change)
-
-    try:
-        substr = re.search(r"(?:\d+\.\d*|\d+) *[-\+]? *[\^√] *(?:\d+\.\d*|\d+) *[-\+]{1} *\D", string_for_change).group()
-    except AttributeError:
-        substr = re.search(r"(?:\d+\.\d*|\d+) *[\^√] *(?:\d+\.\d*|\d+)[-]{2}", string_for_change)
-
-    substr = "".join(reversed(substr))
-
-    substr = re.sub(r"\D","",substr,1)
-
-    # substr = re.finditer()
-
-    print(substr)
-
-    return string_for_change
-
-
-# find_all_expressions_power_d("3√-27")
+# print(decrement(2))
