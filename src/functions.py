@@ -15,6 +15,7 @@ def __funct(string_for_eval):
     value = eval(string_for_eval)
    
     return value
+    
 
 # function which finds and calculates power and root
 def __find_all_expressions_power_d(string_for_change: str) -> str:
@@ -212,6 +213,11 @@ def __string_control(string_for_control: str) -> str:
 
     string_list1 += re.findall(r"\d+.\d+!",string_for_control)  # factorial of fraction
 
+    string_list += re.findall(r"(?:\D|^) *(?:√|\^)",string_for_control) # missing first operand for '^' and '√'
+
+    string_list += re.findall(r"(?:\^|√) *(?:\D *(?:\D|$)|$)",string_for_control) # missing or invalid operand after '^' and '√'
+
+    #string_list += re.findall(r"(?:\^|√) *$",string_for_control)
 
     if bool(string_list) == True:
 
@@ -281,7 +287,7 @@ def power(number: Union[float,int], exponent: Union[float,int]) -> Union[float,i
 
     return float(str_for_calc)
 
-def root(number: Union[int,float], root: Union[int,float]) -> float:
+def root(number: Union[int,float], root: Union[int,float]) -> Union[float,int]:
 
     str_for_calc = str(root) + "√" + str(number)
 
