@@ -20,7 +20,6 @@ img = Image("photo", file="icon/icon.png")
 calc_gui.tk.call('wm', 'iconphoto', calc_gui._w, img)
 
 
-
 # settings of grid
 calc_gui.columnconfigure(0, weight=1)
 calc_gui.columnconfigure(1, weight=1)
@@ -73,7 +72,7 @@ file_menu.add_command(label='Exit calculator', command=calc_gui.destroy)
 
 # submenus of Help
 help_menu.add_command(label='Manual...', command=lambda: manual_window())
-help_menu.add_command(label='About...')
+help_menu.add_command(label='About...', command=lambda: about_window())
 
 
 def manual_window():
@@ -87,6 +86,44 @@ def manual_window():
         font=("Times", "12"),
         background="white"
     ).pack(pady=10)
+    window.mainloop()
+
+
+def about_window():
+    window = Toplevel()
+    window.geometry(f'{screen_height}x{int(screen_width/1.8)}')
+    window.title("About")
+    window.config(bg="white")
+    ttk.Label(
+        window,
+        text='Pretty basic calculator',
+        font=("Times", "16", "bold"),
+        background="white"
+    ).pack(padx=10, pady=10)
+    ttk.Label(
+        window,
+        text='Created by:\n   ',
+        font=("Times", "12", "bold"),
+        background="white"
+    ).pack(padx=10)
+    ttk.Label(
+        window,
+        text='   Adam Bezák\n'
+             '   Michal Jozef Bukas\n'
+             '   Samuel Stolárik\n'
+             '   Martin Valach',
+        font=("Times", "12", "italic"),
+        background="white"
+    ).pack(padx=10)
+    ttk.Label(
+        window,
+        text='Version: 1.0\n'
+             'This program comes with absolutely no warranty.\n'
+             'See the GNU General Public Licence, version 3\n'
+             'or later for details.',
+        font=("Times", "12"),
+        background="white"
+    ).pack(padx=10, ipady=10)
     window.mainloop()
 
 
@@ -128,7 +165,7 @@ def key_press(key):
     global expr
     if key.keycode == 22:
         delete()
-    elif key.keycode == 36 or key.keycode == 20:
+    elif key.keycode == 36:
         equals()
     else:
         expr = expr + str(key.char)
