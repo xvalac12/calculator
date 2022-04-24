@@ -72,8 +72,22 @@ file_menu.add_command(label='Maybe something')
 file_menu.add_command(label='Exit calculator', command=calc_gui.destroy)
 
 # submenus of Help
-help_menu.add_command(label='Manual...')
+help_menu.add_command(label='Manual...', command=lambda: manual_window())
 help_menu.add_command(label='About...')
+
+
+def manual_window():
+    window = Toplevel()
+    window.geometry(f'{screen_height}x{int(screen_width/2)}')
+    window.title("Manual")
+    window.config(bg="white")
+    ttk.Label(
+        window,
+        text='See user documentation',
+        font=("Times", "12"),
+        background="white"
+    ).pack(pady=10)
+    window.mainloop()
 
 
 def shift_cursor(shift):
