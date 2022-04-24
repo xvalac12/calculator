@@ -103,21 +103,6 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
     return string_for_change
 
 
-# function which finds all num^ substrings and changes 
-def __find_all_expressions_u(string_for_change: str) -> str:
-
-    string_list_num = re.findall("[-]?(?:\d*\.\d+ *\^ *|\d+ *\^ *)",string_for_change)
-
-    for num in string_list_num:
-
-        num_replaced = num.replace("^","")
-        string_for_change = string_for_change.replace(num,num_replaced + "**2")
-
-    
-
-    return string_for_change
-
-
 # function to change power symbol into string able to be processed by eval function
 def __convert_to_evaluate_power(string_for_change: str) -> str:
 
@@ -127,9 +112,6 @@ def __convert_to_evaluate_power(string_for_change: str) -> str:
         string_for_change = __find_all_expressions_power_d(string_for_change)    
 
     return string_for_change   # 1024
-
-
-    # 2√2^2+5^2-4√81  
 
 
 # function which calculates factorial 
@@ -241,7 +223,7 @@ def __string_control(string_for_control: str) -> str:
 
 # def calculate_expression(str_for_calc: str) -> Union[int, float]:
 
-def calculate_expression(str_for_calc: str) -> Union[int,float] :
+def calculate_expression(str_for_calc: str) -> str :
 
     #print(str_for_calc)    
     if str_for_calc == "":
@@ -254,7 +236,7 @@ def calculate_expression(str_for_calc: str) -> Union[int,float] :
 
     if bool(error):
 
-        raise SyntaxError(str_for_calc)
+        return str_for_calc
         
     str_for_calc = __convert_to_evalauble_inc(str_for_calc)
     str_for_calc = __convert_to_evaluable_factorial(str_for_calc)
@@ -265,17 +247,17 @@ def calculate_expression(str_for_calc: str) -> Union[int,float] :
 
     except NameError:
 
-        raise SyntaxError("Invalid combintaion of operands")
+        return "Invalid combintaion of operands"
 
     except SyntaxError:
 
-        raise SyntaxError("Invalid combination of operands")
+        return "Invalid combination of operands"
 
     list_comp = re.findall(r"j",str(asdf)); 
 
     if bool(list_comp):
 
-        raise ArithmeticError
+        return "Unable to calculate complex number"
 
     #print(asdf)
     return asdf
@@ -332,6 +314,7 @@ def decrement(number: Union[float,int]) -> Union[float,int]:
     str_for_calc = __find_all_expressions_inc(str_for_calc)
 
     return str_for_calc
+
 
 
 # print(decrement(2))
