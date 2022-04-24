@@ -314,27 +314,4 @@ def decrement(number: int) -> int:
     return int(str_for_calc)
 
 
-def __testing_function(string_for_change: str) -> int:
-
-    string = re.findall(r"inca7",string_for_change)
-
-    string_for_change = "".join(reversed(string_for_change))
-    print(string_for_change)
-
-    try:
-        substr = re.search(r"(?:\d+\.\d*|\d+) *[-\+]? *[\^√] *(?:\d+\.\d*|\d+) *[-\+]{1} *\D", string_for_change).group()
-    except AttributeError:
-        substr = re.search(r"(?:\d+\.\d*|\d+) *[\^√] *(?:\d+\.\d*|\d+)[-]{2}", string_for_change)
-
-    substr = "".join(reversed(substr))
-
-    substr = re.sub(r"\D","",substr,1)
-
-    # substr = re.finditer()
-
-    print(substr)
-
-    return string_for_change
-
-
 # power(5,2)
