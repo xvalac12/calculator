@@ -20,9 +20,19 @@ def get_input() -> list:
         return input_numbers
 
 def avg(numbers: list) -> int:
-    print(numbers)
     if len(numbers) == 0:
         return int(0)
-    
     return sum(numbers)/len(numbers)
 
+
+def inside_function(numbers:list, count:int):
+    sum = 0
+    for i in numbers:
+        sum += power(i,2)
+    sum-=count * power(avg(numbers), 2)
+    
+    return sum
+
+
+my_numbers = get_input()
+print(inside_function(my_numbers, len(my_numbers)))
