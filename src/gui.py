@@ -203,9 +203,9 @@ button_pown = ttk.Button(calc_gui, text="x^n", command=lambda: button_press("^",
 button_pown.grid(row=2, column=3)
 button_pown.bind(pop_mes(" Exponentiation \n x^n ", button_pown))
 
-button_smile = ttk.Button(calc_gui, text="SFT", command=lambda: shift_cursor(1))
-button_smile.grid(row=2, column=4)
-button_smile.bind(pop_mes(" No idea RN ", button_smile))
+button_pi = ttk.Button(calc_gui, text="π", command=lambda: button_press("π", 1))
+button_pi.grid(row=2, column=4)
+button_pi.bind(pop_mes(" Euler number ", button_pi))
 
 # Second ROW
 button_factorial = ttk.Button(calc_gui, text="!", command=lambda: button_press("!", 1))
