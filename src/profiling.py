@@ -46,7 +46,7 @@ def expresion(numbers:list):
         return nan
 
     try:
-        return sqrt(partial)
+        return root(partial, 2)
 
     except ValueError:
         print("ERROR: Sqrt of negative number. Number: ", partial,".")
