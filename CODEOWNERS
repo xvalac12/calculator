@@ -8,3 +8,6 @@ src/gui.py xvalac12@stud.fit.vutbr.cz
 
 # xbezak02
 src/tests.py @Brezak
+
+# xstola03
+src/profiling.py xstola03@stud.fit.vutbr.cz
