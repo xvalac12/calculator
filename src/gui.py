@@ -86,7 +86,6 @@ def manual_window():
         font=("Times", "12"),
         background="white"
     ).pack(pady=10)
-    window.mainloop()
 
 
 def about_window():
@@ -124,7 +123,6 @@ def about_window():
         font=("Times", "12"),
         background="white"
     ).pack(padx=10, ipady=10)
-    window.mainloop()
 
 
 def shift_cursor(shift):
@@ -205,7 +203,7 @@ button_pown.bind(pop_mes(" Exponentiation \n x^n ", button_pown))
 
 button_pi = ttk.Button(calc_gui, text="π", command=lambda: button_press("π", 1))
 button_pi.grid(row=2, column=4)
-button_pi.bind(pop_mes(" Euler number ", button_pi))
+button_pi.bind(pop_mes(" Euler\'s number ", button_pi))
 
 # Second ROW
 button_factorial = ttk.Button(calc_gui, text="!", command=lambda: button_press("!", 1))
