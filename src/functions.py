@@ -267,8 +267,40 @@ def calculate_expression(str_for_calc: str) -> str :
     str_for_calc = __convert_to_evaluable_factorial(str_for_calc)
     str_for_calc = __convert_to_evaluate_power(str_for_calc)
     
+    
     try :
-        asdf = __funct(str_for_calc)
+        asdf = __funct(str_for_calc)  # calculation
+
+        exp_expr = re.findall(r"e",str(asdf))
+
+        is_there_dot = re.findall(r"\.",str(asdf))
+
+        if bool(exp_expr):
+
+            asdf = str(asdf).replace("e+","*10^")
+
+            return asdf
+
+        elif bool(is_there_dot) and len(str(asdf)) > 15:
+
+            new_string = str(asdf)[0:10]   
+
+            without_dot = re.split(r"\.",asdf)
+
+            exponent = len(str(without_dot[0])) #+ len(str(new_string))     
+
+            new_string = new_string[0] + "." + new_string[1:9] + "*10^" + str(exponent)
+
+
+        elif len(str(asdf)) > 20:
+            
+            new_string = str(asdf)[0:10]   
+
+            exponent = len(str(asdf)) #+ len(str(new_string))     
+
+            new_string = new_string[0] + "." + new_string[1:15] + "*10^" + str(exponent)
+
+            return new_string
 
     except NameError:
 
@@ -289,7 +321,7 @@ def calculate_expression(str_for_calc: str) -> str :
         return "Arithmetric error"
 
     #print(asdf)
-    return asdf
+    return float(asdf)
 
 
 
@@ -363,4 +395,7 @@ def division(number1: Union[float,int], number2: Union[float,int]) -> Union[floa
     return number1/number2
 
 
-# calculate_expression("einc10")
+#string1 = float(calculate_expression("5.6"))
+
+#if string1 < 6:
+ #   print(string1)
