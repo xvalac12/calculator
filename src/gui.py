@@ -1,21 +1,24 @@
 #!/usr/bin/python3
 # author: Martin Valach <xvalac12>
 
-from idlelib.tooltip import Hovertip
 # import everything from tkinter module
 from tkinter import *
 from tkinter import ttk
-
+import webbrowser
+from idlelib.tooltip import Hovertip
 import functions
+
 
 # elementary settings of window
 calc_gui = Tk()
-screen_width = int(calc_gui.winfo_screenwidth()/9)
-screen_height = int(calc_gui.winfo_screenheight()/3.05)
+screen_width = int(calc_gui.winfo_screenwidth()/3.3)
+screen_height = int(calc_gui.winfo_screenheight()/2.34)
 calc_gui.geometry(f'{screen_width}x{screen_height}')
 calc_gui.resizable(False, False)
 calc_gui.title('Calculator G.I.I.T.')
 calc_gui.config(bg="white")
+
+# icona
 img = Image("photo", file="icon/icon.png")
 calc_gui.tk.call('wm', 'iconphoto', calc_gui._w, img)
 
@@ -34,22 +37,22 @@ style.configure('TLabel',
                 background='black'
                 )
 style.configure('TButton',
-                font=('Helvetica', 19),
+                font=('Helvetica', 17),
                 foreground='gray',
                 background='white',
                 bordercolor='black',
                 width=20,
-                padding=10
+                padding=20,
                 )
 style.configure('Equals.TButton',
                 font=('Helvetica', 30),
-                width=10,
-                padding=28,
+                width=5,
+                padding=46,
                 )
 style.configure('Zero.TButton',
-                font=('Helvetica', 19),
+                font=('Helvetica', 17),
                 width=40,
-                padding=10,
+                padding=20,
                 )
 style.map('TButton', foreground=[('pressed', 'red'), ('active', 'red')])
 # style.theme_use('default')
@@ -67,7 +70,6 @@ main_menu.add_cascade(label="File", menu=file_menu)
 main_menu.add_cascade(label="Help", menu=help_menu)
 
 # submenus of File
-file_menu.add_command(label='Maybe something')
 file_menu.add_command(label='Exit calculator', command=calc_gui.destroy)
 
 # submenus of Help
@@ -75,9 +77,10 @@ help_menu.add_command(label='Manual...', command=lambda: manual_window())
 help_menu.add_command(label='About...', command=lambda: about_window())
 
 
+# window with manual
 def manual_window():
     window = Toplevel()
-    window.geometry(f'{screen_height}x{int(screen_width/2)}')
+    window.geometry(f'{int(screen_width/4)}x{int(screen_height/8)}')
     window.title("Manual")
     window.config(bg="white")
     ttk.Label(
@@ -88,9 +91,10 @@ def manual_window():
     ).pack(pady=10)
 
 
+# window with info about calculator
 def about_window():
     window = Toplevel()
-    window.geometry(f'{screen_height}x{int(screen_width/1.8)}')
+    window.geometry(f'{int(screen_width/1.5)}x{int(screen_height/1.8)}')
     window.title("About")
     window.config(bg="white")
     ttk.Label(
@@ -125,22 +129,25 @@ def about_window():
     ).pack(padx=10, ipady=10)
 
 
+# function shifting cursor
 def shift_cursor(shift):
     cursor = input_field.index(INSERT)
     input_field.icursor(cursor + shift)
 
 
+# function for clearing expression
 def clear():
     global expr
     expr = ""
     expr_input.set(expr)
 
 
+# function for deleting last character
 def delete():
     global expr
     expr = expr[:-1]
     expr_input.set(expr)
-    # shift_cursor(-1)
+
 
 
 def equals():
@@ -163,7 +170,15 @@ def key_press(key):
     global expr
     if key.keycode == 22:
         delete()
+    elif key.keycode == 23:
+        print()
+    elif key.keysym == 32:
+        delete()
     elif key.keycode == 36:
+        # easter egg
+        url = "https://www.youtube.com/watch?v=rcVb6l4TpHw"
+        if expr == "blumelein":
+            webbrowser.open(url, new=0, autoraise=True)
         equals()
     else:
         expr = expr + str(key.char)
@@ -229,7 +244,7 @@ button_delete.bind(pop_mes(" Clear last character ", button_delete))
 # Third ROW
 button_plus = ttk.Button(calc_gui, text="+", command=lambda: button_press("+", 1))
 button_plus.grid(row=4, column=0)
-button_plus.bind(pop_mes(" Addition \n x+x ", button_plus))
+button_plus.bind(pop_mes(" Addition \n x+y ", button_plus))
 
 button_7 = ttk.Button(calc_gui, text="7", command=lambda: button_press("7", 1))
 button_7.grid(row=4, column=1)
@@ -250,7 +265,7 @@ button_convert.bind(pop_mes(" Conversion from eur(€) to ruble(₽) ", button_c
 # Fourth ROW
 button_minus = ttk.Button(calc_gui, text="-", command=lambda: button_press("-", 1))
 button_minus.grid(row=5, column=0)
-button_minus.bind(pop_mes(" Subtraction \n x-x ", button_minus))
+button_minus.bind(pop_mes(" Subtraction \n x-y ", button_minus))
 
 button_4 = ttk.Button(calc_gui, text="4", command=lambda: button_press("4", 1))
 button_4.grid(row=5, column=1)
@@ -271,7 +286,7 @@ button_rng.bind(pop_mes(" Generate random number ", button_rng))
 # Fifth ROW
 button_mul = ttk.Button(calc_gui, text="*", command=lambda: button_press("*", 1))
 button_mul.grid(row=6, column=0)
-button_mul.bind(pop_mes(" Multiplication \n x*x ", button_mul))
+button_mul.bind(pop_mes(" Multiplication \n x*y ", button_mul))
 
 button_1 = ttk.Button(calc_gui, text="1", command=lambda: button_press("1", 1))
 button_1.grid(row=6, column=1)
@@ -292,7 +307,7 @@ button_equals.bind(pop_mes(" Calculate expression ", button_equals))
 # Sixth ROW
 button_div = ttk.Button(calc_gui, text="/", command=lambda: button_press("/", 1))
 button_div.grid(row=7, column=0)
-button_div.bind(pop_mes(" Division \n x/x ", button_div))
+button_div.bind(pop_mes(" Division \n x/y ", button_div))
 
 button_0 = ttk.Button(calc_gui, text="0", style='Zero.TButton', command=lambda: button_press("0", 1))
 button_0.grid(row=7, column=1, columnspan=2)
