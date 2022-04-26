@@ -285,11 +285,13 @@ def calculate_expression(str_for_calc: str) -> str :
 
             new_string = str(asdf)[0:10]   
 
-            without_dot = re.split(r"\.",asdf)
+            without_dot = re.split(r"\.",str(asdf))
 
             exponent = len(str(without_dot[0])) #+ len(str(new_string))     
 
             new_string = new_string[0] + "." + new_string[1:9] + "*10^" + str(exponent)
+
+            return new_string
 
 
         elif len(str(asdf)) > 20:
@@ -395,7 +397,7 @@ def division(number1: Union[float,int], number2: Union[float,int]) -> Union[floa
     return number1/number2
 
 
-#string1 = float(calculate_expression("5.6"))
+#string1 = float(calculate_expression("54+2/3-^4!"))
 
 #if string1 < 6:
  #   print(string1)
