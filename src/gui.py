@@ -9,6 +9,8 @@ from idlelib.tooltip import Hovertip
 import functions
 
 
+expr = ""  # variable for entered characters
+
 # elementary settings of window
 calc_gui = Tk()
 screen_width = int(calc_gui.winfo_screenwidth()/3.3)
@@ -18,10 +20,9 @@ calc_gui.resizable(False, False)
 calc_gui.title('Calculator G.I.I.T.')
 calc_gui.config(bg="white")
 
-# icona
+# icon
 img = Image("photo", file="icon/icon.png")
 calc_gui.tk.call('wm', 'iconphoto', calc_gui._w, img)
-
 
 # settings of grid
 calc_gui.columnconfigure(0, weight=1)
@@ -32,32 +33,16 @@ calc_gui.columnconfigure(4, weight=1)
 
 # settings of style
 style = ttk.Style(calc_gui)
-style.configure('TLabel',
-                font=('Helvetica', 30, 'black'),
-                background='black'
-                )
-style.configure('TButton',
-                font=('Helvetica', 17),
-                foreground='gray',
-                background='white',
-                bordercolor='black',
-                width=20,
-                padding=20,
-                )
-style.configure('Equals.TButton',
-                font=('Helvetica', 30),
-                width=5,
-                padding=46,
-                )
-style.configure('Zero.TButton',
-                font=('Helvetica', 17),
-                width=40,
-                padding=20,
-                )
-style.map('TButton', foreground=[('pressed', 'red'), ('active', 'red')])
-# style.theme_use('default')
+style.configure('TLabel', font=('Helvetica', 30, 'black'), background='black')
 
-expr = ""
+style.configure('TButton', font=('Helvetica', 17), foreground='gray', background='white',
+                bordercolor='black', width=20, padding=20,)
+style.map('TButton', foreground=[('pressed', 'red'), ('active', 'red')])
+
+style.configure('Equals.TButton', font=('Helvetica', 30), width=5, padding=46)
+
+style.configure('Zero.TButton', font=('Helvetica', 17), width=40, padding=20)
+
 
 # main menu settings
 main_menu = Menu(calc_gui)
@@ -83,12 +68,8 @@ def manual_window():
     window.geometry(f'{int(screen_width/4)}x{int(screen_height/8)}')
     window.title("Manual")
     window.config(bg="white")
-    ttk.Label(
-        window,
-        text='See user documentation',
-        font=("Times", "12"),
-        background="white"
-    ).pack(pady=10)
+    ttk.Label(window, text='See user documentation', font=("Times", "12"), background="white").\
+        pack(pady=10)
 
 
 # window with info about calculator
@@ -97,18 +78,10 @@ def about_window():
     window.geometry(f'{int(screen_width/1.5)}x{int(screen_height/1.8)}')
     window.title("About")
     window.config(bg="white")
-    ttk.Label(
-        window,
-        text='Pretty basic calculator',
-        font=("Times", "16", "bold"),
-        background="white"
-    ).pack(padx=10, pady=10)
-    ttk.Label(
-        window,
-        text='Created by:\n   ',
-        font=("Times", "12", "bold"),
-        background="white"
-    ).pack(padx=10)
+    ttk.Label(window,text='Pretty basic calculator', font=("Times", "16", "bold"), background="white").\
+        pack(padx=10, pady=10)
+    ttk.Label(window, text='Created by:\n   ', font=("Times", "12", "bold"), background="white").\
+        pack(padx=10)
     ttk.Label(
         window,
         text='   Adam Bezák\n'
@@ -116,8 +89,8 @@ def about_window():
              '   Samuel Stolárik\n'
              '   Martin Valach',
         font=("Times", "12", "italic"),
-        background="white"
-    ).pack(padx=10)
+        background="white").\
+        pack(padx=10)
     ttk.Label(
         window,
         text='Version: 1.0\n'
@@ -125,8 +98,8 @@ def about_window():
              'See the GNU General Public Licence, version 3\n'
              'or later for details.',
         font=("Times", "12"),
-        background="white"
-    ).pack(padx=10, ipady=10)
+        background="white").\
+        pack(padx=10, ipady=10)
 
 
 # function shifting cursor
@@ -149,7 +122,7 @@ def delete():
     expr_input.set(expr)
 
 
-
+# function which assign evaluation to expression
 def equals():
     global expr
     eval_string = functions.calculate_expression(expr)
@@ -159,6 +132,7 @@ def equals():
     shift_cursor(len(expr))
 
 
+# function which assign gui buttons to expression
 def button_press(button, shift):
     global expr
     expr = expr + str(button)
@@ -166,6 +140,7 @@ def button_press(button, shift):
     shift_cursor(shift)
 
 
+# function which assign keys to expression
 def key_press(key):
     global expr
     if key.keycode == 22:
@@ -185,18 +160,19 @@ def key_press(key):
         expr_input.set(expr)
 
 
+# function for pop-out messages about buttons
 def pop_mes(message, event):
-    myTip = Hovertip(event, message)
+    Hovertip(event, message)
 
 
 expr_input = StringVar()
+calc_gui.bind('<Key>', key_press)
 
+# calculator display
 input_field = ttk.Entry(calc_gui, font=('Helvetica', 20), width=100, textvariable=expr_input)
 input_field.grid(row=1, column=0, columnspan=5, ipady=8, ipadx=15)
 input_field.focus()
 expr_input.get()
-
-calc_gui.bind('<Key>', key_press)
 
 
 # First ROW
