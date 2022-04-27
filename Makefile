@@ -8,7 +8,7 @@ EMAIL=xvalac12@stud.fit.vutbr.cz
 
 
 SRC_FILES= src/gui.py src/functions.py
-ICON=calc_icon.xpm
+ICON=src/icon.xpm
 
 .PHONY: all pack profile doc install clean
 
@@ -36,14 +36,13 @@ install: calc-$(VERSION) calc-$(VERSION).tar.gz
 	cd $(DESTDIR) && dh_make -e $(EMAIL) -n  -c $(LICENSE) -f ../$<.tar.gz
 	cd $(DESTDIR) && dpkg-buildpackage -rfakeroot
 
-#TODO add an icon
-# $(ICON)
-# 	install $(INSFLAGS) $(word 3, $^) $(DESTDIR)/usr/share/pixmaps/
-calc-$(VERSION): $(SRC_FILES) 
+
+calc-$(VERSION): $(SRC_FILES) $(ICON) 
 	mkdir -p $(DESTDIR)/usr/bin
 
 	install $(INSFLAGS) $(word 1, $^) $(DESTDIR)/usr/bin
 	install $(INSFLAGS) $(word 2, $^) $(DESTDIR)/usr/bin
+	install $(INSFLAGS) $(word 3, $^) $(DESTDIR)/usr/share/pixmaps/
 
 calc-$(VERSION).tar.gz:
 	tar -czvf $(DESTDIR).tar.gz $(DESTDIR)
