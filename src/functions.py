@@ -103,6 +103,12 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
         is_not_even = float(nums[0]) % 2
 
         exponent = (1 / float(nums[0]))
+
+        try:       
+            exponent = (1 / float(nums[0]))
+        except ZeroDivisionError:
+            return "Syntax error"
+
         number = float(nums[1])
 
         if number < 0 and bool(is_not_even):
@@ -211,7 +217,11 @@ def __replace_irational_numbers(string_for_change: str) -> str:
 
     #string_list = re.findall(r"(?:e|π)",string_for_cange)
 
+    string_for_change = string_for_change.replace("dec","Q")
+
     string_for_change = string_for_change.replace("e","2.7182818")
+
+    string_for_change = string_for_change.replace("Q","dec")
 
     string_for_change = string_for_change.replace("π","3.14159265359")
 
@@ -252,9 +262,9 @@ def __string_control(string_for_control: str) -> str:
 
     string_list1 += re.findall(r"\d+\.\d+!",string_for_control)  # factorial of fraction
 
-    string_list += re.findall(r"(?:\D|^) *(?:√|\^)",string_for_control) # missing or invalid first operand for '^' and '√'
+    string_list += re.findall(r"(?:[-\+\*\\]{1}|^) *(?:√|\^)",string_for_control) # missing or invalid first operand for '^' and '√'
 
-    string_list += re.findall(r"(?:\^|√) *(?:\D *(?:\D|$)|$)",string_for_control) # missing or invalid operand after '^' and '√'
+    string_list += re.findall(r"(?:\^|√) *(?:\D{2} *(?:\D|$)|$)",string_for_control) # missing or invalid operand after '^' and '√'
 
     # string_list += re.findall(r"",string_for_control)
 
@@ -311,9 +321,13 @@ def calculate_expression(str_for_calc: str) -> str :
 
             without_dot = re.split(r"\.",str(asdf))
 
-            exponent = len(str(without_dot[0])) #+ len(str(new_string))
+            exponent = len(str(without_dot[0])) #+ len(str(new_string)
 
-            new_string = new_string[0] + "." + new_string[1:9] + "*10^" + str(exponent)
+            if exponent < 10:     
+
+                decimal_places = len(str(without_dot[1])) - 1
+                new_string = without_dot[0] +"."+ without_dot[1][0:decimal_places]
+                
 
             return new_string
 
@@ -421,7 +435,7 @@ def division(number1: Union[float,int], number2: Union[float,int]) -> Union[floa
     return number1/number2
 
 
-#string1 = float(calculate_expression("54+2/3-^4!"))
+#tring1 = float(calculate_expression("dec-5"))
 
 #if string1 < 6:
  #   print(string1)
