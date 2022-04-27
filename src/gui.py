@@ -200,8 +200,8 @@ def equals():
     global expr
     ## Result of evaluation
     eval_string = functions.calculate_expression(expr)
-
     clear()
+    eval_string = pars_convert(eval_string)
     expr = str(eval_string)
     expr_input.set(expr)
     shift_cursor(len(expr))
@@ -215,7 +215,7 @@ def pars_convert(eval_string):
 
     Function check string from math library (how long is it, if has dot, if it ist error) and convert e+n to *10^n.
     """
-    is_error = re.findall(r"(?:Syntax error|Arithmetic error)")
+    is_error = re.findall(r"(?:Syntax error|Arithmetic error)", str(eval_string))
     if bool(is_error):
         return eval_string
 
