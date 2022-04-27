@@ -162,6 +162,10 @@ def __find_all_expressions_factorial(string_for_change: str) -> str:
     for num in string_list:
 
         num_replaced = num.replace("!", "")
+        if int(num_replaced) > 170:
+
+            return "Arithmetic error"
+            
         num_replaced = __factorial_function(int(float(num_replaced)))
 
         string_for_change = string_for_change.replace(num,str(num_replaced))
