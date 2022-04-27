@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 
-"""! @brief Package containing mathematical functions"""
+"""! @brief Package containing functions for calculator G.I.I.T"""
 ##
 # @section description_file
 # This file contains mathematical functions
-# for calculator G.I.I.T. and for API.
+# for calculator G.I.I.T.
 # All internal functions were build around
 # needs of calculator. That is why most functions
 # operate with strings. Simple functions like
-# root() use only functions they need to calculate
+# root() from calc.py use only functions they need to calculate
 # right return value. Because of that it is recomended
 # to use those because they are quicker.
 # 
@@ -22,7 +22,7 @@
 # @section notes_file
 # 
 # @file functions.py
-# @brief File containg mathematical functions
+# @brief File containing functions for calculator G.I.I.T
 # @author Jozef Michal Bukas <xbukas00@stud.fit.vutbr.cz>
 # @date 28.4.2022
 

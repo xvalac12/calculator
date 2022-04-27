@@ -1,3 +1,22 @@
+#!/usr/bin/python3
+
+"""! @brief Package containing mathematical functions"""
+##
+# @section description_file 
+# This file contains mathematical functions.
+# 
+# @section libraries_file
+# - re
+# - functions
+# - typing
+#
+# @section notes_file
+# 
+# @file calc.py
+# @brief File containg mathematical functions
+# @author Jozef Michal Bukas <xbukas00@stud.fit.vutbr.cz>
+# @date 28.4.2022
+
 from typing import Union
 import functions
 import re
