@@ -81,6 +81,8 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
                                                                                                         # shortcut which wasn't mathemathicly correct
         except AttributeError:
 
+            string_for_change = "".join(reversed(string_for_change))
+
             return string_for_change
 
         substr = "".join(reversed(substr))
@@ -262,7 +264,7 @@ def __string_control(string_for_control: str) -> str:
 
     string_list += re.findall(r"(?:[-\+\*\\]{1}|^) *(?:√|\^)",string_for_control) # missing or invalid first operand for '^' and '√'
 
-    string_list += re.findall(r"(?:\^|√) *(?:\D{2} *(?:\D|$)|$)",string_for_control) # missing or invalid operand after '^' and '√'
+    string_list += re.findall(r"[\^√]{1} *[-\+\*\\]{1} *[-\+\*\\]",string_for_control) # missing or invalid operand after '^' and '√'
 
     # string_list += re.findall(r"",string_for_control)
 
@@ -302,6 +304,12 @@ def calculate_expression(str_for_calc: str) -> str :
 
     try :
         asdf = __funct(str_for_calc)  # calculation
+
+        list_comp = re.findall(r"j",str(asdf))
+
+        if bool(list_comp):
+
+            return "Arithmetric error"
 
         exp_expr = re.findall(r"e",str(asdf))
 
@@ -350,11 +358,6 @@ def calculate_expression(str_for_calc: str) -> str :
 
         return "Arithmetic error: /0"
 
-    list_comp = re.findall(r"j",str(asdf))
-
-    if bool(list_comp):
-
-        return "Arithmetric error"
 
     #print(asdf)
     return float(asdf)
@@ -431,7 +434,7 @@ def division(number1: Union[float,int], number2: Union[float,int]) -> Union[floa
     return number1/number2
 
 
-#tring1 = float(calculate_expression("dec-5"))
+#tring1 = float(calculate_expression("2^ -4"))
 
 #if string1 < 6:
  #   print(string1)
