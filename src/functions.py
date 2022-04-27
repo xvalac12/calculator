@@ -91,7 +91,11 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
 
         nums = re.split(" *\^ *",substr)    # taking oprands for calculation
 
-        num = float(nums[0])**float(nums[1])
+        try:
+            num = float(nums[0])**float(nums[1])
+        except OverflowError:
+
+            return "Arithmetic error"
 
         substr = "".join(reversed(substr))
         num = "".join(reversed(str(num)))
@@ -116,7 +120,11 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
             negative = True
             number *= -1
 
-        root = number ** exponent
+        try:
+            root = number ** exponent
+        except OverflowError:
+
+            return "Arithmetic error"
 
         if negative & bool(is_not_even):
 
@@ -165,7 +173,7 @@ def __find_all_expressions_factorial(string_for_change: str) -> str:
         if int(num_replaced) > 170:
 
             return "Arithmetic error"
-            
+
         num_replaced = __factorial_function(int(float(num_replaced)))
 
         string_for_change = string_for_change.replace(num,str(num_replaced))
@@ -327,10 +335,14 @@ def calculate_expression(str_for_calc: str) -> str :
 
         return "Arithmetic error: /0"
 
+    except OverflowError:
 
+        return "Overflow error"
     #print(eval_string)
-    return float(eval_string)
-
+    try:
+        return float(eval_string)
+    except OverflowError:
+        return "Overflow error"
 
 #tring1 = calculate_expression("12345678901234567")
 
