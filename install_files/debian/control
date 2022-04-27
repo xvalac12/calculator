@@ -3,7 +3,7 @@ Section: Mathematics
 Priority: extra
 Maintainer: G.I.I.T team <xvalac12@stud.fit.vutbr.cz>
 Build-Depends: debhelper (>= 8.0.0), python3-all
-Standards-Version: 4.6.0
+Standards-Version: 5
 Rules-Requires-Root: no
 
 Package: giit-calc
