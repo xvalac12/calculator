@@ -1,7 +1,29 @@
 #!/usr/bin/python3
 
-# file: functions.py
-# author: Jozef Michal Bukas <xbukas00>
+"""! @brief Package containing mathematical functions"""
+##
+# @section description_file
+# This file contains mathematical functions
+# for calculator G.I.I.T. and for API.
+# All internal functions were build around
+# needs of calculator. That is why most functions
+# operate with strings. Simple functions like
+# root() use only functions they need to calculate
+# right return value. Because of that it is recomended
+# to use those because they are quicker.
+# 
+# @section libraries_file
+# - re
+# - string
+# - typing
+# - logging    
+#
+# @section notes_file
+# 
+# @file functions.py
+# @brief File containg mathematical functions
+# @author Jozef Michal Bukas <xbukas00@stud.fit.vutbr.cz>
+# @date 28.4.2022
 
 from logging import raiseExceptions
 import re
