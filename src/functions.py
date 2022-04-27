@@ -303,29 +303,29 @@ def calculate_expression(str_for_calc: str) -> str :
 
 
     try :
-        asdf = __funct(str_for_calc)  # calculation
+        eval_string = __funct(str_for_calc)  # calculation
 
-        list_comp = re.findall(r"j",str(asdf))
+        list_comp = re.findall(r"j",str(eval_string))
 
         if bool(list_comp):
 
             return "Arithmetric error"
 
-        exp_expr = re.findall(r"e",str(asdf))
+        exp_expr = re.findall(r"e",str(eval_string))
 
-        is_there_dot = re.findall(r"\.",str(asdf))
+        is_there_dot = re.findall(r"\.",str(eval_string))
 
         if bool(exp_expr):
 
-            asdf = str(asdf).replace("e+","*10^")
+            eval_string = str(eval_string).replace("e+","*10^")
 
-            return asdf
+            return eval_string
 
-        elif bool(is_there_dot) and len(str(asdf)) > 18:
+        elif bool(is_there_dot) and len(str(eval_string)) > 18:
 
-            new_string = str(asdf)[0:10]
+            new_string = str(eval_string)[0:10]
 
-            without_dot = re.split(r"\.",str(asdf))
+            without_dot = re.split(r"\.",str(eval_string))
 
             exponent = len(str(without_dot[0])) #+ len(str(new_string)
 
@@ -336,11 +336,11 @@ def calculate_expression(str_for_calc: str) -> str :
 
             return float(new_string)
 
-        elif len(str(asdf)) > 20 and not bool(is_there_dot):
+        elif len(str(eval_string)) > 20 and not bool(is_there_dot):
             
-            new_string = str(asdf)[0:10]   
+            new_string = str(eval_string)[0:10]   
 
-            exponent = len(str(asdf))#+ len(str(new_string))     
+            exponent = len(str(eval_string))#+ len(str(new_string))     
 
             new_string = new_string[0] + "." + new_string[1:15] + "*10^" + str(exponent)
 
@@ -359,8 +359,8 @@ def calculate_expression(str_for_calc: str) -> str :
         return "Arithmetic error: /0"
 
 
-    #print(asdf)
-    return float(asdf)
+    #print(eval_string)
+    return float(eval_string)
 
 
 
@@ -434,7 +434,9 @@ def division(number1: Union[float,int], number2: Union[float,int]) -> Union[floa
     return number1/number2
 
 
-#tring1 = float(calculate_expression("2^ -4"))
+#tring1 = calculate_expression("12345678901234567")
+
+#print(tring1)
 
 #if string1 < 6:
  #   print(string1)
