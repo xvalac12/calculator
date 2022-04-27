@@ -33,6 +33,7 @@
 from tkinter import *
 from tkinter import ttk
 import webbrowser
+import re
 from idlelib.tooltip import Hovertip
 import functions
 
@@ -184,6 +185,7 @@ def delete():
 
     Delete last character shown on the display (var expr).
     """
+
     global expr
     expr = expr[:-1]
     expr_input.set(expr)
@@ -198,10 +200,51 @@ def equals():
     global expr
     ## Result of evaluation
     eval_string = functions.calculate_expression(expr)
+
     clear()
     expr = str(eval_string)
     expr_input.set(expr)
     shift_cursor(len(expr))
+
+
+def pars_convert(eval_string):
+    """!
+    @brief Function for parsing output from math library
+
+    @param eval_string string to parse
+
+    Function check string from math library (how long is it, if has dot, if it ist error) and convert e+n to *10^n.
+    """
+    is_error = re.findall(r"(?:Syntax error|Arithmetic error)")
+    if bool(is_error):
+        return eval_string
+
+    exp_expr = re.findall(r"e", str(eval_string))
+    is_there_dot = re.findall(r"\.", str(eval_string))
+
+    if bool(exp_expr):
+        eval_string = str(eval_string).replace("e+", "*10^")
+        return eval_string
+
+    elif bool(is_there_dot) and len(str(eval_string)) > 18:
+        new_string = str(eval_string)[0:10]
+        without_dot = re.split(r"\.", str(eval_string))
+        exponent = len(str(without_dot[0]))  # + len(str(new_string)
+
+        if exponent < 10:
+            decimal_places = len(str(without_dot[1])) - 1
+            new_string = without_dot[0] + "." + without_dot[1][0:decimal_places]
+
+        return float(new_string)
+
+    elif len(str(eval_string)) > 20 and not bool(is_there_dot):
+        new_string = str(eval_string)[0:10]
+        exponent = len(str(eval_string))  # + len(str(new_string))
+        new_string = new_string[0] + "." + new_string[1:15] + "*10^" + str(exponent)
+
+        return new_string
+
+    return eval_string
 
 
 def button_press(button, shift):
@@ -223,9 +266,9 @@ def key_press(key):
     """!
     @brief Function for assign value of key to expression
 
-    @param key key to assign
+    @param key character from key to assign
 
-    Characters entered from keyboard are concatenated to expression. Some special characters have different behavior.
+    Characters entered from keyboard are concatenated to expression. Some special keys have different behavior.
     """
     global expr
     if key.keycode == 22:  # BackSpace
@@ -241,6 +284,18 @@ def key_press(key):
     else:
         expr = expr + str(key.char)
         expr_input.set(expr)
+
+
+def random_number():
+    """!
+    @brief Function assign random number to expression
+
+    Characters entered from keyboard are concatenated to expression. Some special characters have different behavior.
+    """
+    global expr
+    rng = functions.get_random_number()
+    expr = expr + str(rng)
+    expr_input.set(expr)
 
 
 def pop_mes(message, event):
@@ -261,7 +316,7 @@ calc_gui.bind('<Key>', key_press)
 ## Variable to hold calculator input display
 input_field = ttk.Entry(calc_gui, font=('Helvetica', 20), width=100, textvariable=expr_input)
 input_field.grid(row=1, column=0, columnspan=5, ipady=8, ipadx=15)
-input_field.focus()
+input_field.focus_set()
 expr_input.get()
 
 
@@ -365,7 +420,7 @@ button_6.grid(row=5, column=3)
 button_6.bind(pop_mes(" Number 6 ", button_6))
 
 ## Button for generating random number
-button_rng = ttk.Button(calc_gui, text="RNG", command=lambda: button_press("√", 1))
+button_rng = ttk.Button(calc_gui, text="RNG", command=lambda: random_number())
 button_rng.grid(row=5, column=4)
 button_rng.bind(pop_mes(" Generate random number ", button_rng))
 
