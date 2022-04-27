@@ -55,10 +55,7 @@ class TestSubtraction(unittest.TestCase):
     def test_exceptions(self):
         self.assertTrue(calculate_expression("-").startswith("Syntax error"))
         self.assertTrue(calculate_expression("10 - ").startswith("Syntax error"))
-        self.assertTrue(calculate_expression("- 2").startswith("Syntax error"))
         self.assertTrue(calculate_expression("10 - 2 -").startswith("Syntax error"))
-        self.assertTrue(calculate_expression("- 10 - 2").startswith("Syntax error"))
-        self.assertTrue(calculate_expression("10 - - 2").startswith("Syntax error"))
 
 
 class IncrementDecrement(unittest.TestCase):
@@ -151,7 +148,7 @@ class TestRoot(unittest.TestCase):
         self.assertEqual(calculate_expression("-3 √ -8"), -0.5)
 
     def test_exceptions(self):
-        self.assertTrue(calculate_expression("2000√-4").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("2000√-4").startswith("Arithmetic error"))
         self.assertTrue(calculate_expression("0√4").startswith("Syntax error"))
 
 
@@ -161,7 +158,7 @@ class TestFactorial(unittest.TestCase):
         self.assertEqual(calculate_expression("5!"), 120)
 
     def test_exceptions(self):
-        self.assertTrue(calculate_expression("-5!").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("-5!").startswith("Arithmetic error"))
         self.assertTrue(calculate_expression("2!5").startswith("Syntax error"))
 
 
