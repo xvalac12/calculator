@@ -8,7 +8,7 @@ EMAIL=xvalac12@stud.fit.vutbr.cz
 
 
 SRC_FILES= src/gui.py src/functions.py src/calc.py
-ICON=src/icon/icon.xpm
+ICON=src/icon/giit-calc.xpm
 
 .PHONY: all pack profile doc install clean
 
