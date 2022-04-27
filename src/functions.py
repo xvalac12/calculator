@@ -311,41 +311,6 @@ def calculate_expression(str_for_calc: str) -> str :
 
             return "Arithmetric error"
 
-        exp_expr = re.findall(r"e",str(eval_string))
-
-        is_there_dot = re.findall(r"\.",str(eval_string))
-
-        if bool(exp_expr):
-
-            eval_string = str(eval_string).replace("e+","*10^")
-
-            return eval_string
-
-        elif bool(is_there_dot) and len(str(eval_string)) > 18:
-
-            new_string = str(eval_string)[0:10]
-
-            without_dot = re.split(r"\.",str(eval_string))
-
-            exponent = len(str(without_dot[0])) #+ len(str(new_string)
-
-            if exponent < 10:     
-
-                decimal_places = len(str(without_dot[1])) - 1
-                new_string = without_dot[0] +"."+ without_dot[1][0:decimal_places]
-
-            return float(new_string)
-
-        elif len(str(eval_string)) > 20 and not bool(is_there_dot):
-            
-            new_string = str(eval_string)[0:10]   
-
-            exponent = len(str(eval_string))#+ len(str(new_string))     
-
-            new_string = new_string[0] + "." + new_string[1:15] + "*10^" + str(exponent)
-
-            return new_string
-
     except NameError:
 
         return "Syntax error"
