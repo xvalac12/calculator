@@ -59,4 +59,5 @@ calc-$(VERSION).tar.gz:
 
 
 clean:
+	rm -rf install
 	rm -rf __pycache__
