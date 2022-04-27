@@ -102,8 +102,6 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
         negative = False
         is_not_even = float(nums[0]) % 2
 
-        exponent = (1 / float(nums[0]))
-
         try:       
             exponent = (1 / float(nums[0]))
         except ZeroDivisionError:
@@ -328,7 +326,7 @@ def calculate_expression(str_for_calc: str) -> str :
                 decimal_places = len(str(without_dot[1])) - 1
                 new_string = without_dot[0] +"."+ without_dot[1][0:decimal_places]
 
-            return new_string
+            return float(new_string)
 
         elif len(str(asdf)) > 20 and not bool(is_there_dot):
             
@@ -352,7 +350,7 @@ def calculate_expression(str_for_calc: str) -> str :
 
         return "Arithmetic error: /0"
 
-    list_comp = re.findall(r"j",str(asdf));
+    list_comp = re.findall(r"j",str(asdf))
 
     if bool(list_comp):
 
