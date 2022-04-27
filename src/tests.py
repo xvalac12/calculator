@@ -29,7 +29,6 @@ class TestAddition(unittest.TestCase):
     def test_exceptions(self):
         self.assertRaises(SyntaxError, calculate_expression, "+")
         self.assertRaises(SyntaxError, calculate_expression, "10 + ")
-        self.assertRaises(SyntaxError, calculate_expression, "+ 2")
         self.assertRaises(SyntaxError, calculate_expression, "10 + 2 +")
         self.assertRaises(SyntaxError, calculate_expression, "+ 10 + 2")
         self.assertRaises(SyntaxError, calculate_expression, "10 + + 2")
@@ -176,7 +175,6 @@ class Exceptions(unittest.TestCase):
         self.assertRaises(SyntaxError, calculate_expression, "-")
 
         # Hanging symbols
-        self.assertRaises(SyntaxError, calculate_expression, "+ 2 + 5")
         self.assertRaises(SyntaxError, calculate_expression, "5 * 6 /")
 
         # Repeating symbols
