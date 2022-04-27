@@ -28,7 +28,7 @@
 from logging import raiseExceptions
 import re
 import string
-from typing import Union
+from typing import Union, Generator
 
 
 # function which calculates basic operations
@@ -423,3 +423,14 @@ def division(number1: Union[float,int], number2: Union[float,int]) -> Union[floa
 
 #if string1 < 6:
  #   print(string1)
+
+#------------------------------------------------random numbers---------------------------------------------------------
+
+def get_random_number() -> int:
+    raise NotImplementedError
+
+def __create_generator(modulus: int, multiplier: int, increment: int, seed: int) -> Generator[int, None, None]:
+    raise NotImplementedError
+
+def __combine_generators(generators: [Generator[int, None, None]]) -> int:
+    raise NotImplementedError
