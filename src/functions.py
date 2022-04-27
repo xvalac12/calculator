@@ -99,8 +99,12 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
         nums = re.split(" *√ *",substr)     # spliting expression into two parts
         negative = False
         is_not_even = float(nums[0]) % 2
-       
-        exponent = (1 / float(nums[0]))
+
+        try:       
+            exponent = (1 / float(nums[0]))
+        except ZeroDivisionError:
+            return "Syntax error"
+
         number = float(nums[1])
 
         if number < 0 and bool(is_not_even):
