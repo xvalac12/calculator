@@ -311,7 +311,7 @@ def calculate_expression(str_for_calc: str) -> str :
 
             return asdf
 
-        elif bool(is_there_dot) and len(str(asdf)) > 15:
+        elif bool(is_there_dot) and len(str(asdf)) > 18:
 
             new_string = str(asdf)[0:10]   
 
@@ -321,17 +321,17 @@ def calculate_expression(str_for_calc: str) -> str :
 
             if exponent < 10:     
 
-                #if 
-                new_string = without_dot[0] +"."+ without_dot[1][0:]
+                decimal_places = len(str(without_dot[1])) - 1
+                new_string = without_dot[0] +"."+ without_dot[1][0:decimal_places]
 
             return new_string
 
 
-        elif len(str(asdf)) > 20:
+        elif len(str(asdf)) > 20 and not bool(is_there_dot):
             
             new_string = str(asdf)[0:10]   
 
-            exponent = len(str(asdf)) #+ len(str(new_string))     
+            exponent = len(str(asdf))#+ len(str(new_string))     
 
             new_string = new_string[0] + "." + new_string[1:15] + "*10^" + str(exponent)
 
