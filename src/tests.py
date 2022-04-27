@@ -27,11 +27,11 @@ class TestAddition(unittest.TestCase):
         self.assertEqual(calculate_expression("2.0 + -1.0"), 1)
 
     def test_exceptions(self):
-        self.assertRaises(SyntaxError, calculate_expression, "+")
-        self.assertRaises(SyntaxError, calculate_expression, "10 + ")
-        self.assertRaises(SyntaxError, calculate_expression, "10 + 2 +")
-        self.assertRaises(SyntaxError, calculate_expression, "+ 10 + 2")
-        self.assertRaises(SyntaxError, calculate_expression, "10 + + 2")
+        self.assertTrue(calculate_expression("+").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("10 + ").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("10 + 2 +").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("+ 10 + 2").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("10 + + 2").startswith("Syntax error"))
 
 
 class TestSubtraction(unittest.TestCase):
@@ -55,12 +55,12 @@ class TestSubtraction(unittest.TestCase):
         self.assertEqual(calculate_expression("-3.5 - 3"), -6.5)
 
     def test_exceptions(self):
-        self.assertRaises(SyntaxError, calculate_expression, "-")
-        self.assertRaises(SyntaxError, calculate_expression, "10 - ")
-        self.assertRaises(SyntaxError, calculate_expression, "- 2")
-        self.assertRaises(SyntaxError, calculate_expression, "10 - 2 -")
-        self.assertRaises(SyntaxError, calculate_expression, "- 10 - 2")
-        self.assertRaises(SyntaxError, calculate_expression, "10 - - 2")
+        self.assertTrue(calculate_expression("-").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("10 - ").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("- 2").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("10 - 2 -").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("- 10 - 2").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("10 - - 2").startswith("Syntax error"))
 
 
 class IncrementDecrement(unittest.TestCase):
@@ -78,9 +78,9 @@ class IncrementDecrement(unittest.TestCase):
         self.assertEqual(calculate_expression("dec-5"), - 6)
 
     def test_exceptions(self):
-        self.assertRaises(SyntaxError, calculate_expression, "inc")
+        self.assertTrue(calculate_expression("inc").startswith("Syntax error"))
 
-        self.assertRaises(SyntaxError, calculate_expression, "dec")
+        self.assertTrue(calculate_expression("dec").startswith("Syntax error"))
 
 
 class TestMultiplication(unittest.TestCase):
@@ -117,7 +117,7 @@ class TestDivision(unittest.TestCase):
         self.assertEqual(calculate_expression("14/ -7"), -2)
 
     def test_exceptions(self):
-        self.assertRaises(ArithmeticError, calculate_expression, "3 / 0")
+        self.assertTrue(calculate_expression("3 / 0").startswith("Syntax error"))
 
 
 class TestPower(unittest.TestCase):
@@ -154,8 +154,8 @@ class TestRoot(unittest.TestCase):
         self.assertEqual(calculate_expression("-3 √ -8"), 0.25)
 
     def test_exceptions(self):
-        self.assertRaises(ArithmeticError, calculate_expression, "2000√-4")
-        self.assertRaises(ArithmeticError, calculate_expression, "0√4")
+        self.assertTrue(calculate_expression("2000√-4").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("0√4").startswith("Syntax error"))
 
 
 class TestFactorial(unittest.TestCase):
@@ -164,28 +164,28 @@ class TestFactorial(unittest.TestCase):
         self.assertEqual(calculate_expression("5!"), 120)
 
     def test_exceptions(self):
-        self.assertRaises(SyntaxError, calculate_expression, "-5!")
-        self.assertRaises(SyntaxError, calculate_expression, "2!5")
+        self.assertTrue(calculate_expression("-5!").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("2!5").startswith("Syntax error"))
 
 
 class Exceptions(unittest.TestCase):
     def test_syntax(self):
         # Lone symbols
-        self.assertRaises(SyntaxError, calculate_expression, "+")
-        self.assertRaises(SyntaxError, calculate_expression, "-")
+        self.assertTrue(calculate_expression("+").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("-").startswith("Syntax error"))
 
         # Hanging symbols
-        self.assertRaises(SyntaxError, calculate_expression, "5 * 6 /")
+        self.assertTrue(calculate_expression("5 * 6 /").startswith("Syntax error"))
 
         # Repeating symbols
-        self.assertRaises(SyntaxError, calculate_expression, "2 + + 5")
-        self.assertRaises(SyntaxError, calculate_expression, "5!!")
+        self.assertTrue(calculate_expression("2 + + 5").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("5!!").startswith("Syntax error"))
 
         # Text
-        self.assertRaises(SyntaxError, calculate_expression, "Heyo")
-        self.assertRaises(SyntaxError, calculate_expression, "increment")
-        self.assertRaises(SyntaxError, calculate_expression, "Minca")
-        self.assertRaises(SyntaxError, calculate_expression, "codec")
+        self.assertTrue(calculate_expression("Heyo").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("increment").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("Minca").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("codec").startswith("Syntax error"))
 
 
 class TestRandomness(unittest.TestCase):
