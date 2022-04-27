@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """! @brief Tkinter GUI of calculator"""
 ##
-# @mainpage Doxygen calculator
+# @mainpage Documentation
 # @section description_main Description
 # School project for subject IVS (Practical Aspects of Software Design).
 # Calculator with elementary operations (+,-,*,/), factorial, exponentiation, square root, incrementation
@@ -103,18 +103,11 @@ help_menu.add_command(label='About...', command=lambda: about_window())
 
 def manual_window():
     """!
-    @brief Create window with manual in it
+    @brief Open user documentation
 
-    Manual is link to user documentation pdf. Setting of configurations of window.
+    Manual is link to user documentation pdf.
     """
-
-    ## Variable to hold 'Manual' window in GUI
-    window = Toplevel()
-    window.geometry(f'{int(screen_width/4)}x{int(screen_height/8)}')
-    window.title("Manual")
-    window.config(bg="white")
-    ttk.Label(window, text='See user documentation', font=("Times", "12"), background="white").\
-        pack(pady=10)
+    webbrowser.open_new(r'../dokumentace.pdf')
 
 
 def about_window():
@@ -344,7 +337,7 @@ button_pown.bind(pop_mes(" Exponentiation \n x^n ", button_pown))
 ## Button for pi (π)
 button_pi = ttk.Button(calc_gui, text="π", command=lambda: button_press("π", 1))
 button_pi.grid(row=2, column=4)
-button_pi.bind(pop_mes(" Euler\'s number ", button_pi))
+button_pi.bind(pop_mes(" Ludolph\'s number ", button_pi))
 
 # Second ROW
 ## Button for factorial
@@ -393,10 +386,10 @@ button_9 = ttk.Button(calc_gui, text="9", command=lambda: button_press("9", 1))
 button_9.grid(row=4, column=3)
 button_9.bind(pop_mes(" Number 9 ", button_9))
 
-## Button for convert eur(€) to ruble(₽)
-button_convert = ttk.Button(calc_gui, text="€->₽", command=lambda: button_press("√", 1))
-button_convert.grid(row=4, column=4)
-button_convert.bind(pop_mes(" Conversion from eur(€) to ruble(₽) ", button_convert))
+## Button e (Euler`n number)
+button_e = ttk.Button(calc_gui, text="e", command=lambda: button_press("e", 1))
+button_e.grid(row=4, column=4)
+button_e.bind(pop_mes(" Euler\'s number ", button_e))
 
 # Fourth ROW
 ## Button for subtraction
