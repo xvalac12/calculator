@@ -9,7 +9,7 @@
 # needs of calculator. That is why most functions
 # operate with strings. Simple functions like
 # root() from calc.py use only functions they need to calculate
-# right return value. Because of that it is recomended
+# right return value. Because of that it is recommended
 # to use those because they are quicker.
 # 
 # @section libraries_functions Libraries/Module
@@ -44,17 +44,17 @@ def __funct(string_for_eval):
 def __find_all_expressions_power_d(string_for_change: str) -> str:
     string_list = re.findall(r" *[\^√] *", string_for_change)  # check if there are any desired symbols in string
 
-    if bool(string_list) == False:
+    if not bool(string_list):
         return string_for_change
 
     string_for_change = "".join(
-        reversed(string_for_change))  # string is reversed because I want to look for last occurence of symbol
+        reversed(string_for_change))  # string is reversed because I want to look for last occurrence of symbol
 
     try:
-        # this regex must be read backwards. It is backwards because I need to look for the most inner symbol so it will be mathematicly correct
-        # this regex looks for symbols ^ and √ . Then it cuts it from string with all operands.
-        # It must be in try because there are two tipes of tring which I look for. If this regex finds nothing it throws exception
-        # which would ruin whole calculation
+        # this regex must be read backwards. It is backwards because I need to look for the most inner symbol, so it
+        # will be mathematically correct this regex looks for symbols ^ and √ . Then it cuts it from string with all
+        # operands. It must be in try because there are two types of string which I look for. If this regex finds
+        # nothing it throws exception which would ruin whole calculation
 
         substr = re.search(r"(?:\d+\.\d*|\d+) *[-\+]? *[\^√] *(?:\d+\.\d*|\d+) *[-\+]{1} *(?:\D|$)",
                            string_for_change).group()
@@ -74,10 +74,10 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
 
         try:
             substr = re.search(r"(?:\d+\.\d*|\d+) *[-\+]? *[\^√] *(?:\d+\.\d*|\d+)", string_for_change).group()
-            # search is used to find first occurence
-            # this may proof uneffecient and it is but
+            # search is used to find first occurrence
+            # this may proof inefficient, and it is but
             # while it tried to be fast it has also taken
-            # shortcut which wasn't mathemathicly correct
+            # shortcut which wasn't mathematically correct
         except AttributeError:
 
             string_for_change = "".join(reversed(string_for_change))
@@ -88,7 +88,7 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
 
     if "^" in substr:
 
-        nums = re.split(" *\^ *", substr)  # taking oprands for calculation
+        nums = re.split(" *\^ *", substr)  # taking operands for calculation
 
         try:
             num = float(nums[0]) ** float(nums[1])
@@ -104,7 +104,7 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
 
     else:
 
-        nums = re.split(" *√ *", substr)  # spliting expression into two parts
+        nums = re.split(" *√ *", substr)  # splitting expression into two parts
         negative = False
         is_not_even = float(nums[0]) % 2
 
@@ -174,14 +174,14 @@ def __find_all_expressions_factorial(string_for_change: str) -> str:
     return string_for_change
 
 
-# function whitch calls function for factorial evaluation
+# function which calls function for factorial evaluation
 def __convert_to_evaluable_factorial(string_for_change: str) -> str:
     return __find_all_expressions_factorial(string_for_change)
 
 
 # function which finds all inc symbols and replaces them with number
 def __find_all_expressions_inc(string_for_change: str) -> str:
-    string_for_change = "".join(reversed(string_for_change))  # string is reversed to look for most inner occurence
+    string_for_change = "".join(reversed(string_for_change))  # string is reversed to look for most inner occurrence
     # also it had tendency to change incorrect substrings
     # this is the safest way
 
@@ -209,15 +209,15 @@ def __find_all_expressions_inc(string_for_change: str) -> str:
 
 
 # function which calls functions for evaluation of inc and dec symbol 
-def __convert_to_evalauble_inc(string_for_change: str) -> str:
+def __convert_to_evaluable_inc(string_for_change: str) -> str:
     while string_for_change != __find_all_expressions_inc(string_for_change):
         string_for_change = __find_all_expressions_inc(string_for_change)
 
     return string_for_change
 
 
-def __replace_irational_numbers(string_for_change: str) -> str:
-    # string_list = re.findall(r"(?:e|π)",string_for_cange)
+def __replace_irrational_numbers(string_for_change: str) -> str:
+    # string_list = re.findall(r"(?:e|π)",string_for_change)
 
     string_for_change = string_for_change.replace("dec", "Q")
 
@@ -236,7 +236,7 @@ def __string_control(string_for_control: str) -> str:
 
     string_list = re.findall(r"(?:\d *(?:e|π)|(?:e|π) *\d)", string_for_control)  # number before or after constants
 
-    string_for_control = __replace_irational_numbers(
+    string_for_control = __replace_irrational_numbers(
         string_for_control)  # replacing so that symbols won't interfere with other controls
 
     string_list += re.findall(r"(?: +\.\d|\d\. )", string_for_control)  # space on one side of '.'
@@ -255,13 +255,13 @@ def __string_control(string_for_control: str) -> str:
     string_list += re.findall(r"(?:inc|dec) *(?:\^|√)",
                               string_for_control)  # inc or dec operand without number before '^' or '√'
 
-    string_list += re.findall(r"(?:! *\d| !)", string_for_control)  # no oprand after '!' and space before '!'
+    string_list += re.findall(r"(?:! *\d| !)", string_for_control)  # no operand after '!' and space before '!'
 
     # string_list += re.findall(r" !",string_for_control)  # space before '!'
 
     string_list += re.findall(r"\D *! *\D", string_for_control)  # '!' between two operands
 
-    string_list += re.findall(r"(?:\D|^) *!", string_for_control)  # '!' at begining without number
+    string_list += re.findall(r"(?:\D|^) *!", string_for_control)  # '!' at beginning without number
 
     string_list1 += re.findall(r"\d+\.\d+!", string_for_control)  # factorial of fraction
 
@@ -273,10 +273,10 @@ def __string_control(string_for_control: str) -> str:
 
     # string_list += re.findall(r"",string_for_control)
 
-    if bool(string_list) == True:
+    if bool(string_list):
         return "Syntax error: " + string_list[0]
 
-    if bool(string_list1) == True:
+    if bool(string_list1):
         return "Arithmetic error: " + string_list1[0]
 
     return string_for_control
@@ -296,7 +296,7 @@ def calculate_expression(str_for_calc: str) -> str:
     if bool(error):
         return str_for_calc
 
-    str_for_calc = __convert_to_evalauble_inc(str_for_calc)
+    str_for_calc = __convert_to_evaluable_inc(str_for_calc)
     str_for_calc = __convert_to_evaluable_factorial(str_for_calc)
     str_for_calc = __convert_to_evaluate_power(str_for_calc)
 
@@ -306,7 +306,7 @@ def calculate_expression(str_for_calc: str) -> str:
         list_comp = re.findall(r"j", str(eval_string))
 
         if bool(list_comp):
-            return "Arithmetric error"
+            return "Arithmetic error"
 
     except NameError:
 
@@ -332,9 +332,9 @@ def calculate_expression(str_for_calc: str) -> str:
         return "Overflow error"
 
 
-# tring1 = calculate_expression("12345678901234567")
+# string1 = calculate_expression("12345678901234567")
 
-# print(tring1)
+# print(string1)
 
 # if string1 < 6:
 #   print(string1)
