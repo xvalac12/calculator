@@ -30,7 +30,7 @@ from logging import raiseExceptions
 import re
 import string
 import random
-from typing import Union, Generator
+from typing import Union, Generator, List
 
 
 # function which calculates basic operations
@@ -446,11 +446,11 @@ def __create_generator(modulus: int, multiplier: int, increment: int, seed: int)
         yield seed
 
 
-def __combine_generators(generators: list[Generator[int, None, None]], modulus_of_first: int) -> int:
+def __combine_generators(generators: List[Generator[int, None, None]], modulus_of_first: int) -> int:
     result = 0
     for i, generator in enumerate(generators):
         result += ((-1) ** i) * generator.__next__()
-    return result % modulus_of_first - 1
+    return result % (modulus_of_first - 1)
 
 
 __glibc_lcg = __create_generator(2**31, 1103515245, 12345, random.randrange(0, 2**31))
@@ -459,7 +459,7 @@ __musl_lcg = __create_generator(2**64, 6364136223846793005, 1, random.randrange(
 # Multiplier from  https://doi.org/10.1002/spe.3030
 __custom_lcg = __create_generator(2**64, 0xd1342543de82ef95, 1, random.randrange(0, 2**64))
 
-__lcg_table = [__custom_lcg, __musl_lcg, __glibc_lcg];
+__lcg_table = [__custom_lcg, __musl_lcg, __glibc_lcg]
 __first_generator_modulus = 2**64
 
 
