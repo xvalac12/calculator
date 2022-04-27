@@ -2,7 +2,7 @@ Source: giit-calc
 Section: Mathematics
 Priority: extra
 Maintainer: G.I.I.T team <xvalac12@stud.fit.vutbr.cz>
-Build-Depends: debhelper-compat (= 13), dh-python, python3-setuptools, python3-all
+Build-Depends: debhelper-compat (>= 12), dh-python, python3-setuptools, python3-all
 Standards-Version: 4.6.0
 Rules-Requires-Root: no
 
