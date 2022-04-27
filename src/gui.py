@@ -206,7 +206,7 @@ def pars_convert(eval_string):
 
     @param eval_string string to parse
 
-    Function check string from math library (how long is it, if has dot, if it ist error) and convert e+n to *10^n.
+    Function check string from math library (how long is it, if it has dot, if it ist error) and convert e+n to *10^n.
     """
     is_error = re.findall(r"(?:Syntax error|Arithmetic error)", str(eval_string))
     if bool(is_error):
