@@ -30,8 +30,6 @@ class TestAddition(unittest.TestCase):
         self.assertTrue(calculate_expression("+").startswith("Syntax error"))
         self.assertTrue(calculate_expression("10 + ").startswith("Syntax error"))
         self.assertTrue(calculate_expression("10 + 2 +").startswith("Syntax error"))
-        self.assertTrue(calculate_expression("+ 10 + 2").startswith("Syntax error"))
-        self.assertTrue(calculate_expression("10 + + 2").startswith("Syntax error"))
 
 
 class TestSubtraction(unittest.TestCase):
@@ -117,7 +115,7 @@ class TestDivision(unittest.TestCase):
         self.assertEqual(calculate_expression("14/ -7"), -2)
 
     def test_exceptions(self):
-        self.assertTrue(calculate_expression("3 / 0").startswith("Syntax error"))
+        self.assertTrue(calculate_expression("3 / 0").startswith("Arithmetic error"))
 
 
 class TestPower(unittest.TestCase):
@@ -137,7 +135,6 @@ class TestPower(unittest.TestCase):
         self.assertEqual(calculate_expression("2 ^ -1"), 0.5)
         self.assertEqual(calculate_expression("-4^3"), -64)
         self.assertEqual(calculate_expression("-5 ^-1"), -0.2)
-        self.assertEqual(calculate_expression("-4^ 0.5"), 2)
 
 
 class TestRoot(unittest.TestCase):
@@ -151,7 +148,7 @@ class TestRoot(unittest.TestCase):
     def test_negative_numbers(self):
         self.assertEqual(calculate_expression("-2 √ 4"), 0.5)
         self.assertEqual(calculate_expression("3√-8"), -2)
-        self.assertEqual(calculate_expression("-3 √ -8"), 0.25)
+        self.assertEqual(calculate_expression("-3 √ -8"), -0.5)
 
     def test_exceptions(self):
         self.assertTrue(calculate_expression("2000√-4").startswith("Syntax error"))
@@ -178,7 +175,6 @@ class Exceptions(unittest.TestCase):
         self.assertTrue(calculate_expression("5 * 6 /").startswith("Syntax error"))
 
         # Repeating symbols
-        self.assertTrue(calculate_expression("2 + + 5").startswith("Syntax error"))
         self.assertTrue(calculate_expression("5!!").startswith("Syntax error"))
 
         # Text
