@@ -1,28 +1,28 @@
 #!/usr/bin/python3
 
-"""! @brief Package containing mathematical functions"""
+"""! @brief Package containing functions for calculator G.I.I.T"""
 ##
-# @section description_file
+# @section description_functions Description
 # This file contains mathematical functions
-# for calculator G.I.I.T. and for API.
+# for calculator G.I.I.T.
 # All internal functions were build around
 # needs of calculator. That is why most functions
 # operate with strings. Simple functions like
-# root() use only functions they need to calculate
+# root() from calc.py use only functions they need to calculate
 # right return value. Because of that it is recomended
 # to use those because they are quicker.
 # 
-# @section libraries_file
+# @section libraries_functions Libraries/Module
 # - re
 # - string
 # - typing
 # - logging
 # - random
 #
-# @section notes_file
+# @section notes_functions Notes
 # 
 # @file functions.py
-# @brief File containg mathematical functions
+# @brief File containing functions for calculator G.I.I.T
 # @author Jozef Michal Bukas <xbukas00@stud.fit.vutbr.cz>
 # @date 28.4.2022
 
@@ -81,6 +81,8 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
                                                                                                         # shortcut which wasn't mathemathicly correct
         except AttributeError:
 
+            string_for_change = "".join(reversed(string_for_change))
+
             return string_for_change
 
         substr = "".join(reversed(substr))
@@ -89,7 +91,12 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
 
         nums = re.split(" *\^ *",substr)    # taking oprands for calculation
 
-        num = float(nums[0])**float(nums[1])
+        try:
+            num = float(nums[0])**float(nums[1])
+        
+        except OverflowError:
+
+            return "Arithmetic error"
 
         substr = "".join(reversed(substr))
         num = "".join(reversed(str(num)))
@@ -104,7 +111,9 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
 
         try:       
             exponent = (1 / float(nums[0]))
+        
         except ZeroDivisionError:
+       
             return "Syntax error"
 
         number = float(nums[1])
@@ -114,7 +123,11 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
             negative = True
             number *= -1
 
-        root = number ** exponent
+        try:
+            root = number ** exponent
+        except OverflowError:
+
+            return "Arithmetic error"
 
         if negative & bool(is_not_even):
 
@@ -160,6 +173,10 @@ def __find_all_expressions_factorial(string_for_change: str) -> str:
     for num in string_list:
 
         num_replaced = num.replace("!", "")
+        if int(num_replaced) > 170:
+
+            return "Arithmetic error"
+
         num_replaced = __factorial_function(int(float(num_replaced)))
 
         string_for_change = string_for_change.replace(num,str(num_replaced))
@@ -262,7 +279,7 @@ def __string_control(string_for_control: str) -> str:
 
     string_list += re.findall(r"(?:[-\+\*\\]{1}|^) *(?:√|\^)",string_for_control) # missing or invalid first operand for '^' and '√'
 
-    string_list += re.findall(r"(?:\^|√) *(?:\D{2} *(?:\D|$)|$)",string_for_control) # missing or invalid operand after '^' and '√'
+    string_list += re.findall(r"[\^√]{1} *[-\+\*\\]{1} *[-\+\*\\]",string_for_control) # missing or invalid operand after '^' and '√'
 
     # string_list += re.findall(r"",string_for_control)
 
@@ -301,42 +318,13 @@ def calculate_expression(str_for_calc: str) -> str :
 
 
     try :
-        asdf = __funct(str_for_calc)  # calculation
+        eval_string = __funct(str_for_calc)  # calculation
 
-        exp_expr = re.findall(r"e",str(asdf))
+        list_comp = re.findall(r"j",str(eval_string))
 
-        is_there_dot = re.findall(r"\.",str(asdf))
+        if bool(list_comp):
 
-        if bool(exp_expr):
-
-            asdf = str(asdf).replace("e+","*10^")
-
-            return asdf
-
-        elif bool(is_there_dot) and len(str(asdf)) > 18:
-
-            new_string = str(asdf)[0:10]
-
-            without_dot = re.split(r"\.",str(asdf))
-
-            exponent = len(str(without_dot[0])) #+ len(str(new_string)
-
-            if exponent < 10:     
-
-                decimal_places = len(str(without_dot[1])) - 1
-                new_string = without_dot[0] +"."+ without_dot[1][0:decimal_places]
-
-            return float(new_string)
-
-        elif len(str(asdf)) > 20 and not bool(is_there_dot):
-            
-            new_string = str(asdf)[0:10]   
-
-            exponent = len(str(asdf))#+ len(str(new_string))     
-
-            new_string = new_string[0] + "." + new_string[1:15] + "*10^" + str(exponent)
-
-            return new_string
+            return "Arithmetric error"
 
     except NameError:
 
@@ -350,88 +338,20 @@ def calculate_expression(str_for_calc: str) -> str :
 
         return "Arithmetic error: /0"
 
-    list_comp = re.findall(r"j",str(asdf))
+    except OverflowError:
 
-    if bool(list_comp):
+        return "Overflow error"
+    #print(eval_string)
+    try:
+        return float(eval_string)
 
-        return "Arithmetric error"
+    except OverflowError:
 
-    #print(asdf)
-    return float(asdf)
+        return "Overflow error"
 
+#tring1 = calculate_expression("12345678901234567")
 
-
-
-def power(number: Union[float,int], exponent: Union[float,int]) -> Union[float,int]:
-
-    str_for_calc = str(number) + "^" + str(exponent)
-
-    str_for_calc = __find_all_expressions_power_d(str_for_calc)
-
-    error = re.findall(r"j",str_for_calc)
-
-    if bool(error):
-
-        raise ArithmeticError("Root of negative number while exponent is even is not defined")
-
-    return float(str_for_calc)
-
-def root(number: Union[int,float], root: Union[int,float]) -> Union[float,int]:
-
-    str_for_calc = str(root) + "√" + str(number)
-
-    str_for_calc = __find_all_expressions_power_d(str_for_calc)
-
-    error = re.findall(r"j",str_for_calc)
-
-    if bool(error):
-
-        raise ArithmeticError("Root of negative number while exponent is even is not defined")
-
-    return str_for_calc
-
-def factorial(number: int) -> int:
-
-    str_for_calc = str(number) + "!"
-
-    if number < 0:
-
-        raise ArithmeticError("Factorial of negative number is not defined")
-
-    str_for_calc = __find_all_expressions_factorial(str_for_calc)
-
-    return int(str_for_calc)
-
-def increment(number: Union[float,int]) -> Union[float,int]:
-
-    str_for_calc = "inc" + str(number)
-
-    str_for_calc = __find_all_expressions_inc(str_for_calc)
-
-    return str_for_calc
-
-def decrement(number: Union[float,int]) -> Union[float,int]:
-
-    str_for_calc = "dec" + str(number)
-
-    str_for_calc = __find_all_expressions_inc(str_for_calc)
-
-    return str_for_calc
-
-def multiply(number1: Union[float,int], number2: Union[float,int]) -> Union[float,int]:
-
-    return number1*number2
-
-def division(number1: Union[float,int], number2: Union[float,int]) -> Union[float,int]:
-
-    if not number2:
-
-        raise ZeroDivisionError
-
-    return number1/number2
-
-
-#tring1 = float(calculate_expression("dec-5"))
+#print(tring1)
 
 #if string1 < 6:
  #   print(string1)
