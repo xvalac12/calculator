@@ -1,10 +1,10 @@
-NAME=xvalac00
+NAME=xvalac12
 DESTDIR=calc-$(VERSION)
 INSFLAGS=
 
 VERSION=1.0
 LICENSE=gpl3
-EMAIL=xvalac00@fit.vutbr.cz
+EMAIL=xvalac12@stud.fit.vutbr.cz
 
 
 SRC_FILES= src/gui.py src/functions.py
