@@ -1,3 +1,17 @@
+"""! @brief Tests for our library"""
+##
+# @section description_file Description
+# Test for our library
+#
+# @section libraries_file Libraries/Modules
+# - unittest
+# - functions
+#
+# @file tests.py
+# @brief tests
+# @author Adam Bezak <xbezak02@stud.fit.vutbr.cz>
+# @date 28.4.2022
+
 import unittest
 from functions import calculate_expression
 
@@ -138,7 +152,6 @@ class TestPower(unittest.TestCase):
         self.assertEqual(calculate_expression("2 ^ -1"), 0.5)
         self.assertEqual(calculate_expression("-4^3"), -64)
         self.assertEqual(calculate_expression("-5 ^-1"), -0.2)
-        self.assertEqual(calculate_expression("-4^ 0.5"), 2)
 
 
 class TestRoot(unittest.TestCase):
@@ -152,7 +165,7 @@ class TestRoot(unittest.TestCase):
     def test_negative_numbers(self):
         self.assertEqual(calculate_expression("-2 √ 4"), 0.5)
         self.assertEqual(calculate_expression("3√-8"), -2)
-        self.assertEqual(calculate_expression("-3 √ -8"), 0.25)
+        self.assertEqual(calculate_expression("-3 √ -8"), -0.5)
 
     def test_exceptions(self):
         self.assertRaises(ArithmeticError, calculate_expression, "2000√-4")
