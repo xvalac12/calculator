@@ -13,7 +13,7 @@
 # @date 28.4.2022
 
 import unittest
-from functions import calculate_expression
+from functions import calculate_expression, get_random_number
 
 
 class TestAddition(unittest.TestCase):
@@ -201,6 +201,14 @@ class Exceptions(unittest.TestCase):
         self.assertRaises(SyntaxError, calculate_expression, "increment")
         self.assertRaises(SyntaxError, calculate_expression, "Minca")
         self.assertRaises(SyntaxError, calculate_expression, "codec")
+
+
+class TestRandomness(unittest.TestCase):
+
+    # We're not testing for randomness we don't have the proper tools.
+    # Nor are we required to.
+    def test_returns(self):
+        self.assertEqual(type(get_random_number()), int)
 
 
 if __name__ == '__main__':
