@@ -10,6 +10,8 @@ EMAIL=xvalac00@fit.vutbr.cz
 SRC_FILES= src/gui.py src/functions.py
 ICON=calc_icon.xpm
 
+.PHONY: all pack profile doc install clean
+
 all:
 
 
@@ -23,7 +25,12 @@ profile:
 test:
 	python3 ./src/tests.py
 
+repo:
+	(git clone . $@ || (rm -rf $@  && git clone . $@)) || echo "Couldn't make folder repo"
+
 doc:
+
+
 
 install: calc-$(VERSION) calc-$(VERSION).tar.gz
 	cd $(DESTDIR) && dh_make -e $(EMAIL) -n  -c $(LICENSE) -f ../$<.tar.gz
@@ -41,9 +48,6 @@ calc-$(VERSION): $(SRC_FILES)
 calc-$(VERSION).tar.gz:
 	tar -czvf $(DESTDIR).tar.gz $(DESTDIR)
 
-
-repo:
-	(git clone . $@ || (rm -rf $@  && git clone . $@)) || echo "Couldn't make folder repo"
 
 clean:
 	rm -rf __pycache__
