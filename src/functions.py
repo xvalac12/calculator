@@ -2,7 +2,7 @@
 
 """! @brief Package containing functions for calculator G.I.I.T"""
 ##
-# @section description_file
+# @section description_functions Description
 # This file contains mathematical functions
 # for calculator G.I.I.T.
 # All internal functions were build around
@@ -12,14 +12,14 @@
 # right return value. Because of that it is recomended
 # to use those because they are quicker.
 # 
-# @section libraries_file
+# @section libraries_functions Libraries/Module
 # - re
 # - string
 # - typing
 # - logging
 # - random
 #
-# @section notes_file
+# @section notes_functions Notes
 # 
 # @file functions.py
 # @brief File containing functions for calculator G.I.I.T
@@ -93,6 +93,7 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
 
         try:
             num = float(nums[0])**float(nums[1])
+        
         except OverflowError:
 
             return "Arithmetic error"
@@ -110,7 +111,9 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
 
         try:       
             exponent = (1 / float(nums[0]))
+        
         except ZeroDivisionError:
+       
             return "Syntax error"
 
         number = float(nums[1])
@@ -341,7 +344,9 @@ def calculate_expression(str_for_calc: str) -> str :
     #print(eval_string)
     try:
         return float(eval_string)
+
     except OverflowError:
+
         return "Overflow error"
 
 #tring1 = calculate_expression("12345678901234567")

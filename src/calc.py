@@ -2,15 +2,15 @@
 
 """! @brief Package containing mathematical functions"""
 ##
-# @section description_file 
+# @section description_calc Description
 # This file contains mathematical functions.
 # 
-# @section libraries_file
+# @section libraries_calc Libraries/Module
 # - re
 # - functions
 # - typing
 #
-# @section notes_file
+# @section notes_calc Notes
 # 
 # @file calc.py
 # @brief File containg mathematical functions
