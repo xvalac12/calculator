@@ -2,7 +2,7 @@ NAME=xvalac12
 APP=giit-calc
 
 DESTDIR=install/$(APP)-$(VERSION)
-INSFLAGS=
+INSFLAGS= -m 0755
 INSTALL_FILES=install_files
 VERSION=1.0
 LICENSE=gpl3
