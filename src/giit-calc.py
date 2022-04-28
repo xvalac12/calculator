@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""! @brief Tkinter GUI of calculator"""
+"""! @brief Tkinter GUI and main file of calculator"""
 ##
 # @mainpage Documentation
 # @section description_main Description
@@ -309,7 +309,7 @@ calc_gui.bind('<Key>', key_press)
 
 # calculator display
 ## Variable to hold calculator input display
-input_field = ttk.Entry(calc_gui, font=('Helvetica', 25), width=100, textvariable=expr_input)
+input_field = ttk.Entry(calc_gui, font=('Helvetica', 25), width=100, textvariable=expr_input, justify='right')
 input_field.grid(row=1, column=0, columnspan=5, ipady=8, ipadx=15)
 input_field.focus_set()
 expr_input.get()
