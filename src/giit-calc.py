@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """! @brief Tkinter GUI and main file of calculator"""
 ##
 # @mainpage Documentation
@@ -15,6 +16,8 @@
 # - works on python 3.7+
 # - gui made with tkinter python library
 
+
+"""! @brief Tkinter GUI and main file of calculator"""
 ##
 # @section description_giit-calc Description
 # Defines GUI of calculator app and behavior of buttons.
