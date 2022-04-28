@@ -426,14 +426,20 @@ def __combine_generators(generators: List[Generator[int, None, None]], modulus_o
         result += ((-1) ** i) * generator.__next__()
     return result % (modulus_of_first - 1)
 
-
+## Linear Congruential Generator which uses time as seed
 __glibc_lcg = __create_generator(2 ** 31, 1103515245, 12345, int(time.time_ns()))
+
+## Linear Congruential Generator  which uses next item from iterator as seed
 __musl_lcg = __create_generator(2 ** 64, 6364136223846793005, 1, __glibc_lcg.__next__())
 
 # Multiplier from  https://doi.org/10.1002/spe.3030
+## Linear Congruential Generator which uses power of next items from previous two generators as seed
 __custom_lcg = __create_generator(2 ** 64, 0xd1342543de82ef95, 1, __glibc_lcg.__next__() ^ __musl_lcg.__next__())
 
+## List of all LCG generators
 __lcg_table = [__custom_lcg, __musl_lcg, __glibc_lcg]
+
+## Modulus for first generator 
 __first_generator_modulus = 2 ** 64
 
 

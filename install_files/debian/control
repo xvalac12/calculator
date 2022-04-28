@@ -1,0 +1,16 @@
+Source: giit-calc
+Section: Mathematics
+Priority: extra
+Maintainer: G.I.I.T team <xvalac12@stud.fit.vutbr.cz>
+Build-Depends:
+Standards-Version: 4.6.0
+Rules-Requires-Root: no
+
+Package: giit-calc
+Architecture: all
+Depends: ${python3:Depends}, ${misc:Depends}
+Suggests: python-calc-doc
+Description: <insert up to 60 chars description> (Python 3)
+ <insert long description, indented with spaces>
+  Simple calculator
+ This package installs the library for Python 3.
