@@ -5,7 +5,7 @@
 # @section description_calc Description
 # This file contains mathematical functions.
 # 
-# @section libraries_calc Libraries/Module
+# @section libraries_calc Libraries/Modules
 # - re
 # - functions
 # - typing
@@ -64,6 +64,7 @@ def root(number: Union[int, float], root: Union[int, float]) -> Union[float, int
     return str_for_calc
 
 
+
 def factorial(number: int) -> int:
     """!
     @brief short description
@@ -110,6 +111,7 @@ def decrement(number: Union[float, int]) -> Union[float, int]:
     str_for_calc = functions.__find_all_expressions_inc(str_for_calc)
 
     return str_for_calc
+
 
 
 def multiply(number1: Union[float, int], number2: Union[float, int]) -> Union[float, int]:
