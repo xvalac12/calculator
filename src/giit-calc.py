@@ -19,10 +19,10 @@
 
 """! @brief Tkinter GUI and main file of calculator"""
 ##
-# @section description_giit-calc Description
+# @section description_giit_calc Description
 # Defines GUI of calculator app and behavior of buttons.
 #
-# @section libraries_giit-calc Libraries/Modules
+# @section libraries_giit_calc Libraries/Modules
 # - tkinter python library
 # - webbrowser python library
 # - idlelib python library
