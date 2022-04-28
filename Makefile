@@ -30,7 +30,7 @@ pack: doc repo
 	cp Makefile install
 
 	zip ../$(NAME).zip doc repo install || echo "Packing failed"
-	rm -rf doc rep install html
+	rm -rf doc repo install html
 
 
 profile:
