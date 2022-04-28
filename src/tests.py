@@ -314,6 +314,12 @@ class TestRoot(unittest.TestCase):
         self.assertEqual(calculate_expression("-3 √ -8"), -0.5)
 
     def test_exceptions(self):
+        """!
+        @brief short description
+        @param self
+
+        long description (if needed)
+        """
         self.assertTrue(calculate_expression("2000√-4").startswith("Arithmetic error"))
         self.assertTrue(calculate_expression("0√4").startswith("Syntax error"))
 
