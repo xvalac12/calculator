@@ -9,7 +9,7 @@
 # - math python library
 #
 # @file profiling.py
-# @brief
+# @brief calcalating standard deviation for mathematical library profiling purposes
 # @author Samuel Stolárik <xstola02@stud.fit.vutbr.cz>
 # @date 28.4.2022
 
@@ -18,10 +18,8 @@ from calc import root, power
 
 def get_input() -> list:
     """!
-    @brief short description
-    @return
-
-    longer description (if needed)
+    @brief function to read unlimited amount of whitespace separated numbers from stdin
+    @return list of numbers
     """
     try:
         input_numbers = []
@@ -34,11 +32,9 @@ def get_input() -> list:
 
 def avg(numbers: list) -> int:
     """!
-    @brief short description
+    @brief calculate average value from @p numbers 
     @param numbers
-    @return
-
-    longer description (if needed)
+    @return calculated value
     """
     if len(numbers) == 0:
         return int(0)
@@ -47,11 +43,9 @@ def avg(numbers: list) -> int:
 
 def inside_function(numbers: list):
     """!
-    @brief short description
+    @brief first part of the function to calculate the standard deviation
     @param numbers
     @return
-
-    longer description (if needed)
     """
     sum = 0
     for i in numbers:
@@ -64,11 +58,9 @@ def inside_function(numbers: list):
 
 def expression(numbers: list):
     """!
-    @brief short description
+    @brief calculate the whole standard deviation function of @p numbers
     @param numbers
     @return
-
-    longer description (if needed)
     """
     try:
         partial = inside_function(numbers) / (len(numbers) - 1)
