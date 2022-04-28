@@ -1,4 +1,4 @@
-xbezak02 100 (úkony)
-xbukas00 100 (úkony)
-xstola03 100 (úkony)
-xvalac12 100 (úkony)
+xbezak02 100 (tests, RNG, Conversion)
+xbukas00 100 (Math library)
+xstola03 100 (Profiling, Installer, Makefile)
+xvalac12 100 (GUI, User manual, Program documentation)
