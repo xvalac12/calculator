@@ -56,6 +56,7 @@ def inside_function(numbers: list):
     return sum
 
 
+
 def expression(numbers: list):
     """!
     @brief calculate the whole standard deviation function of @p numbers
@@ -80,3 +81,4 @@ def expression(numbers: list):
 if __name__ == "__main__":
     input_numbers = get_input()
     print(expression(input_numbers))
+

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Categories=Mathematics;
+Exec=giit-calc
+GenericName=Calculator
+Icon=/usr/share/pixmaps/giit-calc.xpm
+Name=G.I.I.T Calculator
+Type=Application
