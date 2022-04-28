@@ -11,25 +11,22 @@
 # root() from calc.py use only functions they need to calculate
 # right return value. Because of that it is recommended
 # to use those because they are quicker.
-# 
+#
 # @section libraries_functions Libraries/Module
 # - re
 # - string
 # - typing
-# - logging
-# - random
+# - time
 #
 # @section notes_functions Notes
-# 
+#
 # @file functions.py
 # @brief File containing functions for calculator G.I.I.T
 # @author Jozef Michal Bukas <xbukas00@stud.fit.vutbr.cz>
 # @date 28.4.2022
-
-from logging import raiseExceptions
+import time
 import re
 import string
-import random
 from typing import Union, Generator, List
 
 
@@ -420,13 +417,11 @@ def calculate_expression(str_for_calc: str) -> str:
 
 def __create_generator(modulus: int, multiplier: int, increment: int, seed: int) -> Generator[int, None, None]:
     """!
-    @brief short description
-    @param modulus
-    @param multiplier
-    @param increment
-    @param seed
-
-    long description (if needed)
+    @brief Creates a lcg with given parameters.
+    @param modulus The modulus the lcg will use.
+    @param multiplier The multiplier the lcg will use.
+    @param increment The increment the lcg will use (set to zero if you want to use a mcg).
+    @param seed The initial seed the lcg will use.
     """
     while True:
         seed = (multiplier * seed + increment) % modulus
@@ -435,12 +430,10 @@ def __create_generator(modulus: int, multiplier: int, increment: int, seed: int)
 
 def __combine_generators(generators: List[Generator[int, None, None]], modulus_of_first: int) -> int:
     """!
-    @brief short description
-    @param generators
-    @param modulus_of_first
-    @return
-
-    long description (if needed)
+    @brief INcrements multiple lcgs and combines their results into a better one
+    @param generators A list of lcgs to combine into 1
+    @param modulus_of_first The modulus of the first lcg
+    @return The combined result of multiple lcgs.
     """
     result = 0
     for i, generator in enumerate(generators):
@@ -448,11 +441,11 @@ def __combine_generators(generators: List[Generator[int, None, None]], modulus_o
     return result % (modulus_of_first - 1)
 
 
-__glibc_lcg = __create_generator(2 ** 31, 1103515245, 12345, random.randrange(0, 2 ** 31))
-__musl_lcg = __create_generator(2 ** 64, 6364136223846793005, 1, random.randrange(0, 2 ** 64))
+__glibc_lcg = __create_generator(2 ** 31, 1103515245, 12345, int(time.time_ns()))
+__musl_lcg = __create_generator(2 ** 64, 6364136223846793005, 1, __glibc_lcg.__next__())
 
 # Multiplier from  https://doi.org/10.1002/spe.3030
-__custom_lcg = __create_generator(2 ** 64, 0xd1342543de82ef95, 1, random.randrange(0, 2 ** 64))
+__custom_lcg = __create_generator(2 ** 64, 0xd1342543de82ef95, 1, __glibc_lcg.__next__() ^ __musl_lcg.__next__())
 
 __lcg_table = [__custom_lcg, __musl_lcg, __glibc_lcg]
 __first_generator_modulus = 2 ** 64
@@ -460,9 +453,9 @@ __first_generator_modulus = 2 ** 64
 
 def get_random_number() -> int:
     """!
-    @brief short description
-    @return
+    @brief Returns a random number in the range fo [0, 2**64).
+    @return A random number.
 
-    long description (if needed)
+    This function should not be considered cryptographically secure.
     """
     return __combine_generators(__lcg_table, __first_generator_modulus)
