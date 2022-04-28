@@ -58,7 +58,7 @@ file_menu = Menu(main_menu, tearoff=0)
 ## Variable to hold submenu Help
 help_menu = Menu(main_menu, tearoff=0)
 ## Icon to show on Dock
-img = Image("photo", file="icon/icon.png")
+img = Image("photo", file="icon.png")
 
 # setting geometry and ,config of calculator window
 calc_gui.geometry(f'{screen_width}x{screen_height}')
