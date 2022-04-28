@@ -1,0 +1,6 @@
+Not implemented
+- PGO
+- conversion EUR to Ruble
+
+Unfulfilled schedule
+- work on project started 27.3.2022, not 18.3.2022
