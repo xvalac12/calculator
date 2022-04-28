@@ -18,17 +18,12 @@ from functions import calculate_expression, get_random_number
 
 class TestAddition(unittest.TestCase):
     """!
-    @brief short description
-
-    long description (if needed)
+    @brief Testing simple addition
     """
 
     def test_small_numbers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Tests for addition with small integers. Using both floats and ints.
         """
         self.assertEqual(calculate_expression("1 + 2"), 3)
         self.assertEqual(calculate_expression("1.0 +2.0"), 3)
@@ -39,10 +34,7 @@ class TestAddition(unittest.TestCase):
 
     def test_large_numbers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing addition with large integers
         """
         self.assertEqual(calculate_expression("2000 + 11100000"), 11102000)
         self.assertEqual(calculate_expression("2000.0 + 11100000.0"), 11102000)
@@ -50,10 +42,7 @@ class TestAddition(unittest.TestCase):
 
     def test_negative_numbers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing if addition works with negative numbers
         """
         self.assertEqual(calculate_expression("-2 + 1"), -1)
         self.assertEqual(calculate_expression("-2 + -1"), -3)
@@ -65,10 +54,7 @@ class TestAddition(unittest.TestCase):
 
     def test_exceptions(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing if hanging symbols are properly dealt with
         """
         self.assertTrue(calculate_expression("+").startswith("Syntax error"))
         self.assertTrue(calculate_expression("10 + ").startswith("Syntax error"))
