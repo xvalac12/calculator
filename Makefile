@@ -29,7 +29,7 @@ pack: doc repo
 	cp -r install_files install
 	cp Makefile install
 
-	zip ../$(NAME).zip doc repo install || echo "Packing failed"
+	zip -r ../$(NAME).zip doc repo install || echo "Packing failed"
 	rm -rf doc repo install html
 
 
