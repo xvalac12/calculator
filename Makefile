@@ -36,7 +36,7 @@ doc:
 ##############################################
 
 release:
-	install $(INSFLAGS) install_files/debian/* install/giit-calc-$(VERSION)/debian
+	install $(INSFLAGS) install_files/debian/* $(DESTDIR)/debian
 
 	cd $(DESTDIR) && dpkg-buildpackage -rfakeroot
 
@@ -59,5 +59,5 @@ calc-$(VERSION).tar.gz:
 
 
 clean:
-	rm -rf install
+	rm -rf giit-calc
 	rm -rf __pycache__
