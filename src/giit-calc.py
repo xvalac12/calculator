@@ -4,9 +4,9 @@
 # @mainpage Documentation
 # @section description_main Description
 # School project for subject IVS (Practical Aspects of Software Design).
-# Calculator with elementary operations (+,-,*,/), factorial, exponentiation, square root, incrementation
-# and decrementation, generating random number and converting eur(€) to ruble(₽).
-# Calculator can be control by mouse or keyboard.
+# Calculator with elementary operations (+,-,*,/), factorial, exponentiation, square root, incrementation,
+# decrementation and generating of random number.
+# Calculator can be control by mouse and keyboard.
 #
 # @section notes_main Notes
 # - runs on Ubuntu 20.04+
@@ -42,9 +42,11 @@ expr = ""
 ## Calculator window
 calc_gui = Tk()
 ## Width of calculator in px
-screen_width = int(calc_gui.winfo_screenwidth()/3.3)
+screen_width = 580
+# screen_width = int(calc_gui.winfo_screenwidth()/3.3)
 ## Width of calculator in px
-screen_height = int(calc_gui.winfo_screenheight()/2.34)
+screen_height = 465
+# screen_height = int(calc_gui.winfo_screenheight()/2.34)
 ## Variable to hold string of expression in GUI
 expr_input = StringVar()
 ## Variable to hold style of widget in GUI
@@ -149,7 +151,6 @@ def about_window():
 def shift_cursor(shift):
     """!
     @brief Function for shifting cursor to right
-
     @param shift number to shift
 
     Function get number of char to shift from pressed button and shift cursor to right by value shift var.
@@ -203,10 +204,11 @@ def equals():
 def pars_convert(eval_string):
     """!
     @brief Function for parsing output from math library
-
     @param eval_string string to parse
+    @return parsed string
 
-    Function check string from math library (how long is it, if it has dot, if it ist error) and convert e+n to *10^n.
+    Function check string from math library (how long is it, if it has dot, if it is error)
+    and convert exponential format (e+n to *10^n).
     """
     is_error = re.findall(r"(?:Syntax error|Arithmetic error)", str(eval_string))
     if bool(is_error):
@@ -222,7 +224,7 @@ def pars_convert(eval_string):
     elif bool(is_there_dot) and len(str(eval_string)) > 18:
         new_string = str(eval_string)[0:10]
         without_dot = re.split(r"\.", str(eval_string))
-        exponent = len(str(without_dot[0]))  # + len(str(new_string)
+        exponent = len(str(without_dot[0]))
 
         if exponent < 10:
             decimal_places = len(str(without_dot[1])) - 1
@@ -232,7 +234,7 @@ def pars_convert(eval_string):
 
     elif len(str(eval_string)) > 20 and not bool(is_there_dot):
         new_string = str(eval_string)[0:10]
-        exponent = len(str(eval_string))  # + len(str(new_string))
+        exponent = len(str(eval_string))
         new_string = new_string[0] + "." + new_string[1:15] + "*10^" + str(exponent)
 
         return new_string
@@ -307,7 +309,7 @@ calc_gui.bind('<Key>', key_press)
 
 # calculator display
 ## Variable to hold calculator input display
-input_field = ttk.Entry(calc_gui, font=('Helvetica', 20), width=100, textvariable=expr_input)
+input_field = ttk.Entry(calc_gui, font=('Helvetica', 25), width=100, textvariable=expr_input)
 input_field.grid(row=1, column=0, columnspan=5, ipady=8, ipadx=15)
 input_field.focus_set()
 expr_input.get()
