@@ -1,5 +1,0 @@
-#!/bin/sh
-# -*- coding: utf-8 -*-
-
-GIIT_CALC_HOME=`dirname "$0"`
-exec python3 -m main "${GIIT_CALC_HOME}/gui.py"
