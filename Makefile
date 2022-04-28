@@ -14,7 +14,7 @@ SRC_FILES= src/giit-calc.py src/functions.py src/calc.py
 
 
 BASH = /bin/env bash
-PROJ = /src/latex/user_documentation
+PROJ = ./src/latex/user_documentation
 
 .PHONY: all pack profile doc install clean release doc_f install_f
 
@@ -44,7 +44,6 @@ repo:
 
 doc:
 	doxygen ./src/Doxyfile
-	latex $(PROJ).tex
 	latex $(PROJ).tex
 	dvips -t a4 $(PROJ).dvi
 	ps2pdf -sPAPERSIZE-a4 $(PROJ).ps
