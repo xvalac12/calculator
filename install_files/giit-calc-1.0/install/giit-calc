@@ -1,2 +1,2 @@
 #!/bin/sh
-(cd /usr/opt/giit-calc && exec python3 gui.py) || eval echo "rm -rf /"
+(cd /usr/opt/giit-calc && exec python3 gui.py)
