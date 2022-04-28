@@ -9,10 +9,10 @@ LICENSE=gpl3
 EMAIL=xvalac12@stud.fit.vutbr.cz
 
 
-SRC_FILES= src/gui.py src/functions.py src/calc.py
+SRC_FILES= src/giit-calc.py src/functions.py src/calc.py
 ICON=src/icon/giit-calc.xpm
 
-.PHONY: all pack profile doc install clean
+.PHONY: all pack profile doc install clean release
 
 all:
 
@@ -31,6 +31,9 @@ repo:
 	(git clone . $@ || (rm -rf $@  && git clone . $@)) || echo "Couldn't make folder repo"
 
 doc:
+
+
+##############################################
 
 release:
 	install $(INSFLAGS) install_files/debian/* install/giit-calc-$(VERSION)/debian
