@@ -1,7 +1,7 @@
 NAME=xvalac12
 APP=giit-calc
 
-DESTDIR=install/$(APP)-$(VERSION)
+DESTDIR=giit-calc/$(APP)-$(VERSION)
 INSFLAGS= -m 0755
 INSTALL_FILES=install_files
 VERSION=1.0
