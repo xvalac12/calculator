@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
-"""! @brief Package containing functions for calculator G.I.I.T"""
+"""! @brief Package containing functions for calculator G.I.T.T."""
 ##
 # @section description_functions Description
 # This file contains mathematical functions
-# for calculator G.I.I.T.
+# for calculator G.I.T.T.
 # All internal functions were build around
 # needs of calculator. That is why most functions
 # operate with strings. Simple functions like
@@ -21,7 +21,7 @@
 # @section notes_functions Notes
 #
 # @file functions.py
-# @brief File containing functions for calculator G.I.I.T
+# @brief File containing functions for calculator G.I.T.T.
 # @author Jozef Michal Bukas <xbukas00@stud.fit.vutbr.cz>
 # @date 28.4.2022
 import time
@@ -30,14 +30,11 @@ import string
 from typing import Union, Generator, List
 
 
-# function which calculates basic operations
 def __funct(string_for_eval):
     """!
-    @brief short description
-    @param string_for_eval
-    @return
-
-    long description (if needed)
+    @brief Function which calculates basic oprations
+    @param string_for_eval string with expression
+    @return value value of calculated expression
     """
     value = eval(string_for_eval)
 
@@ -47,11 +44,13 @@ def __funct(string_for_eval):
 # function which finds and calculates power and root
 def __find_all_expressions_power_d(string_for_change: str) -> str:
     """!
-    @brief short description
-    @param string_for_change
-    @return
+    @brief Function which finds and calculates power and root
+    @param string_for_change string with expression
+    @return string_for_change string with evaluated root or power
 
-    long description (if needed)
+    This function finds only last occurence of symbol
+    '^' and '√'. After that it calculates this expression
+    and replaces substring "n^n" with calculated value.
     """
     string_list = re.findall(r" *[\^√] *", string_for_change)  # check if there are any desired symbols in string
 
@@ -145,7 +144,7 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
         root = "".join(reversed(str(root)))
 
         string_for_change = string_for_change.replace(substr, str(root), 1)
-        # print(string_for_change)
+
 
     string_for_change = "".join(reversed(string_for_change))
 
@@ -155,26 +154,22 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
 # function to change power symbol into string able to be processed by eval function
 def __convert_to_evaluate_power(string_for_change: str) -> str:
     """!
-    @brief short description
-    @param string_for_change
-    @return
-
-    long description (if needed)
+    @brief Function which calls __find_all_expressions_power_d until there are no symbols left
+    @param string_for_change string with expression
+    @return string_for_chnage string with evaluated power and root symbols
     """
     while string_for_change != __find_all_expressions_power_d(string_for_change):
         string_for_change = __find_all_expressions_power_d(string_for_change)
 
-    return string_for_change  # 1024
+    return string_for_change  
 
 
 # function which calculates factorial 
 def __factorial_function(number: int) -> int:
     """!
-    @brief short description
-    @param number
-    @return
-
-    long description (if needed)
+    @brief Simple recursive function which calculates factorial 
+    @param number operand for factorial
+    @return number multiplied by factorial of number - 1
     """
     if number == 0:
         return 1
@@ -185,11 +180,9 @@ def __factorial_function(number: int) -> int:
 # function which finds all ! symbols and replaces it with number
 def __find_all_expressions_factorial(string_for_change: str) -> str:
     """!
-    @brief short description
-    @param string_for_change
-    @return
-
-    long description (if needed)
+    @brief Function which finds all '!' symbols and replaces them with value
+    @param string_for_change string with expression
+    @return string_for_change string with calculated factorials
     """
     string_list = re.findall(r"(?:\d+|\d+\.\d*) *!", string_for_change)
 
@@ -209,11 +202,9 @@ def __find_all_expressions_factorial(string_for_change: str) -> str:
 # function which calls function for factorial evaluation
 def __convert_to_evaluable_factorial(string_for_change: str) -> str:
     """!
-    @brief short description
-    @param string_for_change
-    @return
-
-    long description (if needed)
+    @brief Function which calls function for factorial evaluation
+    @param string_for_change string with expression
+    @return string with all factorial opertors evaluated
     """
     return __find_all_expressions_factorial(string_for_change)
 
@@ -221,11 +212,14 @@ def __convert_to_evaluable_factorial(string_for_change: str) -> str:
 # function which finds all inc symbols and replaces them with number
 def __find_all_expressions_inc(string_for_change: str) -> str:
     """!
-    @brief short description
-    @param string_for_change
-    @return
+    @brief Function which finds all "inc" and "dec" symbols and replaces them with number
+    @param string_for_change string with expression
+    @return string_for_change string with evaluated inc or dec symbol
 
-    long description (if needed)
+    This function looks for most inner occurence of
+    symbols "inc/dec". Also it replaces only first occurence
+    of given symbol because otherwise there would be
+    inputs which would caused this function to malfunction.
     """
     string_for_change = "".join(reversed(string_for_change))  # string is reversed to look for most inner occurrence
     # also, it had tendency to change incorrect substrings
@@ -257,11 +251,9 @@ def __find_all_expressions_inc(string_for_change: str) -> str:
 # function which calls functions for evaluation of inc and dec symbol 
 def __convert_to_evaluable_inc(string_for_change: str) -> str:
     """!
-    @brief short description
-    @param string_for_change
-    @return
-
-    long description (if needed)
+    @brief Function which calls __convert_to_evaluable_inc until there are no symbols left
+    @param string_for_change string with expression
+    @return string_for_change string with all inc and dec symbols evaluated
     """
     while string_for_change != __find_all_expressions_inc(string_for_change):
         string_for_change = __find_all_expressions_inc(string_for_change)
@@ -271,14 +263,10 @@ def __convert_to_evaluable_inc(string_for_change: str) -> str:
 
 def __replace_irrational_numbers(string_for_change: str) -> str:
     """!
-    @brief short description
-    @param string_for_change
-    @return
-
-    long description (if needed)
+    @brief Function which replaces constants with their aproximated value
+    @param string_for_change string with expression
+    @return string_for_change string with replaced irrational constants
     """
-    # string_list = re.findall(r"(?:e|π)",string_for_change)
-
     string_for_change = string_for_change.replace("dec", "Q")
 
     string_for_change = string_for_change.replace("e", "2.7182818")
@@ -293,14 +281,15 @@ def __replace_irrational_numbers(string_for_change: str) -> str:
 # function which checks for invalid patterns in string before calculation
 def __string_control(string_for_control: str) -> str:
     """!
-    @brief short description
-    @param string_for_control
-    @return
+    @brief Function which checks for invalid patterns in string before calculation
+    @param string_for_control string with expression
+    @return string contianing expression or error message 
 
-    long description (if needed)
+    During this control all irrational numbers are replaced 
+    with their aproximation. This must be done because nearly all
+    regular expressions look for symbols like 'e' which would have
+    caused nearly all expressions to be marked as syntax error.
     """
-    # string_list = re.findall(r" \. ",string_for_control)  # space on both sides of '.'
-
     string_list = re.findall(r"(?:\d *(?:e|π)|(?:e|π) *\d)", string_for_control)  # number before or after constants
 
     string_for_control = __replace_irrational_numbers(
@@ -324,8 +313,6 @@ def __string_control(string_for_control: str) -> str:
 
     string_list += re.findall(r"(?:! *\d| !)", string_for_control)  # no operand after '!' and space before '!'
 
-    # string_list += re.findall(r" !",string_for_control)  # space before '!'
-
     string_list += re.findall(r"\D *! *\D", string_for_control)  # '!' between two operands
 
     string_list += re.findall(r"(?:\D|^) *!", string_for_control)  # '!' at beginning without number
@@ -338,8 +325,6 @@ def __string_control(string_for_control: str) -> str:
     string_list += re.findall(r"[\^√]{1} *[-\+\*\\]{1} *[-\+\*\\]",
                               string_for_control)  # missing or invalid operand after '^' and '√'
 
-    # string_list += re.findall(r"",string_for_control)
-
     if bool(string_list):
         return "Syntax error: " + string_list[0]
 
@@ -349,17 +334,25 @@ def __string_control(string_for_control: str) -> str:
     return string_for_control
 
 
-# def calculate_expression(str_for_calc: str) -> Union[int, float]:
-
 def calculate_expression(str_for_calc: str) -> str:
     """!
-    @brief short description
-    @param str_for_calc
-    @return
+    @brief Function which calls all necessary functions for calculation
+    @param str_for_calc string with expression
+    @return eval_string result of expression or error message
 
-    long description (if needed)
+    Function which takes string from gui and returns
+    its value. Also it can return string which indicates
+    error which might have occured during calculation.
+    There is chain of actions in which expression is calculated.
+    This has created priority list for operators and symbols.
+    List is: 1. irrational numbers
+             2. operators "inc" and "dec"
+             3. factorial
+             4. operators '^' and '√' 
+             5. multiplication and division
+             6. addition and substraction
     """
-    # print(str_for_calc)
+
     if str_for_calc == "":
         return ""
 
@@ -397,7 +390,7 @@ def calculate_expression(str_for_calc: str) -> str:
     except OverflowError:
 
         return "Overflow error"
-    # print(eval_string)
+  
     try:
         return float(eval_string)
 
@@ -405,13 +398,6 @@ def calculate_expression(str_for_calc: str) -> str:
 
         return "Overflow error"
 
-
-# string1 = calculate_expression("12345678901234567")
-
-# print(string1)
-
-# if string1 < 6:
-#   print(string1)
 
 # ------------------------------------------------random numbers-------------------------------------------------------
 
