@@ -4,9 +4,9 @@
 # @mainpage Documentation
 # @section description_main Description
 # School project for subject IVS (Practical Aspects of Software Design).
-# Calculator with elementary operations (+,-,*,/), factorial, exponentiation, square root, incrementation
-# and decrementation, generating random number and converting eur(€) to ruble(₽).
-# Calculator can be control by mouse or keyboard.
+# Calculator with elementary operations (+,-,*,/), factorial, exponentiation, square root, incrementation,
+# decrementation and generating of random number.
+# Calculator can be control by mouse and keyboard.
 #
 # @section notes_main Notes
 # - runs on Ubuntu 20.04+
@@ -205,8 +205,10 @@ def pars_convert(eval_string):
     """!
     @brief Function for parsing output from math library
     @param eval_string string to parse
+    @return parsed string
 
-    Function check string from math library (how long is it, if has dot, if it ist error) and convert e+n to *10^n.
+    Function check string from math library (how long is it, if it has dot, if it is error)
+    and convert exponential format (e+n to *10^n).
     """
     is_error = re.findall(r"(?:Syntax error|Arithmetic error)", str(eval_string))
     if bool(is_error):
@@ -222,7 +224,7 @@ def pars_convert(eval_string):
     elif bool(is_there_dot) and len(str(eval_string)) > 18:
         new_string = str(eval_string)[0:10]
         without_dot = re.split(r"\.", str(eval_string))
-        exponent = len(str(without_dot[0]))  # + len(str(new_string)
+        exponent = len(str(without_dot[0]))
 
         if exponent < 10:
             decimal_places = len(str(without_dot[1])) - 1
@@ -232,7 +234,7 @@ def pars_convert(eval_string):
 
     elif len(str(eval_string)) > 20 and not bool(is_there_dot):
         new_string = str(eval_string)[0:10]
-        exponent = len(str(eval_string))  # + len(str(new_string))
+        exponent = len(str(eval_string))
         new_string = new_string[0] + "." + new_string[1:15] + "*10^" + str(exponent)
 
         return new_string
