@@ -42,9 +42,11 @@ expr = ""
 ## Calculator window
 calc_gui = Tk()
 ## Width of calculator in px
-screen_width = int(calc_gui.winfo_screenwidth()/3.3)
+screen_width = 580
+# screen_width = int(calc_gui.winfo_screenwidth()/3.3)
 ## Width of calculator in px
-screen_height = int(calc_gui.winfo_screenheight()/2.34)
+screen_height = 462
+# screen_height = int(calc_gui.winfo_screenheight()/2.34)
 ## Variable to hold string of expression in GUI
 expr_input = StringVar()
 ## Variable to hold style of widget in GUI
