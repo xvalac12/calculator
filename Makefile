@@ -41,7 +41,7 @@ release:
 
 
 install: $(APP)-$(VERSION) $(APP)-$(VERSION).tar.gz
-	cd $< && dh_make -e $(EMAIL) -n  -c $(LICENSE) -y -p "$<" -f ../$<.tar.gz
+	cd $< && dh_make -e $(EMAIL) -n -s -c $(LICENSE) -y -p "$<" -f ../$<.tar.gz
 	
 $(APP)-$(VERSION): $(SRC_FILES)
 	mkdir -p $@/install
