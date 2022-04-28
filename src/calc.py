@@ -25,9 +25,9 @@ import re
 def power(number: Union[float, int], exponent: Union[float, int]) -> Union[float, int]:
     """!
     @brief Function which calculates n-th power number
-    @param number
-    @param exponent
-    @return str_for_calc
+    @param number number to be raised
+    @param exponent number by which we raise
+    @return str_for_calc result of operation
     """
     str_for_calc = str(number) + "^" + str(exponent)
 
@@ -38,15 +38,22 @@ def power(number: Union[float, int], exponent: Union[float, int]) -> Union[float
     if bool(error):
         raise ArithmeticError("Root of negative number while exponent is even is not defined")
 
+    error = re.findall(r"Arithmetic error", str_for_calc)
+
+    if bool(error):
+        raise OverflowError("Result is too big")
+
     return float(str_for_calc)
+
+    
 
 
 def root(number: Union[int, float], root: Union[int, float]) -> Union[float, int]:
     """!
     @brief Function which calculates n-th root of number
-    @param number
-    @param root
-    @return str_for_calc
+    @param number number which will be rooted
+    @param root number by which we root
+    @return str_for_calc result of operation
     """
     str_for_calc = str(root) + "√" + str(number)
 
@@ -57,6 +64,11 @@ def root(number: Union[int, float], root: Union[int, float]) -> Union[float, int
     if bool(error):
         raise ArithmeticError("Root of negative number while exponent is even is not defined")
 
+    error = re.findall(r"Arithmetic error", str_for_calc)
+
+    if bool(error):
+        raise OverflowError("Result is too big")
+
     return str_for_calc
 
 
@@ -64,8 +76,8 @@ def root(number: Union[int, float], root: Union[int, float]) -> Union[float, int
 def factorial(number: int) -> int:
     """!
     @brief Function which calculates factorial
-    @param number
-    @return str_for_calc
+    @param number number from which we will calculate factorial
+    @return str_for_calc result
     """
     str_for_calc = str(number) + "!"
 
@@ -74,14 +86,19 @@ def factorial(number: int) -> int:
 
     str_for_calc = functions.__find_all_expressions_factorial(str_for_calc)
 
+    error = re.findall(r"Arithmetic error", str_for_calc)
+
+    if bool(error):
+        raise OverflowError("Result is too big")
+
     return int(str_for_calc)
 
 
 def increment(number: Union[float, int]) -> Union[float, int]:
     """!
     @brief Function which increments given number
-    @param number
-    @return str_for_calc
+    @param number number to be incremented
+    @return str_for_calc result
     """
     str_for_calc = "inc" + str(number)
 
@@ -93,8 +110,8 @@ def increment(number: Union[float, int]) -> Union[float, int]:
 def decrement(number: Union[float, int]) -> Union[float, int]:
     """!
     @brief Function which decrements given number
-    @param number
-    @return str_for_calc
+    @param number number to be decremented
+    @return str_for_calc result
     """
     str_for_calc = "dec" + str(number)
 
@@ -107,9 +124,9 @@ def decrement(number: Union[float, int]) -> Union[float, int]:
 def multiply(number1: Union[float, int], number2: Union[float, int]) -> Union[float, int]:
     """!
     @brief Function which multiplies two numbers
-    @param number1
-    @param number2
-    @return number1 * number2
+    @param number1 first operand
+    @param number2 second operand
+    @return number1 multiplied by number2
     """
     return number1 * number2
 
@@ -117,11 +134,12 @@ def multiply(number1: Union[float, int], number2: Union[float, int]) -> Union[fl
 def division(number1: Union[float, int], number2: Union[float, int]) -> Union[float, int]:
     """!
     @brief Function which devides two numbers
-    @param number1
-    @param number2
-    @return number1 / number2
+    @param number1 first operand
+    @param number2 second operand
+    @return number1 devide by number2
     """
     if not number2:
         raise ZeroDivisionError
 
     return number1 / number2
+    

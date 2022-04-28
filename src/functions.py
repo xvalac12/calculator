@@ -33,12 +33,11 @@ import random
 from typing import Union, Generator, List
 
 
-# function which calculates basic operations
 def __funct(string_for_eval):
     """!
     @brief Function which calculates basic oprations
-    @param string_for_eval
-    @return value
+    @param string_for_eval string with expression
+    @return value value of calculated expression
     """
     value = eval(string_for_eval)
 
@@ -49,8 +48,8 @@ def __funct(string_for_eval):
 def __find_all_expressions_power_d(string_for_change: str) -> str:
     """!
     @brief Function which finds and calculates power and root
-    @param string_for_change
-    @return string_for_change
+    @param string_for_change string with expression
+    @return string_for_change string with evaluated root or power
 
     This function finds only last occurence of symbol
     '^' and '√'. After that it calculates this expression
@@ -159,8 +158,8 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
 def __convert_to_evaluate_power(string_for_change: str) -> str:
     """!
     @brief Function which calls __find_all_expressions_power_d until there are no symbols left
-    @param string_for_change
-    @return string_for_chnage
+    @param string_for_change string with expression
+    @return string_for_chnage string with evaluated power and root symbols
     """
     while string_for_change != __find_all_expressions_power_d(string_for_change):
         string_for_change = __find_all_expressions_power_d(string_for_change)
@@ -172,8 +171,8 @@ def __convert_to_evaluate_power(string_for_change: str) -> str:
 def __factorial_function(number: int) -> int:
     """!
     @brief Simple recursive function which calculates factorial 
-    @param number
-    @return number *  __factorial_function(number - 1)
+    @param number operand for factorial
+    @return number multiplied by factorial of number - 1
     """
     if number == 0:
         return 1
@@ -185,8 +184,8 @@ def __factorial_function(number: int) -> int:
 def __find_all_expressions_factorial(string_for_change: str) -> str:
     """!
     @brief Function which finds all '!' symbols and replaces them with value
-    @param string_for_change
-    @return string_for_change
+    @param string_for_change string with expression
+    @return string_for_change string with calculated factorials
     """
     string_list = re.findall(r"(?:\d+|\d+\.\d*) *!", string_for_change)
 
@@ -207,8 +206,8 @@ def __find_all_expressions_factorial(string_for_change: str) -> str:
 def __convert_to_evaluable_factorial(string_for_change: str) -> str:
     """!
     @brief Function which calls function for factorial evaluation
-    @param string_for_change
-    @return  __find_all_expressions_factorial(string_for_change)
+    @param string_for_change string with expression
+    @return string with all factorial opertors evaluated
     """
     return __find_all_expressions_factorial(string_for_change)
 
@@ -217,8 +216,8 @@ def __convert_to_evaluable_factorial(string_for_change: str) -> str:
 def __find_all_expressions_inc(string_for_change: str) -> str:
     """!
     @brief Function which finds all "inc" and "dec" symbols and replaces them with number
-    @param string_for_change
-    @return string_for_change
+    @param string_for_change string with expression
+    @return string_for_change string with evaluated inc or dec symbol
 
     This function looks for most inner occurence of
     symbols "inc/dec". Also it replaces only first occurence
@@ -256,8 +255,8 @@ def __find_all_expressions_inc(string_for_change: str) -> str:
 def __convert_to_evaluable_inc(string_for_change: str) -> str:
     """!
     @brief Function which calls __convert_to_evaluable_inc until there are no symbols left
-    @param string_for_change
-    @return string_for_change
+    @param string_for_change string with expression
+    @return string_for_change string with all inc and dec symbols evaluated
     """
     while string_for_change != __find_all_expressions_inc(string_for_change):
         string_for_change = __find_all_expressions_inc(string_for_change)
@@ -268,8 +267,8 @@ def __convert_to_evaluable_inc(string_for_change: str) -> str:
 def __replace_irrational_numbers(string_for_change: str) -> str:
     """!
     @brief Function which replaces constants with their aproximated value
-    @param string_for_change
-    @return string_for_change
+    @param string_for_change string with expression
+    @return string_for_change string with replaced irrational constants
     """
     string_for_change = string_for_change.replace("dec", "Q")
 
@@ -286,8 +285,8 @@ def __replace_irrational_numbers(string_for_change: str) -> str:
 def __string_control(string_for_control: str) -> str:
     """!
     @brief Function which checks for invalid patterns in string before calculation
-    @param string_for_control
-    @return string
+    @param string_for_control string with expression
+    @return string contianing expression or error message 
 
     During this control all irrational numbers are replaced 
     with their aproximation. This must be done because nearly all
@@ -341,8 +340,8 @@ def __string_control(string_for_control: str) -> str:
 def calculate_expression(str_for_calc: str) -> str:
     """!
     @brief Function which calls all necessary functions for calculation
-    @param str_for_calc
-    @return eval_string
+    @param str_for_calc string with expression
+    @return eval_string result of expression or error message
 
     Function which takes string from gui and returns
     its value. Also it can return string which indicates
