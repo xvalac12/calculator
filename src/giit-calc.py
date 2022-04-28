@@ -28,6 +28,7 @@
 # @brief Graphic user interface and main file of calculator
 # @author Martin Valach <xvalac12@stud.fit.vutbr.cz>
 # @date 28.4.2022
+
 # import everything from tkinter module
 
 from tkinter import *
