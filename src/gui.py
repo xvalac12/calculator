@@ -151,7 +151,6 @@ def about_window():
 def shift_cursor(shift):
     """!
     @brief Function for shifting cursor to right
-
     @param shift number to shift
 
     Function get number of char to shift from pressed button and shift cursor to right by value shift var.
@@ -205,7 +204,6 @@ def equals():
 def pars_convert(eval_string):
     """!
     @brief Function for parsing output from math library
-
     @param eval_string string to parse
 
     Function check string from math library (how long is it, if has dot, if it ist error) and convert e+n to *10^n.
