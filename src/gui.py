@@ -45,7 +45,7 @@ calc_gui = Tk()
 screen_width = 580
 # screen_width = int(calc_gui.winfo_screenwidth()/3.3)
 ## Width of calculator in px
-screen_height = 462
+screen_height = 465
 # screen_height = int(calc_gui.winfo_screenheight()/2.34)
 ## Variable to hold string of expression in GUI
 expr_input = StringVar()
@@ -309,7 +309,7 @@ calc_gui.bind('<Key>', key_press)
 
 # calculator display
 ## Variable to hold calculator input display
-input_field = ttk.Entry(calc_gui, font=('Helvetica', 20), width=100, textvariable=expr_input)
+input_field = ttk.Entry(calc_gui, font=('Helvetica', 25), width=100, textvariable=expr_input)
 input_field.grid(row=1, column=0, columnspan=5, ipady=8, ipadx=15)
 input_field.focus_set()
 expr_input.get()
