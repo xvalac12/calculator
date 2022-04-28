@@ -28,6 +28,7 @@ def power(number: Union[float, int], exponent: Union[float, int]) -> Union[float
     @param number
     @param exponent
     @return
+
     long description (if needed)
     """
     str_for_calc = str(number) + "^" + str(exponent)
@@ -48,6 +49,7 @@ def root(number: Union[int, float], root: Union[int, float]) -> Union[float, int
     @param number
     @param root
     @return
+
     long description (if needed)
     """
     str_for_calc = str(root) + "√" + str(number)
@@ -62,11 +64,13 @@ def root(number: Union[int, float], root: Union[int, float]) -> Union[float, int
     return str_for_calc
 
 
+
 def factorial(number: int) -> int:
     """!
     @brief short description
     @param number
     @return
+
     long description (if needed)
     """
     str_for_calc = str(number) + "!"
@@ -84,6 +88,7 @@ def increment(number: Union[float, int]) -> Union[float, int]:
     @brief short description
     @param number
     @return
+
     long description (if needed)
     """
     str_for_calc = "inc" + str(number)
@@ -98,6 +103,7 @@ def decrement(number: Union[float, int]) -> Union[float, int]:
     @brief short description
     @param number
     @return
+
     long description (if needed)
     """
     str_for_calc = "dec" + str(number)
@@ -107,12 +113,14 @@ def decrement(number: Union[float, int]) -> Union[float, int]:
     return str_for_calc
 
 
+
 def multiply(number1: Union[float, int], number2: Union[float, int]) -> Union[float, int]:
     """!
     @brief short description
     @param number1
     @param number2
     @return
+
     long description (if needed)
     """
     return number1 * number2
@@ -124,10 +132,10 @@ def division(number1: Union[float, int], number2: Union[float, int]) -> Union[fl
     @param number1
     @param number2
     @return
+
     long description (if needed)
     """
     if not number2:
         raise ZeroDivisionError
 
     return number1 / number2
-
