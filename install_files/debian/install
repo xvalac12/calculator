@@ -1,4 +1,3 @@
 install/giit-calc.xpm /usr/share/pixmaps
 install/giit-calc.desktop /usr/share/applications
 install/giit-calc /usr/bin
-giit-calc.py /usr/bin
