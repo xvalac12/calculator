@@ -24,12 +24,10 @@ import re
 
 def power(number: Union[float, int], exponent: Union[float, int]) -> Union[float, int]:
     """!
-    @brief short description
+    @brief Function which calculates n-th power number
     @param number
     @param exponent
-    @return
-
-    long description (if needed)
+    @return str_for_calc
     """
     str_for_calc = str(number) + "^" + str(exponent)
 
@@ -45,12 +43,10 @@ def power(number: Union[float, int], exponent: Union[float, int]) -> Union[float
 
 def root(number: Union[int, float], root: Union[int, float]) -> Union[float, int]:
     """!
-    @brief short description
+    @brief Function which calculates n-th root of number
     @param number
     @param root
-    @return
-
-    long description (if needed)
+    @return str_for_calc
     """
     str_for_calc = str(root) + "√" + str(number)
 
@@ -67,11 +63,9 @@ def root(number: Union[int, float], root: Union[int, float]) -> Union[float, int
 
 def factorial(number: int) -> int:
     """!
-    @brief short description
+    @brief Function which calculates factorial
     @param number
-    @return
-
-    long description (if needed)
+    @return str_for_calc
     """
     str_for_calc = str(number) + "!"
 
@@ -85,11 +79,9 @@ def factorial(number: int) -> int:
 
 def increment(number: Union[float, int]) -> Union[float, int]:
     """!
-    @brief short description
+    @brief Function which increments given number
     @param number
-    @return
-
-    long description (if needed)
+    @return str_for_calc
     """
     str_for_calc = "inc" + str(number)
 
@@ -100,11 +92,9 @@ def increment(number: Union[float, int]) -> Union[float, int]:
 
 def decrement(number: Union[float, int]) -> Union[float, int]:
     """!
-    @brief short description
+    @brief Function which decrements given number
     @param number
-    @return
-
-    long description (if needed)
+    @return str_for_calc
     """
     str_for_calc = "dec" + str(number)
 
@@ -116,24 +106,20 @@ def decrement(number: Union[float, int]) -> Union[float, int]:
 
 def multiply(number1: Union[float, int], number2: Union[float, int]) -> Union[float, int]:
     """!
-    @brief short description
+    @brief Function which multiplies two numbers
     @param number1
     @param number2
-    @return
-
-    long description (if needed)
+    @return number1 * number2
     """
     return number1 * number2
 
 
 def division(number1: Union[float, int], number2: Union[float, int]) -> Union[float, int]:
     """!
-    @brief short description
+    @brief Function which devides two numbers
     @param number1
     @param number2
-    @return
-
-    long description (if needed)
+    @return number1 / number2
     """
     if not number2:
         raise ZeroDivisionError
