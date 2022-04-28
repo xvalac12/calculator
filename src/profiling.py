@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 ##
-# @section description_gui Description
+# @section description_profiling Description
 # Defines GUI of calculator app and behavior of buttons.
 #
-# @section libraries_gui Libraries/Modules
+# @section libraries_profiling Libraries/Modules
 # - cmath python library
 # - math python library
 #
