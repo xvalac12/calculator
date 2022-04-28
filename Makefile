@@ -14,7 +14,10 @@ SRC_FILES= src/giit-calc.py src/functions.py src/calc.py
 
 
 BASH = /bin/env bash
+
+
 PROJ = ./src/latex/dokumentace
+
 
 .PHONY: all pack profile doc install clean release doc_f install_f
 
@@ -29,7 +32,7 @@ pack: doc repo
 	cp -r install_files install
 	cp Makefile install
 
-	zip ../$(NAME).zip doc repo install || echo "Packing failed"
+	zip -r ../$(NAME).zip doc repo install || echo "Packing failed"
 	rm -rf doc repo install html
 
 
