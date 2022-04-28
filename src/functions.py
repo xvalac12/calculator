@@ -35,6 +35,13 @@ from typing import Union, Generator, List
 
 # function which calculates basic operations
 def __funct(string_for_eval):
+    """!
+    @brief short description
+    @param string_for_eval
+    @return
+
+    long description (if needed)
+    """
     value = eval(string_for_eval)
 
     return value
@@ -42,6 +49,13 @@ def __funct(string_for_eval):
 
 # function which finds and calculates power and root
 def __find_all_expressions_power_d(string_for_change: str) -> str:
+    """!
+    @brief short description
+    @param string_for_change
+    @return
+
+    long description (if needed)
+    """
     string_list = re.findall(r" *[\^√] *", string_for_change)  # check if there are any desired symbols in string
 
     if not bool(string_list):
@@ -143,6 +157,13 @@ def __find_all_expressions_power_d(string_for_change: str) -> str:
 
 # function to change power symbol into string able to be processed by eval function
 def __convert_to_evaluate_power(string_for_change: str) -> str:
+    """!
+    @brief short description
+    @param string_for_change
+    @return
+
+    long description (if needed)
+    """
     while string_for_change != __find_all_expressions_power_d(string_for_change):
         string_for_change = __find_all_expressions_power_d(string_for_change)
 
@@ -151,6 +172,13 @@ def __convert_to_evaluate_power(string_for_change: str) -> str:
 
 # function which calculates factorial 
 def __factorial_function(number: int) -> int:
+    """!
+    @brief short description
+    @param number
+    @return
+
+    long description (if needed)
+    """
     if number == 0:
         return 1
 
@@ -159,6 +187,13 @@ def __factorial_function(number: int) -> int:
 
 # function which finds all ! symbols and replaces it with number
 def __find_all_expressions_factorial(string_for_change: str) -> str:
+    """!
+    @brief short description
+    @param string_for_change
+    @return
+
+    long description (if needed)
+    """
     string_list = re.findall(r"(?:\d+|\d+\.\d*) *!", string_for_change)
 
     for num in string_list:
@@ -176,13 +211,27 @@ def __find_all_expressions_factorial(string_for_change: str) -> str:
 
 # function which calls function for factorial evaluation
 def __convert_to_evaluable_factorial(string_for_change: str) -> str:
+    """!
+    @brief short description
+    @param string_for_change
+    @return
+
+    long description (if needed)
+    """
     return __find_all_expressions_factorial(string_for_change)
 
 
 # function which finds all inc symbols and replaces them with number
 def __find_all_expressions_inc(string_for_change: str) -> str:
+    """!
+    @brief short description
+    @param string_for_change
+    @return
+
+    long description (if needed)
+    """
     string_for_change = "".join(reversed(string_for_change))  # string is reversed to look for most inner occurrence
-    # also it had tendency to change incorrect substrings
+    # also, it had tendency to change incorrect substrings
     # this is the safest way
 
     string_list = re.findall(r"\d+[-]?cni|\d+[-]?ced", string_for_change)
@@ -210,6 +259,13 @@ def __find_all_expressions_inc(string_for_change: str) -> str:
 
 # function which calls functions for evaluation of inc and dec symbol 
 def __convert_to_evaluable_inc(string_for_change: str) -> str:
+    """!
+    @brief short description
+    @param string_for_change
+    @return
+
+    long description (if needed)
+    """
     while string_for_change != __find_all_expressions_inc(string_for_change):
         string_for_change = __find_all_expressions_inc(string_for_change)
 
@@ -217,6 +273,13 @@ def __convert_to_evaluable_inc(string_for_change: str) -> str:
 
 
 def __replace_irrational_numbers(string_for_change: str) -> str:
+    """!
+    @brief short description
+    @param string_for_change
+    @return
+
+    long description (if needed)
+    """
     # string_list = re.findall(r"(?:e|π)",string_for_change)
 
     string_for_change = string_for_change.replace("dec", "Q")
@@ -232,6 +295,13 @@ def __replace_irrational_numbers(string_for_change: str) -> str:
 
 # function which checks for invalid patterns in string before calculation
 def __string_control(string_for_control: str) -> str:
+    """!
+    @brief short description
+    @param string_for_control
+    @return
+
+    long description (if needed)
+    """
     # string_list = re.findall(r" \. ",string_for_control)  # space on both sides of '.'
 
     string_list = re.findall(r"(?:\d *(?:e|π)|(?:e|π) *\d)", string_for_control)  # number before or after constants
@@ -285,6 +355,13 @@ def __string_control(string_for_control: str) -> str:
 # def calculate_expression(str_for_calc: str) -> Union[int, float]:
 
 def calculate_expression(str_for_calc: str) -> str:
+    """!
+    @brief short description
+    @param str_for_calc
+    @return
+
+    long description (if needed)
+    """
     # print(str_for_calc)
     if str_for_calc == "":
         return ""
@@ -339,15 +416,32 @@ def calculate_expression(str_for_calc: str) -> str:
 # if string1 < 6:
 #   print(string1)
 
-# ------------------------------------------------random numbers---------------------------------------------------------
+# ------------------------------------------------random numbers-------------------------------------------------------
 
 def __create_generator(modulus: int, multiplier: int, increment: int, seed: int) -> Generator[int, None, None]:
+    """!
+    @brief short description
+    @param modulus
+    @param multiplier
+    @param increment
+    @param seed
+
+    long description (if needed)
+    """
     while True:
         seed = (multiplier * seed + increment) % modulus
         yield seed
 
 
 def __combine_generators(generators: List[Generator[int, None, None]], modulus_of_first: int) -> int:
+    """!
+    @brief short description
+    @param generators
+    @param modulus_of_first
+    @return
+
+    long description (if needed)
+    """
     result = 0
     for i, generator in enumerate(generators):
         result += ((-1) ** i) * generator.__next__()
@@ -365,4 +459,10 @@ __first_generator_modulus = 2 ** 64
 
 
 def get_random_number() -> int:
+    """!
+    @brief short description
+    @return
+
+    long description (if needed)
+    """
     return __combine_generators(__lcg_table, __first_generator_modulus)
