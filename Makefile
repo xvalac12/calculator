@@ -23,7 +23,7 @@ all: install doc
 
 pack: doc repo
 	mkdir doc
-	cp -r html doc/html
+	cp -r ./src/html doc/html
 
 	mkdir install
 	cp -r install_files install
@@ -43,7 +43,7 @@ repo:
 	(git clone . $@ || (rm -rf $@  && git clone . $@)) || echo "Couldn't make folder repo"
 
 doc:
-	doxygen ./src/Doxyfile
+	cd src && doxygen Doxyfile
 	latex $(PROJ).tex
 	dvips -t a4 $(PROJ).dvi
 	ps2pdf -sPAPERSIZE-a4 $(PROJ).ps
