@@ -23,6 +23,14 @@ import re
 
 
 def power(number: Union[float, int], exponent: Union[float, int]) -> Union[float, int]:
+    """!
+    @brief short description
+    @param number
+    @param exponent
+    @return
+
+    long description (if needed)
+    """
     str_for_calc = str(number) + "^" + str(exponent)
 
     str_for_calc = functions.__find_all_expressions_power_d(str_for_calc)
@@ -36,6 +44,14 @@ def power(number: Union[float, int], exponent: Union[float, int]) -> Union[float
 
 
 def root(number: Union[int, float], root: Union[int, float]) -> Union[float, int]:
+    """!
+    @brief short description
+    @param number
+    @param root
+    @return
+
+    long description (if needed)
+    """
     str_for_calc = str(root) + "√" + str(number)
 
     str_for_calc = functions.__find_all_expressions_power_d(str_for_calc)
@@ -49,6 +65,13 @@ def root(number: Union[int, float], root: Union[int, float]) -> Union[float, int
 
 
 def factorial(number: int) -> int:
+    """!
+    @brief short description
+    @param number
+    @return
+
+    long description (if needed)
+    """
     str_for_calc = str(number) + "!"
 
     if number < 0:
@@ -60,6 +83,13 @@ def factorial(number: int) -> int:
 
 
 def increment(number: Union[float, int]) -> Union[float, int]:
+    """!
+    @brief short description
+    @param number
+    @return
+
+    long description (if needed)
+    """
     str_for_calc = "inc" + str(number)
 
     str_for_calc = functions.__find_all_expressions_inc(str_for_calc)
@@ -68,6 +98,13 @@ def increment(number: Union[float, int]) -> Union[float, int]:
 
 
 def decrement(number: Union[float, int]) -> Union[float, int]:
+    """!
+    @brief short description
+    @param number
+    @return
+
+    long description (if needed)
+    """
     str_for_calc = "dec" + str(number)
 
     str_for_calc = functions.__find_all_expressions_inc(str_for_calc)
@@ -76,10 +113,26 @@ def decrement(number: Union[float, int]) -> Union[float, int]:
 
 
 def multiply(number1: Union[float, int], number2: Union[float, int]) -> Union[float, int]:
+    """!
+    @brief short description
+    @param number1
+    @param number2
+    @return
+
+    long description (if needed)
+    """
     return number1 * number2
 
 
 def division(number1: Union[float, int], number2: Union[float, int]) -> Union[float, int]:
+    """!
+    @brief short description
+    @param number1
+    @param number2
+    @return
+
+    long description (if needed)
+    """
     if not number2:
         raise ZeroDivisionError
 
