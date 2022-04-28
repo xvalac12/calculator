@@ -18,7 +18,7 @@ from functions import calculate_expression, get_random_number
 
 class TestAddition(unittest.TestCase):
     """!
-    @brief Testing simple addition
+    @brief Tests for simple addition
     """
 
     def test_small_numbers(self):
@@ -63,16 +63,11 @@ class TestAddition(unittest.TestCase):
 
 class TestSubtraction(unittest.TestCase):
     """!
-    @brief short description
-
-    long description (if needed)
+    @brief Tests for simple subtraction
     """
     def test_small_numbers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing subtraction using small numbers
         """
         self.assertEqual(calculate_expression("2- 1"), 1)
         self.assertEqual(calculate_expression("5 -2"), 3)
@@ -82,10 +77,7 @@ class TestSubtraction(unittest.TestCase):
 
     def test_large_numbers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @breif Testing subtraction using large numbers
         """
         self.assertEqual(calculate_expression("2000000 - 1"), 1999999)
         self.assertEqual(calculate_expression("23213 - 6549"), 16664)
@@ -93,10 +85,7 @@ class TestSubtraction(unittest.TestCase):
 
     def test_negative_numbers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @breif Testing if subtraction works with negative numbers
         """
         self.assertEqual(calculate_expression("-3 - -6"), 3)
         self.assertEqual(calculate_expression("5 - -7"), 12)
@@ -105,10 +94,7 @@ class TestSubtraction(unittest.TestCase):
 
     def test_exceptions(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing if subtraction raises exceptions in the correct circumstances
         """
         self.assertTrue(calculate_expression("-").startswith("Syntax error"))
         self.assertTrue(calculate_expression("10 - ").startswith("Syntax error"))
@@ -117,29 +103,24 @@ class TestSubtraction(unittest.TestCase):
 
 class IncrementDecrement(unittest.TestCase):
     """!
-    @brief short description
-
-    long description (if needed)
+    @brief Tests on the increment and decrement operations
     """
     def test_integers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing increment and decrement using small numbers
         """
         self.assertEqual(calculate_expression("inc2"), 3)
         self.assertEqual(calculate_expression("inc5"), 6)
+        self.assertEqual(calculate_expression("incinc5"), 7)
 
         self.assertEqual(calculate_expression("dec2"), 1)
         self.assertEqual(calculate_expression("dec5"), 4)
+        self.assertEqual(calculate_expression("decdec5"), 3)
+        self.assertEqual(calculate_expression("decinc5"), 5)
 
     def test_negative_numbers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing increment and decrement using negative numbers
         """
         self.assertEqual(calculate_expression("inc-5"), -4)
 
@@ -147,10 +128,7 @@ class IncrementDecrement(unittest.TestCase):
 
     def test_exceptions(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing if increment and decrement raise exceptions in the proper circumstances
         """
         self.assertTrue(calculate_expression("inc").startswith("Syntax error"))
 
@@ -159,16 +137,11 @@ class IncrementDecrement(unittest.TestCase):
 
 class TestMultiplication(unittest.TestCase):
     """!
-    @brief short description
-
-    long description (if needed)
+    @brief Tests on multiplication
     """
     def test_integers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing multiplication with small integers
         """
         self.assertEqual(calculate_expression("2 * 2"), 4)
         self.assertEqual(calculate_expression("3*7"), 21)
@@ -180,10 +153,7 @@ class TestMultiplication(unittest.TestCase):
 
     def test_negative_numbers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing multiplication with negative numbers
         """
         self.assertEqual(calculate_expression("2 * -2"), -4)
         self.assertEqual(calculate_expression("-3*7"), -21)
@@ -193,16 +163,11 @@ class TestMultiplication(unittest.TestCase):
 
 class TestDivision(unittest.TestCase):
     """!
-    @brief short description
-
-    long description (if needed)
+    @brief Tests on division
     """
     def test_integers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing division with whole numbers
         """
         self.assertEqual(calculate_expression("2 / 2"), 1)
         self.assertEqual(calculate_expression("21/7"), 3)
@@ -213,10 +178,7 @@ class TestDivision(unittest.TestCase):
 
     def test_negative_numbers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing division with negative numbers
         """
         self.assertEqual(calculate_expression("2 / -2"), -1)
         self.assertEqual(calculate_expression("-21/7"), -3)
@@ -225,26 +187,18 @@ class TestDivision(unittest.TestCase):
 
     def test_exceptions(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing if we properly catch division by zero
         """
         self.assertTrue(calculate_expression("3 / 0").startswith("Arithmetic error"))
 
 
 class TestPower(unittest.TestCase):
     """!
-    @brief short description
-
-    long description (if needed)
+    @brief Tests on power operation
     """
-    def test_integers(self):
+    def test_positive_numbers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing if power works in most cases for positive numbers
         """
         self.assertEqual(calculate_expression("2 ^ 1"), 2)
         self.assertEqual(calculate_expression("3^3"), 27)
@@ -259,10 +213,7 @@ class TestPower(unittest.TestCase):
 
     def test_negative_numbers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing if power works properly with negative numbers
         """
         self.assertEqual(calculate_expression("2 ^ -1"), 0.5)
         self.assertEqual(calculate_expression("-4^3"), -64)
@@ -271,16 +222,11 @@ class TestPower(unittest.TestCase):
 
 class TestRoot(unittest.TestCase):
     """!
-    @brief short description
-
-    long description (if needed)
+    @brief Tests for the root operation
     """
     def test_integers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing the root operation with simple integers
         """
         self.assertEqual(calculate_expression("2 √ 4"), 2)
         self.assertEqual(calculate_expression("3√8"), 2)
@@ -290,53 +236,46 @@ class TestRoot(unittest.TestCase):
 
     def test_negative_numbers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing if the root operation correctly deals with negative numbers
         """
         self.assertEqual(calculate_expression("-2 √ 4"), 0.5)
         self.assertEqual(calculate_expression("3√-8"), -2)
         self.assertEqual(calculate_expression("-3 √ -8"), -0.5)
 
     def test_exceptions(self):
+        """!
+        @brief Testing if root properly catches errors
+        """
         self.assertTrue(calculate_expression("2000√-4").startswith("Arithmetic error"))
         self.assertTrue(calculate_expression("0√4").startswith("Syntax error"))
 
 
 class TestFactorial(unittest.TestCase):
     """!
-    @brief short description
-
-    long description (if needed)
+    @brief Testing the factorial operation
     """
     def test_integers(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing factorial on simple integers
         """
         self.assertEqual(calculate_expression("2!"), 2)
         self.assertEqual(calculate_expression("5!"), 120)
 
     def test_exceptions(self):
+        """!
+        @brief Testing if factorial correctly deals with negative numbers
+        """
         self.assertTrue(calculate_expression("-5!").startswith("Arithmetic error"))
         self.assertTrue(calculate_expression("2!5").startswith("Syntax error"))
 
 
 class Exceptions(unittest.TestCase):
     """!
-    @brief short description
-
-    long description (if needed)
+    @brief Tests for finding all the edge cases
     """
     def test_syntax(self):
         """!
-        @brief short description
-        @param self
-
-        long description (if needed)
+        @brief Testing if we properly catch syntax errors
         """
         # Lone symbols
         self.assertTrue(calculate_expression("+").startswith("Syntax error"))
@@ -357,19 +296,16 @@ class Exceptions(unittest.TestCase):
 
 class TestRandomness(unittest.TestCase):
     """!
-    @brief short description
-
-    long description (if needed)
+    @brief Tests for the get_random_number function
     """
 
-    # We're not testing for randomness we don't have the proper tools.
-    # Nor are we required to.
     def test_returns(self):
         """!
-        @brief short description
-        @param self
+        @brief Testing if get_random_number returns an int
 
-        long description (if needed)
+        We can't properly test randomness as that would take too long.
+        Considering that the random number generator under the hood is a combination of multiple lcgs,
+        a bruteforce periodicity test would take hours.
         """
         self.assertEqual(type(get_random_number()), int)
 
