@@ -14,9 +14,7 @@
 # @date 28.4.2022
 
 from cmath import nan
-from functions import power, root
-from math import sqrt
-
+from calc import root, power
 
 def get_input() -> list:
     """!
