@@ -1,7 +1,9 @@
 NAME=xvalac12
-DESTDIR=install/giit-calc-$(VERSION)
-INSFLAGS=
+APP=giit-calc
 
+DESTDIR=install/$(APP)-$(VERSION)
+INSFLAGS=
+INSTALL_FILES=install_files
 VERSION=1.0
 LICENSE=gpl3
 EMAIL=xvalac12@stud.fit.vutbr.cz
@@ -32,8 +34,6 @@ doc:
 
 release:
 	install $(INSFLAGS) install_files/debian/* install/giit-calc-$(VERSION)/debian
-	install $(INSFLAGS) install_files/giit-calc-$(VERSION)/install/giit-calc install/giit-calc-$(VERSION)/usr/bin
-# install $(INSFLAGS) install_files/giit-calc-$(VERSION)/install/giit-calc.desktop install/gitt-calc-$(VERSION)/usr/share/applications
 
 	cd $(DESTDIR) && dpkg-buildpackage -rfakeroot
 
@@ -45,14 +45,11 @@ install: calc-$(VERSION) calc-$(VERSION).tar.gz
 calc-$(VERSION): $(SRC_FILES) 
 	mkdir -p $(DESTDIR)/usr/bin
 	mkdir -p $(DESTDIR)/usr/share/pixmaps
-	mkdir -p $(DESTDIR)/usr/opt/giit-calc
 	mkdir -p $(DESTDIR)/usr/share/applications
 
-	install $(INSFLAGS) $(word 1, $^) $(DESTDIR)/usr/opt/giit-calc
-	install $(INSFLAGS) $(word 2, $^) $(DESTDIR)/usr/opt/giit-calc
-	install $(INSFLAGS) $(word 3, $^) $(DESTDIR)/usr/opt/giit-calc
-
+	install $(INSFLAGS) $(INSTALL_FILES)/$(APP)-$(VERSION)/giit-calc $(DESTDIR)/usr/bin
 	install $(INSFLAGS) $(ICON) $(DESTDIR)/usr/share/pixmaps/
+	install $(INSFLAGS) $(INSTALL_FILES)/$(APP)-$(VERSION)/giit-calc.desktop $(DESTDIR)/usr/share/applications
 
 calc-$(VERSION).tar.gz:
 	tar -czvf $(DESTDIR).tar.gz $(DESTDIR)

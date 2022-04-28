@@ -8,7 +8,7 @@ Rules-Requires-Root: no
 
 Package: giit-calc
 Architecture: all
-Depends: ${python3:Depends}, ${misc:Depends}
+Depends: ${python3:Depends}, ${misc:Depends}, python3-tkinter, python3-re, python3-typing, python3-random, python3-idlelib.tooltip, python3-webbrowser
 Suggests: python-calc-doc
 Description: <insert up to 60 chars description> (Python 3)
  <insert long description, indented with spaces>
