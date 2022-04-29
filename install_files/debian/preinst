@@ -12,7 +12,7 @@ set -e
 #        * <old-preinst> `abort-upgrade' <new-version>
 # for details, see https://www.debian.org/doc/debian-policy/ or
 # the debian-policy package
-
+mkdir -p /opt/giit-calc
 
 case "$1" in
     install|upgrade)

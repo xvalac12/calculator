@@ -17,7 +17,7 @@ BASH = /bin/env bash
 PROJ = dokumentace
 
 
-.PHONY: all pack profile doc install clean release doc_f install_f
+.PHONY: all pack profile doc install clean release test rm_app
 
 all: install doc
 
@@ -30,8 +30,10 @@ pack: doc repo
 	cp -r install_files install
 	cp Makefile install
 
-	zip -r ../$(NAME).zip doc repo install || echo "Packing failed"
-	rm -rf doc repo install html
+	mkdir $(NAME)
+	mv doc repo install $(NAME) 
+	zip -r ../$(NAME).zip $(NAME) || echo "Packing failed"
+	rm -rf $(NAME)
 
 
 profile:
@@ -60,7 +62,6 @@ release:
 
 install: $(APP)-$(VERSION) $(APP)-$(VERSION).tar.gz
 	cd $< && dh_make -e $(EMAIL) -n -s -c  $(LICENSE) -p "$<" -f ../$<.tar.gz
-	mkdir -p /opt/giit-calc
 
 $(APP)-$(VERSION): $(SRC_FILES)
 	mkdir -p $@/install
