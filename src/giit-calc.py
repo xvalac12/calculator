@@ -61,8 +61,7 @@ main_menu = Menu(calc_gui)
 file_menu = Menu(main_menu, tearoff=0)
 ## Variable to hold submenu Help
 help_menu = Menu(main_menu, tearoff=0)
-## Icon to show on Dock
-img = Image("photo", file="icon.png")
+
 
 # setting geometry and ,config of calculator window
 calc_gui.geometry(f'{screen_width}x{screen_height}')
@@ -70,8 +69,7 @@ calc_gui.resizable(False, False)
 calc_gui.title('Calculator G.I.I.T.')
 calc_gui.config(bg="white")
 
-# icon
-calc_gui.tk.call('wm', 'iconphoto', calc_gui._w, img)
+
 
 # settings of grid
 calc_gui.columnconfigure(0, weight=1)
