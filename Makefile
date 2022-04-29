@@ -17,7 +17,7 @@ BASH = /bin/env bash
 PROJ = dokumentace
 
 
-.PHONY: all pack profile doc install clean release doc_f install_f
+.PHONY: all pack profile doc install clean release test rm_app
 
 all: install doc
 
