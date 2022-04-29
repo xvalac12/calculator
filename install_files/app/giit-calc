@@ -1,5 +1,4 @@
-#!bin/bash
+#!/bin/bash
 # -*- coding: utf-8 -*-
 
-cd /opt/giit-calc
-./giit-calc
+exec python3 /opt/giit-calc/giit-calc.py

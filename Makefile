@@ -1,4 +1,4 @@
-NAME=xvalac12
+NAME=xbezak02_xbukas00_xstola03_xvalac12
 APP=giit-calc
 
 DESTDIR=giit-calc/$(APP)-$(VERSION)
@@ -26,7 +26,7 @@ all: install doc
 
 pack: doc repo
 	mkdir doc
-	cp -r ./src/html doc/html
+	cp -r src/html doc/html
 
 	mkdir install
 	cp -r install_files install
@@ -59,19 +59,24 @@ release:
 	cd $(APP)-$(VERSION) && dpkg-buildpackage -rfakeroot -uc -b
 
 install: $(APP)-$(VERSION) $(APP)-$(VERSION).tar.gz
-	cd $< && dh_make -e $(EMAIL) -n -s -c  $(LICENSE) -y -p "$<" -f ../$<.tar.gz
-	
+	cd $< && dh_make -e $(EMAIL) -n -s -c  $(LICENSE) -p "$<" -f ../$<.tar.gz
+	mkdir -p /opt/giit-calc
+
 $(APP)-$(VERSION): $(SRC_FILES)
 	mkdir -p $@/install
 	cp $^ $@
 	cp $(INSTALL_FILES)/Makefile $@
+	cp $(INSTALL_FILES)/setup.py $@
 	cp -r $(INSTALL_FILES)/app/* $@/install
+	cp $(SRC_FILES) $@/install
 
 %.tar.gz: %
 	tar -czvf $@ $<
 
 clean:
 	rm -rf __pycache__
+	rm -rf $(PROJ).{aux,dvi,log,pdf,ps,out} html xvalac12-fit.zip
+
+rm_app:
 	rm -rf $(APP)-$(VERSION)
 	rm $(APP)-$(VERSION).tar.gz || rm $(APP)-$(VERSION).tgz 
-	rm -rf $(PROJ).{aux,dvi,log,pdf,ps,out} html xvalac12-fit.zip
