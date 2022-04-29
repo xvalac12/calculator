@@ -3,6 +3,12 @@
 ### Enviroment
 Ubuntu 20.04
 
+### How to run using terminal
+Open terminal and enter sudo dpkg -i giit-calc_1.0_all.deb . Then enter giit-calc.
+
+### How to run using .deb package
+Right click on giit-calc_1.0_all.deb and choose With software install. In software install click on install button. Open Show Applications and search giit-calc. Click on icon to run.
+
 ### Authors
 * Team G.I.I.T. 
 	 * _xbezak02_ Adam Bezák

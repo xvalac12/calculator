@@ -45,7 +45,9 @@ repo:
 
 doc:
 	cd src && doxygen Doxyfile
+
 	latex ./src/latex/$(PROJ).tex
+
 	dvips -t a4 $(PROJ).dvi
 	ps2pdf -sPAPERSIZE-a4 $(PROJ).ps
 
