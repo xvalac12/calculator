@@ -30,8 +30,10 @@ pack: doc repo
 	cp -r install_files install
 	cp Makefile install
 
-	zip -r ../$(NAME).zip doc repo install || echo "Packing failed"
-	rm -rf doc repo install html
+	mkdir $(NAME)
+	mv doc repo install $(NAME) 
+	zip -r ../$(NAME).zip $(NAME) || echo "Packing failed"
+	rm -rf $(NAME)
 
 
 profile:
