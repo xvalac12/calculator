@@ -62,7 +62,6 @@ release:
 
 install: $(APP)-$(VERSION) $(APP)-$(VERSION).tar.gz
 	cd $< && dh_make -e $(EMAIL) -n -s -c  $(LICENSE) -p "$<" -f ../$<.tar.gz
-	mkdir -p /opt/giit-calc
 
 $(APP)-$(VERSION): $(SRC_FILES)
 	mkdir -p $@/install
