@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+"""! @brief Package containing profiling of math library"""
 ##
 # @section description_profiling Description
 # Defines GUI of calculator app and behavior of buttons.

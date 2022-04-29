@@ -416,7 +416,7 @@ def __create_generator(modulus: int, multiplier: int, increment: int, seed: int)
 
 def __combine_generators(generators: List[Generator[int, None, None]], modulus_of_first: int) -> int:
     """!
-    @brief INcrements multiple lcgs and combines their results into a better one
+    @brief Increments multiple lcgs and combines their results into a better one
     @param generators A list of lcgs to combine into 1
     @param modulus_of_first The modulus of the first lcg
     @return The combined result of multiple lcgs.

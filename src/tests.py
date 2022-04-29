@@ -77,7 +77,7 @@ class TestSubtraction(unittest.TestCase):
 
     def test_large_numbers(self):
         """!
-        @breif Testing subtraction using large numbers
+        @brief Testing subtraction using large numbers
         """
         self.assertEqual(calculate_expression("2000000 - 1"), 1999999)
         self.assertEqual(calculate_expression("23213 - 6549"), 16664)
@@ -85,7 +85,7 @@ class TestSubtraction(unittest.TestCase):
 
     def test_negative_numbers(self):
         """!
-        @breif Testing if subtraction works with negative numbers
+        @brief Testing if subtraction works with negative numbers
         """
         self.assertEqual(calculate_expression("-3 - -6"), 3)
         self.assertEqual(calculate_expression("5 - -7"), 12)

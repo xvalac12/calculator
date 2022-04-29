@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """! @brief Tkinter GUI and main file of calculator"""
 ##
 # @mainpage Documentation
@@ -15,19 +16,22 @@
 # - works on python 3.7+
 # - gui made with tkinter python library
 
+
+"""! @brief Tkinter GUI and main file of calculator"""
 ##
-# @section description_gui Description
+# @section description_giit_calc Description
 # Defines GUI of calculator app and behavior of buttons.
 #
-# @section libraries_gui Libraries/Modules
+# @section libraries_giit_calc Libraries/Modules
 # - tkinter python library
 # - webbrowser python library
 # - idlelib python library
 #
-# @file gui.py
-# @brief Graphic user interface of calculator
+# @file giit-calc.py
+# @brief Graphic user interface and main file of calculator
 # @author Martin Valach <xvalac12@stud.fit.vutbr.cz>
 # @date 28.4.2022
+
 # import everything from tkinter module
 
 from tkinter import *
@@ -57,8 +61,7 @@ main_menu = Menu(calc_gui)
 file_menu = Menu(main_menu, tearoff=0)
 ## Variable to hold submenu Help
 help_menu = Menu(main_menu, tearoff=0)
-## Icon to show on Dock
-img = Image("photo", file="icon/icon.png")
+
 
 # setting geometry and ,config of calculator window
 calc_gui.geometry(f'{screen_width}x{screen_height}')
@@ -66,8 +69,7 @@ calc_gui.resizable(False, False)
 calc_gui.title('Calculator G.I.I.T.')
 calc_gui.config(bg="white")
 
-# icon
-calc_gui.tk.call('wm', 'iconphoto', calc_gui._w, img)
+
 
 # settings of grid
 calc_gui.columnconfigure(0, weight=1)
